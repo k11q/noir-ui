@@ -1,24 +1,28 @@
-<script>
-    let hovering = $$props.hovering
-    function handleClick(){
-        this.parent.parent.dataset.state = this.parent.parent.dataset.state === 'open'? 'closed' : 'open'
-        hovering = !hovering
-    }
+<script lang="ts">
+	import { getContext, setContext } from 'svelte';
+    import SvgIcon from "$lib/SvgIcon/SvgIcon.svelte"
+
+	const contentId = getContext('contentId');
+	const summaryId = getContext('summaryId');
+    const open = getContext('open');
+	const classesIcon = getContext('classesIcon');
 </script>
 
-<h3>
-	<button type="button" aria-expanded="{hovering}" on:click={handleClick}>
-		<slot />
-	</button>
-</h3>
-
-<style>
-	button {
-		all: unset;
-        display: flex;
-	}
-
-    button:focus {
-        border: 2px solid black;
-    }
-</style>
+<summary
+		id={summaryId}
+		aria-expanded={open}
+        class={$$props.class}
+		aria-controls={contentId}
+        on:click
+	>
+		<!-- Slot: Lead -->
+		{#if $$slots.lead}<div class="accordion-summary-lead"><slot name="lead" /></div>{/if}
+		<!-- Slot: Text -->
+        <div class="flex-auto cursor-default">
+			<slot>(header)</slot>
+        </div>
+		<!-- Caret -->
+		<div class="accordion-summary-caret {classesIcon}">
+			<SvgIcon name="angle-down" class="opacity-50" />
+		</div>
+	</summary>
