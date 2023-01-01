@@ -24,6 +24,6 @@
 <p>Haha</p>
 <Tooltip />
 
-<Button size="medium">
+<Button size="small">
 Button
 </Button>
