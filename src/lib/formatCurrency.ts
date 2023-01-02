@@ -1,0 +1,1 @@
+export const formatCurrency = (number:number)=>`$${number}`
