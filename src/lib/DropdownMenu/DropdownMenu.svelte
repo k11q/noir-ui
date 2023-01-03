@@ -46,6 +46,7 @@
         menuLeft = left - menu.offsetWidth;
       }
     });
+    
   </script>
 
 <div class="dropdown {menuClass}" bind:this={menu}>
