@@ -1,1 +1,3 @@
-export { default } from './Toast.svelte'
+import Toast from './Toast.svelte'
+
+export default Toast

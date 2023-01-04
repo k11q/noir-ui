@@ -4,22 +4,23 @@
 	import AccordionContent from '$lib/Accordion/AccordionContent.svelte';
 	import AccordionHeader from '$lib/Accordion/AccordionHeader.svelte';
 	import DropdownMenu from '$lib/DropdownMenu/DropdownMenu.svelte';
-	import Tooltip from '$lib/Tooltip/Tooltip.svelte';
 	import Button from '$lib/Button/Button.svelte';
 	import Card from '$lib/Card/Card.svelte';
 	import CardTitle from '$lib/Card/CardTitle.svelte';
 	import Dialog from '$lib/Dialog/Dialog.svelte';
-	import Switch from '$lib/Switch/Switch.svelte';
-	import Slider from '$lib/Slider/Slider.svelte';
 	import Toggle from '$lib/Toggle/Toggle.svelte';
 	import ToggleGroupItem from '$lib/ToggleGroup/ToggleGroupItem.svelte';
 	import ToggleGroup from '$lib/ToggleGroup/ToggleGroup.svelte';
 	import Select from '$lib/Select/Select.svelte';
-	import Toast from '$lib/Toast/Toast.svelte';
-	import Popover from '$lib/Popover/Popover.svelte';
-	import * as RadioGroup from '$lib/Radio'
+	
 	import * as Checkbox from '$lib/Checkbox'
 	import * as Tabs from '$lib/Tabs'
+	import * as RadioGroup from '$lib/Radio';
+	import Slider from '$lib/Slider';
+	import Switch from '$lib/Switch';
+	import Tooltip from '$lib/Tooltip';
+	import Toast from '$lib/Toast';
+	import Popover from '$lib/Popover';
 
 	import { writable, type Writable } from 'svelte/store';
 
@@ -161,17 +162,30 @@
 			<CardTitle title="Popover" />
 		</Card>
 		<Card>
-			<RadioGroup.Root selected={storeLayout2}>
-				<RadioGroup.Item value="horz">top</RadioGroup.Item>
-				<RadioGroup.Item value="vert">bottom</RadioGroup.Item>
-			</RadioGroup.Root>
+			
 			<CardTitle title="Progress" />
 		</Card>
 		<Card>
-			<RadioGroup.Root>
-				<RadioGroup.Item value="horz">Horizontal</RadioGroup.Item>
-				<RadioGroup.Item value="vert">Vertical</RadioGroup.Item>
-			</RadioGroup.Root>
+			<RadioGroup.Root className="flex flex-col gap-3 text-sm text-gray-600">
+				<div class="flex flex-row items-center">
+					<RadioGroup.Item value="r1" id="r1" className="bg-white shadow-sm h-6 aspect-square rounded-full flex items-center justify-center focus:outline focus:outline-2 focus:outline-purple-600">
+						<RadioGroup.Indicator><span class="absolute bg-purple-500 rounded-full h-3 aspect-square"></span> </RadioGroup.Indicator>
+					</RadioGroup.Item>
+					<label class="ml-3" for="r1">RadioGroup 1</label>
+				</div>
+				<div class="flex flex-row items-center">
+					<RadioGroup.Item value="r2" id="r2" className="bg-white shadow-sm h-6 aspect-square rounded-full flex items-center justify-center focus:outline focus:outline-2 focus:outline-purple-600">
+						<RadioGroup.Indicator><span class="absolute bg-purple-500 rounded-full h-3 aspect-square"></span></RadioGroup.Indicator>
+					</RadioGroup.Item>
+					<label class="ml-3" for="r2">RadioGroup 2</label>
+				</div>
+				<div class="flex flex-row items-center">
+					<RadioGroup.Item value="r3" id="r3" className="bg-white shadow-sm h-6 aspect-square rounded-full flex items-center justify-center focus:outline focus:outline-2 focus:outline-purple-600">
+						<RadioGroup.Indicator><span class="absolute bg-purple-500 rounded-full h-3 aspect-square"></span></RadioGroup.Indicator>
+					</RadioGroup.Item>
+					<label class="ml-3" for="r3">Checkbox 3</label>
+				</div>
+		</RadioGroup.Root>
 			<CardTitle title="Radio Group" />
 		</Card>
 		<Card>

@@ -1,69 +1,46 @@
 <script lang="ts">
-	import type { Writable } from 'svelte/store';
-	import { createEventDispatcher, getContext } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
+	import { getContext, setContext } from 'svelte';
 
-	// Event Handler
-	const dispatch = createEventDispatcher();
+	export let className = '';
+    export let selected: Writable<string> = getContext('selected');
+	export let defaultValue:string = getContext('defaultValue');
+	export let onCheckedChange: (checked: boolean | 'indeterminate') => void;
+	export let disabled = false;
+	export let required = false;
+	export let name = '';
+	export let value = '';
+	export let id = '';
 
-	// Props
-	/**
-	 * The item's selection value.
-	 * @type {any}
-	 */
-	export let value: any = undefined;
+    let radioButton:HTMLElement;
 
-	// Props (A11y)
-	/** Defines a semantic ARIA label. */
-	export let label = '';
+    setContext('value', value)
+    setContext('selected', selected)
 
-	// Context
-	export let selected: Writable<any> = getContext('selected');
-	export let padding: string = getContext('padding');
-	export let hover: string = getContext('hover');
-	export let accent: string = getContext('accent');
-	export let color: string = getContext('color');
-	export let fill: string = getContext('fill');
-	export let rounded: string = getContext('rounded');
-
-	// A11y Input Handlers
-	function onKeyDown(event: any): void {
-		// Enter/Space triggers selecton event
-		if (['Enter', 'Space'].includes(event.code)) {
-			event.preventDefault();
-			/** @event {{ event }} keydown - Fires when the component is in focus and key is pressed.  */
-			dispatch('keydown', event);
-			event.target.children[0].click();
-		}
+	function toggleCheck() {
+		selected.set(value);
 	}
 
-	// Reactive Classes
-	$: checked = value === $selected;
-	$: classesSelected = checked ? `${accent} ${fill} ${color} bg-red-600` : `${hover}`;
-	$: classesLabel = `${classesSelected} ${padding} ${rounded}`;
-    $: state = checked ? 'active' : 'inactive'
+    function handleChange(){
+        if(document.activeElement === radioButton){
+            return
+        }else {
+            radioButton.focus()
+        }
+    }
 
-	// Prune $$restProps to avoid overwriting $$props.class
-	function prunedRestProps(): any {
-		delete $$restProps.class;
-		return $$restProps;
-	}
+    $: checked = value === $selected ? true : false
+
 </script>
 
-<div
-	class="radio-item flex-auto"
-	role="radio"
-	aria-checked={checked}
-	aria-label={label}
-	{...prunedRestProps()}
-	tabindex="0"
-	data-testid="radio-item"
-	on:click
-	on:keydown={onKeyDown}
-	on:keyup
-	on:keypress
->
-	<label class="radio-item-label {classesLabel}" data-state={state}>
-		<input class="radio-item-input hidden" type="radio" {value} bind:group={$selected} />
-		<slot />
-	</label>
-</div>
+<button bind:this={radioButton} {id} {value} class={className} on:click={toggleCheck} role="radio" aria-checked={checked} data-state={checked? 'checked' : 'unchecked'}>
+	<slot />
+</button>
+<input
+	type="radio"
+    {value}
+    on:change={handleChange}
+    aria-hidden="true"
+    tabindex="-1"
+	style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px; width: 25px; height: 25px;"
+/>

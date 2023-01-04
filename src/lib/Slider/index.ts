@@ -1,1 +1,3 @@
-export { default } from './Slider.svelte'
+import Slider from './Slider.svelte'
+
+export default Slider

@@ -2,7 +2,7 @@
 	import { writable, type Writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 
-	export let selected: Writable<any> = writable(undefined);
+	export let selected: Writable<any> = writable('');
     export let className = '';
     export let defaultValue = '';
 
