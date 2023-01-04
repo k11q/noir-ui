@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Accordion from '$lib/Accordion/Accordion.svelte';
 	import AccordionItem from '$lib/Accordion/AccordionItem.svelte';
 	import AccordionContent from '$lib/Accordion/AccordionContent.svelte';
@@ -17,6 +17,18 @@
 	import ToggleGroup from '$lib/ToggleGroup/ToggleGroup.svelte';
 	import Select from '$lib/Select/Select.svelte';
 	import Toast from '$lib/Toast/Toast.svelte';
+	import RadioItem from '$lib/Radio/RadioItem.svelte';
+	import RadioGroup from '$lib/Radio/RadioGroup.svelte';
+	import TabsGroup from '$lib/Tabs/TabsGroup.svelte';
+	import { writable, type Writable } from 'svelte/store';
+	import Popover from '$lib/Popover/Popover.svelte';
+	import TabsList from '$lib/Tabs/TabsList.svelte';
+	import TabsContent from '$lib/Tabs/TabsContent.svelte';
+	import TabsTrigger from '$lib/Tabs/TabsTrigger.svelte';
+
+	const storeLayout: Writable<string> = writable('horz');
+	const storeLayout2: Writable<string> = writable('horz');
+	const storeTab: Writable<string> = writable('a');
 
 	let switchChecked = false;
 
@@ -41,8 +53,8 @@
 			<CardTitle title="Accordion" />
 		</Card>
 		<Card>
-			<Dialog buttonClass="bg-blue-9 p-2 text-white">
-				<svelte:fragment slot="trigger">Button</svelte:fragment>
+			<Dialog buttonClass="bg-white py-2 px-4 rounded focus:outline focus:outline-2 focus:outline-purple-600">
+				<svelte:fragment slot="trigger">Alert Dialog</svelte:fragment>
 				<svelte:fragment slot="dialog">
 					<div
 						class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[85vh] w-[90vw] max-w-[450px] border bg-white rounded-lg border-gray-1"
@@ -76,7 +88,7 @@
 			<CardTitle title="Context Menu" />
 		</Card>
 		<Card>
-			<Dialog>
+			<Dialog buttonClass="bg-white py-2 px-4 rounded focus:outline focus:outline-2 focus:outline-purple-600">
 				<svelte:fragment slot="trigger">Button</svelte:fragment>
 				<svelte:fragment slot="dialog">
 					<div class="max-h-[85vh] w-[90vw] max-w-[450px] border bg-white rounded-lg border-gray-1">
@@ -93,7 +105,7 @@
 			<CardTitle title="Dialog" />
 		</Card>
 		<Card>
-			<DropdownMenu>
+			<DropdownMenu buttonClass="bg-white py-2 px-4 rounded focus:outline focus:outline-2 focus:outline-purple-600">
 				<svelte:fragment slot="trigger">Dropdown</svelte:fragment>
 				<svelte:fragment slot="menu">
 					<div
@@ -121,12 +133,33 @@
 			<CardTitle title="Navigation Menu" />
 		</Card>
 		<Card>
+			<Popover
+				buttonClass="bg-white py-2 px-4 rounded focus:outline focus:outline-2 focus:outline-purple-600"
+			>
+				<svelte:fragment slot="trigger">Popover</svelte:fragment>
+				<svelte:fragment slot="content">
+					<div
+						class="border bg-white rounded-lg border-gray-200 w-60 flex flex-col justify-between p-1"
+					>
+						<div class="px-4 py-2">Popover Content!</div>
+					</div>
+				</svelte:fragment>
+			</Popover>
 			<CardTitle title="Popover" />
 		</Card>
 		<Card>
+			<RadioGroup selected={storeLayout2}>
+				<RadioItem value="horz">top</RadioItem>
+				<RadioItem value="vert">bottom</RadioItem>
+			</RadioGroup>
 			<CardTitle title="Progress" />
 		</Card>
 		<Card>
+			<RadioGroup>
+				<RadioItem value="horz">Horizontal</RadioItem>
+				<RadioItem value="vert">Vertical</RadioItem>
+			</RadioGroup>
+
 			<CardTitle title="Radio Group" />
 		</Card>
 		<Card>
@@ -160,19 +193,35 @@
 			<CardTitle title="Switch" />
 		</Card>
 		<Card>
+			<TabsGroup className="flex flex-col rounded-lg bg-white shadow min-h-[140px] text-sm min-w-[240px]">
+				<TabsList
+					selected={storeTab}
+					className="flex flex-row focus:[&>*]:rounded shadow-[0_-1px_0px_0px_inset] shadow-gray-200 [&>*]:py-3 [&>*]:px-5 [&>*]:text-gray-400 data-[state='active']:[&>*]:shadow-[0_-2px_0px_0px_inset] data-[state='active']:[&>*]:shadow-purple-600 data-[state='active']:[&>*]:text-purple-600 focus:[&>*]:outline focus:[&>*]:outline-2 focus:[&>*]:outline-purple-600 focus:[&>*]:relative"
+				>
+					<TabsTrigger value="a">Tab 1</TabsTrigger>
+					<TabsTrigger value="b">Tab 2</TabsTrigger>
+					<TabsTrigger value="c">Tab 3</TabsTrigger>
+				</TabsList>
+				<TabsContent className="mt-2 py-3 px-5">
+					{#if $storeTab === 'a'}
+						Content A
+					{/if}
+					{#if $storeTab === 'b'}Content B{/if}
+					{#if $storeTab === 'c'}Content C{/if}
+				</TabsContent>
+			</TabsGroup>
 			<CardTitle title="Tabs" />
 		</Card>
 		<Card>
-			<Toast>
+			<Toast
+				buttonClass="bg-white py-2 px-4 rounded focus:outline focus:outline-2 focus:outline-purple-600"
+			>
 				<svelte:fragment slot="trigger">Toast</svelte:fragment>
 				<svelte:fragment slot="menu">
 					<div
-						class="border bg-white rounded-lg border-gray-200 w-60 flex flex-col justify-between p-1"
+						class="border bg-white rounded-lg border-gray-200 w-60 flex flex-col justify-between p-1 shadow-lg"
 					>
-						<div class="px-2 py-1 hover:bg-gray-200" tabindex="0">Item 1</div>
-						<div class="px-2 py-1 hover:bg-gray-200" tabindex="0">Item 2</div>
-						<div class="px-2 py-1 hover:bg-gray-200" tabindex="0">Item 3</div>
-						<div class="px-2 py-1 hover:bg-gray-200" tabindex="0">Item 4</div>
+						<div class="px-4 py-2 hover:bg-gray-200">Toast Content!</div>
 					</div>
 				</svelte:fragment>
 			</Toast>
@@ -180,35 +229,30 @@
 		</Card>
 		<Card>
 			<Toggle
-				className="outline-1 outline outline-gray-200 bg-white shadow-sm h-10 aspect-square rounded data-[state='on']:bg-purple-200"
+				className="focus:outline bg-white shadow-sm h-10 aspect-square rounded data-[state='on']:bg-purple-200 focus:outline-2 focus:outline-purple-600"
 			>
-				T
+				W
 			</Toggle>
 			<CardTitle title="Toggle" />
 		</Card>
 		<Card>
-			<ToggleGroup className="flex rounded outline-1 outline outline-gray-200 bg-white shadow-sm overflow-hidden">
-				<ToggleGroupItem
-					value="item1"
-					className="border-r border-gray-200 h-10 aspect-square data-[state='on']:bg-purple-200"
-					>W</ToggleGroupItem>
-				<ToggleGroupItem
-					value="item2"
-					className="border-r border-gray-200 h-10 aspect-square data-[state='on']:bg-purple-200"
-					>A</ToggleGroupItem>
-				<ToggleGroupItem
-					value="item3"
-					className="border-r border-gray-200 h-10 aspect-square data-[state='on']:bg-purple-200"
-				>S</ToggleGroupItem>
-				<ToggleGroupItem
-					value="item3"
-					className=" h-10 aspect-square data-[state='on']:bg-purple-200"
-				>D</ToggleGroupItem>
+			<ToggleGroup
+				className="flex rounded bg-white shadow-sm first:[&>*]:rounded-l last:[&>*]:rounded-r last:[&>*]:border-r-0 [&>*]:border-r [&>*]:border-gray-200 [&>*]:h-10 [&>*]:aspect-square data-[state='on']:[&>*]:bg-purple-200 focus:[&>*]:outline focus:[&>*]:outline-2 focus:[&>*]:outline-purple-600 focus:[&>*]:relative"
+			>
+				<ToggleGroupItem value="item1">W</ToggleGroupItem>
+				<ToggleGroupItem value="item2">A</ToggleGroupItem>
+				<ToggleGroupItem value="item3">S</ToggleGroupItem>
+				<ToggleGroupItem value="item4">D</ToggleGroupItem>
 			</ToggleGroup>
 			<CardTitle title="Toggle Group" />
 		</Card>
 		<Card>
-			<Tooltip />
+			<Tooltip
+				buttonClass="bg-white h-10 rounded-full aspect-square focus:outline focus:outline-2 focus:outline-purple-600"
+			>
+				<svelte:fragment slot="trigger">+</svelte:fragment>
+				<div slot="content" class="px-4 py-2">Tooltip Content!</div>
+			</Tooltip>
 			<CardTitle title="Tooltip" />
 		</Card>
 	</div>

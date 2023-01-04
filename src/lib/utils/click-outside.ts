@@ -9,8 +9,6 @@ export function useClickOutside(e: MouseEvent, element: HTMLElement) {
 	) {
 		return false;
 	} else {
-		e.preventDefault();
-		e.stopPropagation();
 		return true;
 	}
 }

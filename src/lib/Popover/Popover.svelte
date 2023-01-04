@@ -1,24 +1,43 @@
 <script lang="ts">
 	import { useClickOutside } from '$lib/utils/click-outside';
 	import { trapFocus } from '$lib/utils/trap-focus';
-	import { writable, type Writable } from 'svelte/store';
-	import { setContext } from 'svelte';
 	import { portal } from '../Portal/Portal.svelte';
 
-  export let selected: Writable<string | undefined> = writable(undefined);
-	export let open = false;
-	export let buttonClass = '';
+    type Side = 'top' | 'bottom' | 'left' | 'right';
+	type Align = 'start' | 'center' | 'end';
 
-  setContext('selected', selected)
+	export let buttonClass = '';
+	export let delayDuration = 700;
+	export let skipDelayDuration = 300;
+	export let disableHoverableContent = false;
+
+	export let defaultOpen = false;
+	export let open = false;
+
+	export let side: Side = 'top';
+	export let sideOffset = 0;
+	export let align: Align = 'center';
+	export let alignOffset = 0;
+
+	export let avoidCollisions = true;
+	export let collisionBoundary: Element | null | Array<Element | null> = null;
+	export let collisionPadding = 0;
+
+	export let arrow = true;
+	export let arrowWidth = 12;
+	export let arrowHeight = 12;
 
 	let dialogElement: HTMLElement;
 	let triggerButton: HTMLElement;
 
 	$: menuLeft = dialogElement
 		? triggerButton
-			? triggerButton.getBoundingClientRect().left
+			? triggerButton.getBoundingClientRect().left +
+			  triggerButton.getBoundingClientRect().width / 2 -
+			  dialogElement.children[0].getBoundingClientRect().width / 2
 			: 0
 		: 0;
+
 	$: menuTop = dialogElement
 		? triggerButton
 			? triggerButton.getBoundingClientRect().bottom
@@ -73,10 +92,8 @@
 	bind:this={triggerButton}
 	on:click={openDialog}
 	type="button"
-  role="combobox"
 	aria-haspopup="dialog"
 	aria-expanded={open}
-  data-state={open}
 	class={buttonClass}
 >
 	<slot name="trigger" />
@@ -91,6 +108,9 @@
 		aria-modal="true"
 		style="position: fixed; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; transform-origin:118.5px -5px; pointer-events:auto"
 	>
-		<slot name="menu" />
+    <div class="flex flex-col mt-2">
+        <slot name="content" />
+    </div>
+    <div class="bg-white h-2 rotate-45 aspect-square mx-auto absolute inset-0 mt-1" />
 	</div>
 {/if}
