@@ -1,6 +1,7 @@
 
 
 export function trapFocus(element: HTMLElement) {
+	event?.preventDefault()
 	const focusableEls = element.querySelectorAll(
 		'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
 	);
@@ -8,7 +9,7 @@ export function trapFocus(element: HTMLElement) {
 	const lastFocusableEl = focusableEls[focusableEls.length - 1] as HTMLElement;
 	const KEYCODE_TAB = 9;
 
-	firstFocusableEl.focus();
+	if(firstFocusableEl){firstFocusableEl.focus();}
 
 	element.addEventListener('keydown', function (e) {
 		const isTabPressed = e.key === 'Tab' || e.keyCode === KEYCODE_TAB;
@@ -29,6 +30,5 @@ export function trapFocus(element: HTMLElement) {
 			}
 		}
 	});
-	element.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Tab', keyCode:  KEYCODE_TAB,}));
 	return firstFocusableEl
 }

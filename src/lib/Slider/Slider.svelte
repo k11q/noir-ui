@@ -1,43 +1,51 @@
 <script lang="ts">
-
 	export let value = 40;
 	export let minValue = 0;
 	export let maxValue = 100;
-    export let name: string;
+	export let name: string;
+	let offsetHandler: number = value < 50 ? ((value - 50) / 50) * 10 : value > 50 ? ((value - 50) / 50) * -10 : 0;;
+
+	$: offsetHandler =
+		value < 50 ? ((value - 50) / 50) * 10 : value > 50 ? ((value - 50) / 50) * -10 : 0;
 
 	let slider: HTMLElement;
 	let sliderHandler: HTMLElement;
 
 	const changeValue = (e: MouseEvent) => {
-        e.preventDefault();
+		e.preventDefault();
 		const sliderRect = slider.getBoundingClientRect();
 
-		if (e.clientX-10 > sliderRect.left && e.clientX-10 < sliderRect.left + sliderRect.width) {
-			value = ((e.clientX-10 - sliderRect.left) / sliderRect.width) * 100;
+		if (
+			e.clientX - 10 - offsetHandler > sliderRect.left &&
+			e.clientX - 10 - offsetHandler < sliderRect.left + sliderRect.width
+		) {
+			value = ((e.clientX - 10 - offsetHandler - sliderRect.left) / sliderRect.width) * 100;
 		}
 
 		document.addEventListener('mousemove', mousemove);
 		document.addEventListener('mouseup', mouseup);
 
 		function mousemove(e: MouseEvent) {
-            sliderHandler.focus();
-			if (e.clientX-10 > sliderRect.left && e.clientX-10 < sliderRect.left + sliderRect.width) {
-				value = ((e.clientX-10 - sliderRect.left) / sliderRect.width) * 100;
+			sliderHandler.focus();
+			if (
+				e.clientX - 10 - offsetHandler > sliderRect.left &&
+				e.clientX - 10 - offsetHandler < sliderRect.left + sliderRect.width
+			) {
+				value = ((e.clientX - 10 - offsetHandler - sliderRect.left) / sliderRect.width) * 100;
 			}
-			if (e.clientX-10 <= sliderRect.left) {
+			if (e.clientX - 10 - offsetHandler <= sliderRect.left) {
 				value = minValue;
 			}
-			if (e.clientX-10 >= sliderRect.left + sliderRect.width) {
+			if (e.clientX - 10 - offsetHandler >= sliderRect.left + sliderRect.width) {
 				value = maxValue;
 			}
-
 		}
 
 		function mouseup(e: MouseEvent) {
 			document.removeEventListener('mousemove', mousemove);
 			document.removeEventListener('mouseup', mouseup);
 		}
-        sliderHandler.focus();
+		sliderHandler.focus();
 	};
 </script>
 
@@ -49,14 +57,7 @@
 	<span class="rounded-full h-[3px] flex-grow bg-black opacity-50 relative">
 		<span class="rounded-full absolute bg-red-400 h-full left-0" style="right: {100 - value}%" />
 	</span>
-	<span
-		class=" absolute"
-		style="left: calc({value}% + {value < 50
-			? ((value - 50) / 50) * 10
-			: value > 50
-			? ((value - 50) / 50) * -10
-			: 0}px)"
-	>
+	<span class=" absolute" style="left: calc({value}% + {offsetHandler}px)">
 		<span
 			bind:this={sliderHandler}
 			role="slider"
@@ -70,4 +71,4 @@
 	</span>
 </span>
 
-<input style={'display:none'} {value} {name}/>
+<input style={'display:none'} {value} {name} />

@@ -1,161 +1,89 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte';
-    import { fly } from 'svelte/transition';
-  
-    type Option = { value: string; label: string };
-    type Group = { label: string; options: Option[] };
-  
-    interface SelectProps {
-      options: Option[] | Group[];
-      placeholder?: string;
-      value?: string;
-      on: { valueChange: (value: string) => void };
-      dir?: 'ltr' | 'rtl';
-    }
-  
-    const dispatch = createEventDispatcher();
-  
-    let { options, placeholder, value, dir = 'ltr' } = $$props as SelectProps;
-  let open = false;
-  let inputValue = '';
-  let highlightedIndex: number | null = null;
-  let triggerRef: HTMLDivElement | null = null;
-  let listRef: HTMLUListElement | null = null;
+	import { useClickOutside } from '$lib/utils/click-outside';
+	import { trapFocus } from '$lib/utils/trap-focus';
+	import { portal } from '../Portal/Portal.svelte';
 
-  const handleTriggerClick = () => {
-    open = !open;
-  };
+	export let open = false;
+	export let buttonClass = '';
 
-  const handleTriggerKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      open = !open;
-    }
-  };
+	let dialogElement: HTMLElement;
+	let triggerButton: HTMLElement;
 
-  const handleInputChange = (event: InputEvent) => {
-    inputValue = (event.target as HTMLInputElement).value;
-    highlightedIndex = null;
-  };
+	$: menuLeft = dialogElement
+		? triggerButton
+			? triggerButton.getBoundingClientRect().left
+			: 0
+		: 0;
+	$: menuTop = dialogElement
+		? triggerButton
+			? triggerButton.getBoundingClientRect().bottom
+			: 0
+		: 0;
 
-  const handleInputKeyDown = (event: KeyboardEvent) => {
-    const { key } = event;
+	const openDialog = (e: MouseEvent) => {
+		e.preventDefault();
+		open = true;
+	};
 
-    if (key === 'ArrowDown') {
-      event.preventDefault();
-      highlightedIndex = highlightedIndex === null ? 0 : (highlightedIndex + 1) % options.length;
-    } else if (key === 'ArrowUp') {
-      event.preventDefault();
-      highlightedIndex = highlightedIndex === null ? options.length - 1 : (highlightedIndex + options.length - 1) % options.length;
-    } else if (key === 'Enter') {
-      event.preventDefault();
-      if (highlightedIndex !== null) {
-        setValue(options[highlightedIndex].value);
-      }
-    } else if (key === 'Escape') {
-      open = false;
-    }
-  };
+	const closeDialog = () => {
+		open = false;
+	};
 
-  const handleOptionClick = (event: MouseEvent) => {
-    const optionValue = (event.currentTarget as HTMLLIElement).getAttribute('data-value');
-    setValue(optionValue);
-  };
+	$: if (dialogElement) {
+		if (open) {
+			window.addEventListener('scroll', disableScroll);
 
-  const getOptionLabel = (option: Option | Group) => {
-    return typeof option === 'object' && 'label' in option ? option.label : option.value;
-  };
+			document.querySelector('body').style.pointerEvents = 'none';
+			trapFocus(dialogElement);
+			window.addEventListener('mousedown', closeDialogWhenClickOutside);
+			window.addEventListener('mouseup', clearEvents);
 
-  const getOptionValue = (option: Option) => option.value;
+			function clearEvents() {
+				window.removeEventListener('mousedown', closeDialogWhenClickOutside);
+				window.removeEventListener('mouseup', clearEvents);
+			}
+		} else {
+			document.querySelector('body').style.pointerEvents = '';
+		}
 
-  const filterOptions = (options: (Option | Group)[]) => {
-    return options.filter(
-      option =>
-        !inputValue ||
-        getOptionLabel(option)
-          .toLowerCase()
-          .includes(inputValue.toLowerCase())
-    );
-  };
+		function closeDialogWhenClickOutside(e: MouseEvent) {
+			const clickOutside = useClickOutside(e, dialogElement.childNodes[0]);
+			e.preventDefault();
+			e.stopPropagation();
+			if (clickOutside) {
+				closeDialog();
+			}
+		}
 
-  const getOptionId = (index: number) => `option-${index}`;
-
-  const getOptionRef = (index: number) => {
-    return (el: HTMLLIElement | null) => {
-      if (el) {
-        if (index === highlightedIndex) {
-          el.focus();
-        }
-        if (index === 0) {
-          el.scrollIntoView();
-        }
-      }
-    };
-  };
+		function disableScroll(e: WheelEvent) {
+			menuLeft = triggerButton.getBoundingClientRect().left;
+			menuTop = triggerButton.getBoundingClientRect().bottom;
+			e.preventDefault();
+			e.stopPropagation();
+		}
+	}
 </script>
 
-<style>
-  /* Add your own styles here */
-</style>
-
-<SelectTrigger
-  bind:this={triggerRef}
-  placeholder={placeholder}
-  value={value}
-  open={open}
-  on:click={handleTriggerClick}
-  on:keydown={handleTriggerKeyDown}
-  dir={dir}
+<button
+	bind:this={triggerButton}
+	on:click={openDialog}
+	type="button"
+	aria-haspopup="dialog"
+	aria-expanded={open}
+	class={buttonClass}
 >
-  <slot name="trigger" />
-</SelectTrigger>
+	<slot name="trigger" />
+</button>
 
-{#if open}
-  <SelectPortal>
-    <SelectContent>
-      <input
-        type="text"
-        value={inputValue}
-        on:input={handleInputChange}
-        on:keydown={handleInputKeyDown}
-      />
-      <ul bind:this={listRef}>
-        {#each filterOptions(options) as option}
-          {#if option.options}
-            <li>
-              {getOptionLabel(option)}
-              <ul>
-                {#each option.options as subOption (subOption_index)}
-                  <li
-                    data-value={getOptionValue(subOption)}
-                    on:click={handleOptionClick}
-                    on:mouseover={() => (highlightedIndex = subOption_index)}
-                    tabindex="-1"
-                    use:focus
-                    bind:this={getOptionRef(subOption_index)}
-                  >
-                    {getOptionLabel(subOption)}
-                  </li>
-                {/each}
-              </ul>
-            </li>
-          {:else}
-            <li
-              data-value={getOptionValue(option)}
-              on:click={handleOptionClick}
-              on:mouseover={() => (highlightedIndex = option_index)}
-              tabindex="-1"
-              use:focus
-              bind:this={getOptionRef(option_index)}
-            >
-              {getOptionLabel(option)}
-            </li>
-          {/if}
-        {/each}
-      </ul>
-    </SelectContent>
-  </SelectPortal>
+{#if open === true}
+	<div
+		bind:this={dialogElement}
+		on:mousewheel|preventDefault|stopPropagation
+		use:portal={'body'}
+		role="dialog"
+		aria-modal="true"
+		style="position: fixed; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; transform-origin:118.5px -5px; pointer-events:auto"
+	>
+		<slot name="menu" />
+	</div>
 {/if}
-
-
-  

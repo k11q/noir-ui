@@ -68,8 +68,10 @@
 	bind:this={triggerButton}
 	on:click={openDialog}
 	type="button"
+  role="combobox"
 	aria-haspopup="dialog"
 	aria-expanded={open}
+  data-state={open}
 	class={buttonClass}
 >
 	<slot name="trigger" />
