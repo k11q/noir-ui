@@ -3,17 +3,12 @@
 	import { writable, type Writable } from "svelte/store";
 
 	export let className = ''
-	let value:string = getContext('value')
-	let currentExpanded: Writable<string> = getContext('currentExpanded');
+	let expanded:Writable<boolean> = getContext('expanded')
 	let rootAccordion: Writable<HTMLElement> = getContext('rootAccordion');
 	let currentButton: HTMLElement;
 
 	function toggleExpanded(){
-		if($currentExpanded===value){
-			currentExpanded.set('')
-		}else {
-			currentExpanded.set(value)
-		}
+		expanded.set(!$expanded)
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -45,7 +40,7 @@
 
 </script>
 
-<button bind:this={currentButton} on:click={toggleExpanded} on:keydown={handleKeydown} class={className} data-state={$currentExpanded===value?'open':'closed'} aria-expanded={$currentExpanded===value?'true':'false'} data-noir='accordion'>
+<button bind:this={currentButton} on:click={toggleExpanded} on:keydown={handleKeydown} class={className} data-state={$expanded?'open':'closed'} aria-expanded={$expanded?'true':'false'} data-noir='accordion'>
 <slot />
 </button>
 

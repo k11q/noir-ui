@@ -32,13 +32,15 @@
 	import * as Popover from '$lib/Popover';
 	import * as HoverCard from '$lib/HoverCard';
 	import * as ContextMenu from '$lib/ContextMenu';
+	import * as Collapsible from '$lib/Collapsible';
 
 	import { writable, type Writable } from 'svelte/store';
 
 	const storeTab: Writable<string> = writable('a');
 
 	const dialogOpen: Writable<boolean> = writable(false);
-	let accordionCurrentExpanded: Writable<string> = writable('');
+	const accordionCurrentExpanded: Writable<string> = writable('');
+	const collapsibleExpanded: Writable<boolean> = writable(false);
 
 	function closeAlertDialog(){
 		dialogOpen.set(false)
@@ -109,6 +111,10 @@
 			<CardTitle title="Checkbox" />
 		</Card>
 		<Card>
+			<Collapsible.Root expanded={collapsibleExpanded} className="bg-white rounded-md min-w-[220px] flex flex-col absolute top-[50px] shadow-sm first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md">
+					<Collapsible.Trigger className="flex p-3 text-left justify-between items-center"><span> Is it accessible?</span><span class={`${$collapsibleExpanded? 'rotate-180' : ''}  duration-300 ease-in opacity-60`}><ChevronDown size="15"/></span></Collapsible.Trigger>
+					<Collapsible.Content><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide> Content sini</div></Collapsible.Content>
+			</Collapsible.Root>
 			<CardTitle title="Collapsible" />
 		</Card>
 		<Card>
@@ -503,11 +509,14 @@
 		</Card>
 		<Card>
 			<Tooltip.Root>
+				<p>
+					Example of inline
 				<Tooltip.Trigger
-					className="focus:outline focus:outline-2 focus:outline-black text-neutral-600"
+					className="font-semibold"
 				>
-					Placeholder
+					Tooltip!
 				</Tooltip.Trigger>
+			</p>
 				<Tooltip.Portal className="bg-black rounded flex flex-col text-[13px] text-white px-2 py-1">
 					This is a tooltip example
 				</Tooltip.Portal>

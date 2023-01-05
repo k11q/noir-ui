@@ -30,14 +30,14 @@
 
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);
 			window.addEventListener('mouseup', clearEvents);
-			window.addEventListener('wheel', updatePosition);
+			window.addEventListener('wheel', closeDialogWhenScroll);
 
 			function clearEvents() {
 				window.removeEventListener('mousedown', closeDialogWhenClickOutside);
 				window.removeEventListener('mouseup', clearEvents);
 			}
 		} else {
-			window.removeEventListener('wheel', updatePosition);
+			window.removeEventListener('wheel', closeDialogWhenScroll);
 		}
 
 		function closeDialogWhenClickOutside(e: MouseEvent) {
@@ -50,12 +50,8 @@
 		}
 	}
 
-	function updatePosition(e: WheelEvent){
-		menuLeft =
-				$triggerButton.getBoundingClientRect().left +
-				$triggerButton.getBoundingClientRect().width / 2 -
-				$hoverCardPortal.getBoundingClientRect().width / 2;
-		menuTop = $triggerButton.getBoundingClientRect().bottom;
+	function closeDialogWhenScroll(e: WheelEvent){
+			open.set(false);
 	}
 
 	function handleKeydown(e: KeyboardEvent) {

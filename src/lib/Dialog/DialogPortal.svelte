@@ -54,7 +54,7 @@
 			? 'margin: auto;'
 			: ''} min-width: max-content; z-index: auto; transform-origin:118.5px -5px; pointer-events:auto"
 	/>
-	<div in:fly="{{ y: 100, duration: 500 }}" out:fade="{{ duration: 200 }}" bind:this={$alertDialogElement} class={className} aria-expanded={$open} use:portal={'body'} role="dialog" aria-modal="true">
+	<div in:fly="{{ y: 60, duration: 200 }}" out:fade="{{ duration: 100 }}" bind:this={$alertDialogElement} class={className} aria-expanded={$open} use:portal={'body'} role="dialog" aria-modal="true">
 		<slot />
 	</div>
 {/if}

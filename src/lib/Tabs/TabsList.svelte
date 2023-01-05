@@ -1,24 +1,23 @@
 <script lang="ts">
-	import type { Writable } from 'svelte/store';
+	import { writable, type Writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 	
 	export let selected: Writable<any>;
 	export let labeledby = '';
 	export let className = ''
 	export let label = '';
-	
+	let elemTabGroup: Writable<HTMLElement | null> = writable(null);
+
+	setContext('elemTabGroup', elemTabGroup)
 	setContext('selected', selected);
-	
-	let elemTabGroup: HTMLElement;
 
 	function keydown(event: KeyboardEvent) {
 		if (['Home', 'End'].includes(event.code)) {
-			event.preventDefault();
 			if (event.code === 'Home') {
-				(elemTabGroup.children[0] as HTMLElement).focus();
+				($elemTabGroup.children[0] as HTMLElement).focus();
 			}
 			if (event.code === 'End') {
-				(elemTabGroup.children[elemTabGroup.children.length - 1] as HTMLElement).focus();
+				($elemTabGroup.children[$elemTabGroup.children.length - 1] as HTMLElement).focus();
 			}
 		}
 	}
@@ -26,7 +25,7 @@
 </script>
 
 <div
-		bind:this={elemTabGroup}
+		bind:this={$elemTabGroup}
 		on:keydown={keydown}
 		class={className}
 		role="tablist"

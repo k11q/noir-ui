@@ -43,3 +43,9 @@
 >
 	<slot />
 </button>
+
+<style>
+	button {
+		display: inline;
+	}
+</style>

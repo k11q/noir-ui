@@ -8,41 +8,61 @@
 	export let value: any = $selected.value;
 	export let className = '';
 	export let label = 'tab';
+
+	let currentButton:HTMLElement;
+	let rootTabEl: Writable<HTMLElement> = getContext('elemTabGroup');
 	
 	function onClickHandler(value: any): void {
-		/** @event {{ value }} click - Fires on tab click event.  */
 		dispatch('click', value);
-		// Update Selected
 		selected.set(value);
 	}
+
 	function onKeyDown(event: any): void {
-		/** @event {{ event }} keydown - Fires on tab keydown event.  */
 		dispatch('keydown', event);
-		// Enter/Space to toggle element
 		if (['Enter', 'Space'].includes(event.code)) {
-			event.preventDefault();
+			
 			event.target.click();
 		}
+
+		const allTabs = [...$rootTabEl.querySelectorAll('[data-noir="tabs-trigger"]')]
+		const currentButtonIndex = allTabs.indexOf(currentButton)
+
+		if(event.key === 'ArrowRight'){
+			event.preventDefault()
+			if(allTabs[currentButtonIndex+1]){
+				allTabs[currentButtonIndex+1].focus()
+			} else {
+				allTabs[0].focus()
+			}
+		}
+		if(event.key === 'ArrowLeft'){
+			event.preventDefault()
+			if(allTabs[currentButtonIndex-1]){
+				allTabs[currentButtonIndex-1].focus()
+			} else {
+				allTabs[allTabs.length-1].focus()
+			}
+		}
 	}
-	// Reactive Classes
+	
 	$: isSelected = value == $selected;
 	$: state = (value == $selected ? 'active' : 'inactive') as 'active' | 'inactive'
 
 </script>
 
 <button
+	bind:this={currentButton}
 	class={className}
 	on:click={() => {
 		onClickHandler(value);
 	}}
 	on:keydown={onKeyDown}
-	on:keyup
-	on:keypress
 	role="tab"
 	tabindex="0"
 	data-testid="tab"
 	data-state={state}
 	aria-selected={isSelected}
+	data-noir="tabs-trigger"
 >
 	<!-- Slot: Default -->
 	{#if $$slots.default}<slot />{/if}

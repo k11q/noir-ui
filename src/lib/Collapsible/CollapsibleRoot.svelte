@@ -2,13 +2,13 @@
 	import { writable, type Writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 
-    export let currentExpanded: Writable<string> = writable('');
-    export let defaultExpanded = ''
+    export let expanded: Writable<boolean> = writable(false);
+    export let defaultExpanded = false
     export let className = '';
     let rootAccordion: Writable<HTMLElement | null> = writable(null);
 
     setContext('defaultExpanded', defaultExpanded)
-    setContext('currentExpanded', currentExpanded)
+    setContext('expanded', expanded)
     setContext('rootAccordion',rootAccordion)
 </script>
 
