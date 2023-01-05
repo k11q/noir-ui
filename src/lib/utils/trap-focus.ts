@@ -1,6 +1,7 @@
 
 
 export function trapFocus(element: HTMLElement) {
+	if(element){
 	event?.preventDefault()
 	const focusableEls = [
 		...element.querySelectorAll(
@@ -35,4 +36,5 @@ export function trapFocus(element: HTMLElement) {
 		}
 	});
 	return firstFocusableEl
+}
 }

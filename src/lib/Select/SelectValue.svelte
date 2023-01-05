@@ -8,4 +8,8 @@
 
 </script>
 
-<span>{$selected ? capitalise($selected) : capitalise(placeholder)}</span>
+{#if $selected}
+<span>{capitalise($selected)}</span>
+{:else}
+<span style="opacity: 0.4;">{capitalise(placeholder)}</span>
+{/if}

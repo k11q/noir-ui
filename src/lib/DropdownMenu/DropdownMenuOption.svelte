@@ -28,6 +28,7 @@
 	function removeHighlighted() {
 		highlighted.set(undefined);
 	}
+
 </script>
 
 <div
@@ -56,6 +57,7 @@
 		</span>
 	{/if}
 	{capitalise(value)}
+	<slot />
 </div>
 
 <style>

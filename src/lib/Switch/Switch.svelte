@@ -1,28 +1,36 @@
 <script>
+	import { slide } from 'svelte/transition';
+
 	export let checked = false;
-	export let color = '#6E56CF';
+	export let defaultChecked = false;
+	export let disabled = false;
+	export let required = false;
+	export let name = '';
+	export let value = '';
+	export let labelClass = '';
+
 </script>
 
-<label class="switch">
-	<input type="checkbox" bind:checked />
-	<span class="slider" />
+<label class={labelClass}>
+	<input type="checkbox" bind:checked role="switch" {name} {value}/>
+	<span transition:slide/>
 </label>
 
 <style>
-	.switch {
+	label {
 		position: relative;
 		display: inline-block;
-		width: 60px;
-		height: 34px;
+		width: 42px;
+		height: 25px;
 	}
 
-	.switch input {
+	label input {
 		opacity: 0;
 		width: 0;
 		height: 0;
 	}
 
-	.slider {
+	label> span {
 		position: absolute;
 		cursor: pointer;
 		top: 0;
@@ -35,30 +43,30 @@
 		border-radius: 34px;
 	}
 
-	.slider:before {
+	label> span:before {
 		position: absolute;
 		content: '';
-		height: 26px;
-		width: 26px;
-		left: 4px;
-		bottom: 4px;
+		height: 19px;
+		width: 19px;
+		left: 3px;
+		bottom: 3px;
 		background-color: white;
 		-webkit-transition: 0.2s;
 		transition: 0.2s;
 		border-radius: 50%;
 	}
 
-	input:checked + .slider {
-		background-color: #6E56CF;
+	input:checked + span {
+		background-color: black;
 	}
 
-	input:checked + .slider {
-		box-shadow: 0 0 1px #6E56CF;
+	input:checked + span {
+		box-shadow: 0 0 1px black;
 	}
 
-	input:checked + .slider:before {
-		-webkit-transform: translateX(26px);
-		-ms-transform: translateX(26px);
-		transform: translateX(26px);
+	input:checked + span:before {
+		-webkit-transform: translateX(17px);
+		-ms-transform: translateX(17px);
+		transform: translateX(17px);
 	}
 </style>

@@ -7,7 +7,7 @@
 
 	export let open: Writable<boolean> = getContext('open');
 	export let selected: Writable<any> = getContext('selected');
-	export let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
+	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
 	export let className = '';
 
 	let highlighted: Writable<any> = getContext('highlighted');
@@ -21,7 +21,7 @@
 		$triggerButton.focus();
 	};
 
-	$: !$open ? console.log('selectclosed') : ''
+	$: !$open ? console.log('dropdownclosed') : ''
 
 	$: if (selectPortal) {
 		if ($open) {
@@ -29,35 +29,14 @@
 				$triggerButton.getBoundingClientRect().left +
 				$triggerButton.getBoundingClientRect().width / 2 -
 				selectPortal.getBoundingClientRect().width / 2;
-
-			if (selectedElement()) {
-				let distance =
-					selectedElement()!.getBoundingClientRect().top - selectPortal.getBoundingClientRect().top;
-				menuTop =
-					$triggerButton.getBoundingClientRect().top +
-					$triggerButton.getBoundingClientRect().height / 2 -
-					selectedElement()!.getBoundingClientRect().height / 2 -
-					distance;
-			} else {
-				const firstOption = selectPortal.querySelector('[role="option"]');
-				if (firstOption) {
-					let distance =
-						firstOption.getBoundingClientRect().top - selectPortal.getBoundingClientRect().top;
-					menuTop =
-						$triggerButton.getBoundingClientRect().top +
-						$triggerButton.getBoundingClientRect().height / 2 -
-						firstOption.getBoundingClientRect().height / 2 -
-						distance;
-				}
-			}
-
-			window.addEventListener('scroll', updatePortalPosition);
+			menuTop = $triggerButton.getBoundingClientRect().bottom;
 
 			trapFocus(selectPortal);
 			document.querySelector('body')!.style.pointerEvents = 'none';
 
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);
 			window.addEventListener('mouseup', clearEvents);
+			window.addEventListener('wheel', disableScroll,{passive:false});
 
 			function clearEvents() {
 				window.removeEventListener('mousedown', closeDialogWhenClickOutside);
@@ -65,7 +44,7 @@
 			}
 		} else {
 			document.querySelector('body').style.pointerEvents = '';
-			window.removeEventListener('scroll', updatePortalPosition);
+			window.removeEventListener('wheel', disableScroll);
 		}
 
 		function closeDialogWhenClickOutside(e: MouseEvent) {
@@ -76,42 +55,10 @@
 				closeDialog();
 			}
 		}
-
-		function updatePortalPosition() {
-			if (selectPortal && $triggerButton) {
-				menuLeft =
-					$triggerButton.getBoundingClientRect().left +
-					$triggerButton.getBoundingClientRect().width / 2 -
-					selectPortal.getBoundingClientRect().width / 2;
-				if (selectedElement()) {
-					let distance =
-						selectedElement()!.getBoundingClientRect().top -
-						selectPortal.getBoundingClientRect().top;
-					menuTop =
-						$triggerButton.getBoundingClientRect().top +
-						$triggerButton.getBoundingClientRect().height / 2 -
-						selectedElement()!.getBoundingClientRect().height / 2 -
-						distance;
-				} else {
-					const firstOption = selectPortal.querySelector('[role="option"]');
-					if (firstOption) {
-						let distance =
-							firstOption.getBoundingClientRect().top - selectPortal.getBoundingClientRect().top;
-						menuTop =
-							$triggerButton.getBoundingClientRect().top +
-							$triggerButton.getBoundingClientRect().height / 2 -
-							firstOption.getBoundingClientRect().height / 2 -
-							distance;
-					}
-				}
-			}
-		}
 	}
 
-	function selectedElement() {
-		if (selectPortal.querySelector('[data-state="checked"]')) {
-			return selectPortal.querySelector('[data-state="checked"]');
-		} else return null;
+	function disableScroll(e: WheelEvent){
+		e.preventDefault()
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -122,10 +69,11 @@
 			const firstElement = selectPortal.querySelector('[role="option"]') as HTMLElement;
 
 			if (selectPortal.querySelector('[data-highlighted="true"]')) {
+
 				const highlightedElement = selectPortal.querySelector(
 					'[data-highlighted="true"]'
 				) as HTMLElement;
-
+				
 				const highlightedElementIndex = allOptions.indexOf(highlightedElement);
 
 				if (highlightedElementIndex === allOptions.length - 1) {
@@ -144,7 +92,7 @@
 				const highlightedElement = selectPortal.querySelector(
 					'[data-highlighted="true"]'
 				) as HTMLElement;
-
+				
 				const highlightedElementIndex = allOptions.indexOf(highlightedElement);
 
 				if (highlightedElementIndex === 0) {
@@ -161,11 +109,11 @@
 			if (highlighted) {
 				selected.set($highlighted);
 			}
-			closeDialog();
+			closeDialog()
 		}
 
 		if (e.key === 'Escape') {
-			closeDialog();
+			closeDialog()
 		}
 	}
 </script>
@@ -179,8 +127,9 @@
 		on:keydown={handleKeydown}
 		style="position: fixed; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; transform-origin:118.5px -5px; pointer-events:auto"
 	>
-		<div class={className} role="listbox" aria-expanded={$open}>
+		<div class={className} role="listbox" aria-expanded={$open} style="margin-top:8px">
 			<slot />
 		</div>
+		<div style="background-color:white; height:8px; position:absolute; inset:0px;margin-top:4px;  aspect-ratio: 1/1; margin-left:auto; margin-right:auto; transform:rotate(45deg);"/>
 	</div>
 {/if}

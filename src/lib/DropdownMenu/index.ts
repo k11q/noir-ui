@@ -1,0 +1,5 @@
+export { default as Option } from './DropdownMenuOption.svelte'
+export { default as Root } from './DropdownMenuRoot.svelte'
+export { default as Portal } from './DropdownMenuPortal.svelte'
+export { default as Trigger } from './DropdownMenuTrigger.svelte'
+export { default as Group } from './DropdownMenuGroup.svelte'

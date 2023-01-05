@@ -79,13 +79,17 @@
 			}
 		}
 
-		function disableScroll(e: WheelEvent) {
-			menuLeft = triggerButton.getBoundingClientRect().left;
-			menuTop = triggerButton.getBoundingClientRect().bottom;
-			e.preventDefault();
-			e.stopPropagation();
-		}
+		
 	}
+
+	function disableScroll(e: WheelEvent) {
+		if(triggerButton && dialogElement){
+			menuLeft = triggerButton.getBoundingClientRect().left +
+			  triggerButton.getBoundingClientRect().width / 2 -
+			  dialogElement.children[0].getBoundingClientRect().width / 2;
+			menuTop = triggerButton.getBoundingClientRect().bottom;
+		}
+		}
 </script>
 
 <button
@@ -106,7 +110,7 @@
 		use:portal={'body'}
 		role="dialog"
 		aria-modal="true"
-		style="position: fixed; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; transform-origin:118.5px -5px; pointer-events:auto"
+		style="position: fixed; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; pointer-events:auto"
 	>
     <div class="flex flex-col mt-2">
         <slot name="content" />

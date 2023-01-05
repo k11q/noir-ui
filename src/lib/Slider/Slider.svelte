@@ -55,7 +55,7 @@
 	on:mousedown={changeValue}
 >
 	<span class="rounded-full h-[3px] flex-grow bg-gray-400 relative">
-		<span class="rounded-full absolute bg-[#6E56CF] h-full left-0" style="right: {100 - value}%" />
+		<span class="rounded-full absolute bg-black h-full left-0" style="right: {100 - value}%" />
 	</span>
 	<span class=" absolute" style="left: calc({value}% + {offsetHandler}px)">
 		<span
@@ -66,7 +66,7 @@
 			aria-valuemax={maxValue}
 			aria-orientation="horizontal"
 			tabindex="0"
-			class="block h-5 w-5 rounded-full shadow-sm bg-white focus:outline focus:outline-4 outline-[#6e56cf98]"
+			class="block h-5 w-5 rounded-full shadow-sm bg-white focus:outline focus:outline-4 outline-[#00000098]"
 		/>
 	</span>
 </span>

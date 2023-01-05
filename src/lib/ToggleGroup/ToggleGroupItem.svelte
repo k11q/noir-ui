@@ -2,35 +2,42 @@
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
 
-	export let value = '';
+	export let selected: Writable<any> = getContext('selected');
+	export let currentFocus: Writable<string | undefined> = getContext('currentFocus')
 	export let asChild = false;
 	export let defaultPressed = false;
 	export let pressed = false;
 	export let disabled = false;
-	export let selected: Writable<any> = getContext('selected');
-	export let currentFocus: Writable<string | undefined> = getContext('currentFocus')
+    export let value = '';
+	export let name = '';
+
+	export let labelClass = '';
 	export let className = '';
 	export let style = '';
 
-	$: dataState = ($selected === value ? 'on' : 'off') as 'on' | 'off';
-	$: ariaPressed = ($selected === value ? 'true' : 'false') as 'true' | 'false';
-	$: tabindex = ($selected === value ? 0 : -1) as 0 | -1;
-
-	function toggleState() {
-		pressed = !pressed;
-		selected.set(value);
-	}
+	$: dataState = pressed ? 'on' : 'off';
+	$: ariaPressed = pressed ? 'true' : ('false' as 'true' | 'false');
 
 </script>
 
-<button
+<label class={labelClass}>
+	<input type="checkbox" bind:checked={pressed} role="switch" {name} {value}/>
+<span
 	class={className}
 	{style}
 	aria-pressed={ariaPressed}
 	data-state={dataState}
 	data-disabled={disabled}
-	{tabindex}
-	on:click={toggleState}
 >
 	<slot />
-</button>
+</span>
+</label>
+
+<style>
+	label input {
+		opacity: 0;
+		width: 0px;
+		height: 0px;
+		position: absolute;
+	}
+</style>
