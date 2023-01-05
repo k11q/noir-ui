@@ -12,7 +12,7 @@
 	export let value = '';
 	export let id = '';
 
-    let checkboxButton:HTMLElement;
+	let checkboxButton: HTMLElement;
 
 	setContext('checked', checked);
 
@@ -20,28 +20,44 @@
 		checked.set(!$checked);
 	}
 
-    $: defaultChecked ? checked.set(true) : ''
+	$: defaultChecked ? checked.set(true) : '';
 
-    function handleChange(){
-        if(document.activeElement === checkboxButton){
-            return
-        }else {
-            checkboxButton.focus()
-        }
-    }
-
+	function handleChange() {
+		if (document.activeElement === checkboxButton) {
+			return;
+		} else {
+			checkboxButton.focus();
+		}
+	}
+	
 </script>
 
-<input
-	type="checkbox"
-	{id}
-	bind:checked={$checked}
-    on:change={handleChange}
-    value="on"
-    aria-hidden="true"
-    tabindex="-1"
-	style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px; width: 25px; height: 25px;"
-/>
-<button bind:this={checkboxButton} class={className} value="on" on:click={toggleCheck} role="checkbox" aria-checked={$checked} data-state={$checked? 'checked' : 'unchecked'}>
-	<slot />
+	<input
+		type="checkbox"
+		{id}
+		bind:checked={$checked}
+		on:change={handleChange}
+		value="on"
+		aria-hidden="true"
+		tabindex="-1"
+		style="width: 0px; height:0px; position: absolute;"
+	/>
+	<button
+	bind:this={checkboxButton}
+	class={className}
+	value="on"
+	on:click={toggleCheck}
+	role="checkbox"
+	aria-checked={$checked}
+	data-state={$checked ? 'checked' : 'unchecked'}
+>
+	<span>
+		<slot />
+	</span>
 </button>
+
+<style>
+	input:not(:checked) + button > span {
+		display: none;
+	}
+</style>

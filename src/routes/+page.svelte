@@ -1,4 +1,5 @@
 <script lang="ts">
+	import {Check, ChevronDown, Italic, AlignLeft, AlignCenter, AlignRight} from 'lucide-svelte'
 	import Accordion from '$lib/Accordion/Accordion.svelte';
 	import AccordionItem from '$lib/Accordion/AccordionItem.svelte';
 	import AccordionContent from '$lib/Accordion/AccordionContent.svelte';
@@ -9,13 +10,12 @@
 	import CardTitle from '$lib/Card/CardTitle.svelte';
 	import Dialog from '$lib/Dialog/Dialog.svelte';
 	import Toggle from '$lib/Toggle/Toggle.svelte';
-	import ToggleGroupItem from '$lib/ToggleGroup/ToggleGroupItem.svelte';
-	import ToggleGroup from '$lib/ToggleGroup/ToggleGroup.svelte';
-	import Select from '$lib/Select/Select.svelte';
 	
-	import * as Checkbox from '$lib/Checkbox'
+	import Checkbox from '$lib/Checkbox'
 	import * as Tabs from '$lib/Tabs'
 	import * as RadioGroup from '$lib/Radio';
+	import * as Select from '$lib/Select'
+	import * as ToggleGroup from '$lib/ToggleGroup'
 	import Slider from '$lib/Slider';
 	import Switch from '$lib/Switch';
 	import Tooltip from '$lib/Tooltip';
@@ -23,6 +23,8 @@
 	import Popover from '$lib/Popover';
 
 	import { writable, type Writable } from 'svelte/store';
+	import Portal from '$lib/Portal/Portal.svelte';
+	import Option from '$lib/Listbox/Option.svelte';
 
 	const storeLayout: Writable<string> = writable('horz');
 	const storeLayout2: Writable<string> = writable('horz');
@@ -70,28 +72,23 @@
 			<CardTitle title="Alert Dialog" />
 		</Card>
 		<Card>
-			<CardTitle title="Avatar" />
-		</Card>
-		<Card>
 			<div class="flex flex-col gap-3 text-sm text-gray-600">
-			<div class="flex flex-row items-center">
-				<Checkbox.Root id="c1" className="bg-white shadow-sm h-6 aspect-square rounded focus:outline focus:outline-2 focus:outline-purple-600">
-					<Checkbox.Indicator>X</Checkbox.Indicator>
-				</Checkbox.Root>
-				<label class="ml-3" for="c1">Checkbox 1</label>
-			</div>
-			<div class="flex flex-row items-center">
-				<Checkbox.Root id="c2" className="bg-white shadow-sm h-6 aspect-square rounded focus:outline focus:outline-2 focus:outline-purple-600">
-					<Checkbox.Indicator>X</Checkbox.Indicator>
-				</Checkbox.Root>
-				<label class="ml-3" for="c2">Checkbox 2</label>
-			</div>
-			<div class="flex flex-row items-center">
-				<Checkbox.Root id="c3" className="bg-white shadow-sm h-6 aspect-square rounded focus:outline focus:outline-2 focus:outline-purple-600">
-					<Checkbox.Indicator>X</Checkbox.Indicator>
-				</Checkbox.Root>
-				<label class="ml-3" for="c3">Checkbox 3</label>
-			</div>
+				<!-- svelte-ignore a11y-label-has-associated-control -->
+				<label class="text-[13px] flex flex-row gap-3 items-center" for="c1">
+				<Checkbox id="c1" className="bg-white shadow-sm h-6 aspect-square rounded focus:outline focus:outline-2 focus:outline-purple-600 flex items-center justify-center">
+					<Check size="15"/>
+				</Checkbox>
+				Checkbox 1</label>
+				<label class="text-[13px] flex flex-row gap-3 items-center" for="c2">
+				<Checkbox id="c2" className="bg-white shadow-sm h-6 aspect-square rounded focus:outline focus:outline-2 focus:outline-purple-600 flex items-center justify-center">
+					<Check size="15"/>
+				</Checkbox>
+				Checkbox 2</label>
+				<label class="text-[13px] flex flex-row gap-3 items-center" for="c3">
+				<Checkbox id="c3" className="bg-white shadow-sm h-6 aspect-square rounded focus:outline focus:outline-2 focus:outline-purple-600 flex items-center justify-center">
+					<Check size="15"/>
+				</Checkbox>
+				Checkbox 3</label>
 		</div>
 			<CardTitle title="Checkbox" />
 		</Card>
@@ -136,9 +133,6 @@
 		</Card>
 		<Card>
 			<CardTitle title="Hovercard" />
-		</Card>
-		<Card>
-			<CardTitle title="Label" />
 		</Card>
 		<Card>
 			<CardTitle title="Menubar" />
@@ -192,23 +186,30 @@
 			<CardTitle title="Scroll Area" />
 		</Card>
 		<Card>
-			<Select>
-				<svelte:fragment slot="trigger">Select</svelte:fragment>
-				<svelte:fragment slot="menu">
-					<div
-						class="border bg-white rounded-lg border-gray-200 w-60 flex flex-col justify-between p-1"
-					>
-						<div class="px-2 py-1 hover:bg-gray-200" tabindex="0">Item 1</div>
-						<div class="px-2 py-1 hover:bg-gray-200" tabindex="0">Item 2</div>
-						<div class="px-2 py-1 hover:bg-gray-200" tabindex="0">Item 3</div>
-						<div class="px-2 py-1 hover:bg-gray-200" tabindex="0">Item 4</div>
-					</div>
-				</svelte:fragment>
-			</Select>
+			<Select.Root>
+				<Select.Trigger className="bg-white py-2 px-3 rounded focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center text-[13px] text-[#6E56CF]">
+					<Select.Value placeholder="Select a value..."/>
+					<span class="opacity-70 -mb-0.5">
+					<ChevronDown size="15"/>
+				</span>
+				</Select.Trigger>
+				<Select.Portal className="border bg-white rounded-lg border-gray-200 w-[135px] flex flex-col p-[6px] text-[13px] text-[#6E56CF] shadow-lg">
+					<Select.Group label="fruits" labelClass="pl-[25px] pb-1 pt-0.5 text-gray-400 text-xs">
+						<Select.Option value="apple" className="px-2 py-1 data-[highlighted='true']:bg-[#6E56CF] data-[highlighted='true']:text-white rounded" />
+						<Select.Option value="banana" className="px-2 py-1 data-[highlighted='true']:bg-[#6E56CF] data-[highlighted='true']:text-white rounded" />
+						<Select.Option value="blueberry" className="px-2 py-1 data-[highlighted='true']:bg-[#6E56CF] data-[highlighted='true']:text-white rounded" />
+						<Select.Option value="grapes" className="px-2 py-1 data-[highlighted='true']:bg-[#6E56CF] data-[highlighted='true']:text-white rounded" />
+						<Select.Option value="pineapple" className="px-2 py-1 data-[highlighted='true']:bg-[#6E56CF] data-[highlighted='true']:text-white rounded" />
+					</Select.Group>
+						<div class="h-[1px] mx-1 my-2 bg-gray-200"></div>
+						<Select.Group label="vegetables" labelClass="pl-[25px] pb-1 pt-0.5 text-gray-400 text-xs">
+							<Select.Option value="broccoli" className="px-2 py-1 data-[highlighted='true']:bg-[#6E56CF] data-[highlighted='true']:text-white rounded" />
+							<Select.Option value="spinach" className="px-2 py-1 data-[highlighted='true']:bg-[#6E56CF] data-[highlighted='true']:text-white rounded" />
+							<Select.Option value="aubergine" className="px-2 py-1 data-[highlighted='true']:bg-[#6E56CF] data-[highlighted='true']:text-white rounded" />
+							</Select.Group>
+				</Select.Portal>
+			</Select.Root>
 			<CardTitle title="Select" />
-		</Card>
-		<Card>
-			<CardTitle title="Separator" />
 		</Card>
 		<Card>
 			<Slider />
@@ -222,7 +223,7 @@
 			<Tabs.Group className="flex flex-col rounded-lg bg-white shadow min-h-[140px] text-sm min-w-[240px]">
 				<Tabs.List
 					selected={storeTab}
-					className="flex flex-row focus:[&>*]:rounded shadow-[0_-1px_0px_0px_inset] shadow-gray-200 [&>*]:py-3 [&>*]:px-5 [&>*]:text-gray-400 data-[state='active']:[&>*]:shadow-[0_-2px_0px_0px_inset] data-[state='active']:[&>*]:shadow-purple-600 data-[state='active']:[&>*]:text-purple-600 focus:[&>*]:outline focus:[&>*]:outline-2 focus:[&>*]:outline-purple-600 focus:[&>*]:relative"
+					className="flex flex-row  shadow-[0_-1px_0px_0px_inset] shadow-gray-200 [&>*]:py-3 [&>*]:px-5 [&>*]:text-gray-400 first:[&>*]:rounded-tl-lg data-[state='active']:[&>*]:shadow-[0_-2px_0px_0px_inset] data-[state='active']:[&>*]:shadow-[#6E56CF] data-[state='active']:[&>*]:text-[#6E56CF] focus:[&>*]:outline focus:[&>*]:outline-2 focus:[&>*]:outline-black focus:[&>*]:relative"
 				>
 					<Tabs.Trigger value="a">Tab 1</Tabs.Trigger>
 					<Tabs.Trigger value="b">Tab 2</Tabs.Trigger>
@@ -260,21 +261,20 @@
 		</Card>
 		<Card>
 			<Toggle
-				className="focus:outline bg-white shadow-sm h-10 aspect-square rounded data-[state='on']:bg-purple-200 focus:outline-2 focus:outline-purple-600"
+				className="flex items-center justify-center focus:outline bg-white shadow-sm h-10 aspect-square rounded data-[state='on']:bg-[#E4DEFC] focus:outline-2 focus:outline-black text-gray-600"
 			>
-				W
+				<Italic size="14"/>
 			</Toggle>
 			<CardTitle title="Toggle" />
 		</Card>
 		<Card>
-			<ToggleGroup
-				className="flex rounded bg-white shadow-sm first:[&>*]:rounded-l last:[&>*]:rounded-r last:[&>*]:border-r-0 [&>*]:border-r [&>*]:border-gray-200 [&>*]:h-10 [&>*]:aspect-square data-[state='on']:[&>*]:bg-purple-200 focus:[&>*]:outline focus:[&>*]:outline-2 focus:[&>*]:outline-purple-600 focus:[&>*]:relative"
+			<ToggleGroup.Root
+				className="text-gray-600 flex [&>*]:flex [&>*]:items-center [&>*]:justify-center rounded bg-white shadow-sm first:[&>*]:rounded-l last:[&>*]:rounded-r last:[&>*]:border-r-0 [&>*]:border-r [&>*]:border-gray-200 [&>*]:h-10 [&>*]:aspect-square data-[state='on']:[&>*]:bg-[#E4DEFC] focus:[&>*]:outline focus:[&>*]:outline-2 focus:[&>*]:outline-black focus:[&>*]:relative"
 			>
-				<ToggleGroupItem value="item1">W</ToggleGroupItem>
-				<ToggleGroupItem value="item2">A</ToggleGroupItem>
-				<ToggleGroupItem value="item3">S</ToggleGroupItem>
-				<ToggleGroupItem value="item4">D</ToggleGroupItem>
-			</ToggleGroup>
+				<ToggleGroup.Item value="item1"><AlignLeft size="15"/></ToggleGroup.Item>
+				<ToggleGroup.Item value="item2"><AlignCenter size="15"/></ToggleGroup.Item>
+				<ToggleGroup.Item value="item3"><AlignRight size="15"/></ToggleGroup.Item>
+			</ToggleGroup.Root>
 			<CardTitle title="Toggle Group" />
 		</Card>
 		<Card>

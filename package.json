@@ -36,5 +36,9 @@
 		"vitest": "^0.26.3",
 		"windy-radix-palette": "^0.4.1"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"install": "^0.13.0",
+		"lucide-svelte": "^0.104.0"
+	}
 }

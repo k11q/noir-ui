@@ -2,9 +2,13 @@
 
 export function trapFocus(element: HTMLElement) {
 	event?.preventDefault()
-	const focusableEls = element.querySelectorAll(
-		'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
-	);
+	const focusableEls = [
+		...element.querySelectorAll(
+		  'a[href], button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
+		)
+	  ].filter(
+		el => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden')
+	  );
 	const firstFocusableEl = focusableEls[0] as HTMLElement;
 	const lastFocusableEl = focusableEls[focusableEls.length - 1] as HTMLElement;
 	const KEYCODE_TAB = 9;

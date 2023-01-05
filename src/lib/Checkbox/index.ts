@@ -1,2 +1,3 @@
-export { default as Root } from './Checkbox.svelte'
-export { default as Indicator } from './CheckboxIndicator.svelte'
+import Checkbox from './Checkbox.svelte'
+
+export default Checkbox
