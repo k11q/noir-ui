@@ -1,1 +1,3 @@
-export { default } from './Toggle.svelte'
+import Toggle from './Toggle.svelte'
+
+export default Toggle

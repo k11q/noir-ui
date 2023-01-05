@@ -1,28 +1,36 @@
 <script lang="ts">
-	import { getContext, setContext } from 'svelte';
-    import SvgIcon from "$lib/SvgIcon/SvgIcon.svelte"
+	import { getContext, setContext } from "svelte";
+	import type { Writable } from "svelte/store";
 
-	const contentId = getContext('contentId');
-	const summaryId = getContext('summaryId');
-    const open = getContext('open');
-	const classesIcon = getContext('classesIcon');
+	export let className = ''
+	let value:string = getContext('value')
+
+	let currentExpanded: Writable<string> = getContext('currentExpanded');
+
+	function toggleExpanded(){
+		if($currentExpanded===value){
+			currentExpanded.set('')
+		}else {
+			currentExpanded.set(value)
+		}
+		
+	}
+
+	function handleKeydown(e: KeyboardEvent) {
+        if(e.keyCode === 32 || e.key === 'Enter'){
+			e.preventDefault()
+            toggleExpanded()
+        } else return
+	}
+
 </script>
 
-<summary
-		id={summaryId}
-		aria-expanded={open}
-        class={$$props.class}
-		aria-controls={contentId}
-        on:click
-	>
-		<!-- Slot: Lead -->
-		{#if $$slots.lead}<div class="accordion-summary-lead"><slot name="lead" /></div>{/if}
-		<!-- Slot: Text -->
-        <div class="flex-auto cursor-default">
-			<slot>(header)</slot>
-        </div>
-		<!-- Caret -->
-		<div class="accordion-summary-caret {classesIcon}">
-			<SvgIcon name="angle-down" class="opacity-50" />
-		</div>
-	</summary>
+<button on:click={toggleExpanded} on:keydown={handleKeydown} class={className} data-state={$currentExpanded===value?'open':'closed'} aria-expanded={$currentExpanded===value?'true':'false'}>
+<slot />
+</button>
+
+<style>
+	button:focus {
+		outline:none;
+	}
+</style>

@@ -7,20 +7,16 @@
 		AlignCenter,
 		AlignRight,
 		AlignJustify,
-		Command,
 		Settings2,
 		Github
 	} from 'lucide-svelte';
-	import Accordion from '$lib/Accordion/Accordion.svelte';
-	import AccordionItem from '$lib/Accordion/AccordionItem.svelte';
-	import AccordionContent from '$lib/Accordion/AccordionContent.svelte';
-	import AccordionHeader from '$lib/Accordion/AccordionHeader.svelte';
-	import Button from '$lib/Button/Button.svelte';
+	
+	import { slide } from 'svelte/transition';
 	import Card from '$lib/Card/Card.svelte';
 	import CardTitle from '$lib/Card/CardTitle.svelte';
 
-	import Toggle from '$lib/Toggle/Toggle.svelte';
-
+	import Toggle from '$lib/Toggle';
+	import * as Accordion from '$lib/Accordion';
 	import Checkbox from '$lib/Checkbox';
 	import * as Tabs from '$lib/Tabs';
 	import * as RadioGroup from '$lib/Radio';
@@ -42,12 +38,12 @@
 	const storeTab: Writable<string> = writable('a');
 
 	const dialogOpen: Writable<boolean> = writable(false);
+	let accordionCurrentExpanded: Writable<string> = writable('');
 
 	function closeAlertDialog(){
 		dialogOpen.set(false)
 	}
 
-	let rangeValue = 40
 	let switchChecked = false;
 </script>
 
@@ -56,16 +52,20 @@
 	<h3 class="text-lg mb-8">Ready made accessible components</h3>
 	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1020px] w-full gap-5">
 		<Card>
-			<Accordion class="rounded-lg overflow-hidden border border-black">
-				<AccordionItem class="">
-					<AccordionHeader slot="header" class="bg-blue-400 flex p-4">Header2</AccordionHeader>
-					<AccordionContent slot="content" class="bg-red-400 p-4">Hahahha</AccordionContent>
-				</AccordionItem>
-				<AccordionItem class="">
-					<AccordionHeader slot="header" class="bg-blue-400 flex p-4">Header2</AccordionHeader>
-					<AccordionContent slot="content" class="bg-red-400 p-4">Hahahha</AccordionContent>
-				</AccordionItem>
-			</Accordion>
+			<Accordion.Root className="bg-white rounded-md min-w-[220px] flex flex-col absolute top-[50px] shadow-sm first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md" currentExpanded={accordionCurrentExpanded}>
+				<Accordion.Item value="item-1" className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative">
+					<Accordion.Header className="flex p-3 text-left justify-between items-center"><span> Is it accessible?</span><span class={`${$accordionCurrentExpanded==='item-1'? 'rotate-180' : ''}  duration-300 ease-in opacity-60`}><ChevronDown size="15"/></span></Accordion.Header>
+					<Accordion.Content><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide> Content sini</div></Accordion.Content>
+				</Accordion.Item>
+				<Accordion.Item value="item-2" className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative">
+					<Accordion.Header className="flex p-3 text-left justify-between items-center border-t"><span> Is it unstyled?</span><span class={`${$accordionCurrentExpanded==='item-2'? 'rotate-180' : ''}  duration-300 ease-in opacity-60`}><ChevronDown size="15"/></span></Accordion.Header>
+					<Accordion.Content><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide> Content sini</div></Accordion.Content>
+				</Accordion.Item>
+				<Accordion.Item value="item-3" className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative">
+					<Accordion.Header className="flex p-3 text-left justify-between items-center border-t"><span> Can it be animated?</span><span class={`${$accordionCurrentExpanded==='item-3'? 'rotate-180' : ''}  duration-300 ease-in opacity-60`}><ChevronDown size="15"/></span></Accordion.Header>
+					<Accordion.Content><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide> Content sini</div></Accordion.Content>
+				</Accordion.Item>
+			</Accordion.Root>
 			<CardTitle title="Accordion" />
 		</Card>
 		<Card>
@@ -85,8 +85,11 @@
 						data from our servers.
 					</p>
 					<div class="pt-2 flex flex-row gap-3 justify-end">
-						<button class="bg-neutral-100 rounded px-4 py-2 text-neutral-700" on:click={closeAlertDialog}>Cancel</button><button
-							class="bg-red-100 rounded px-4 py-2 text-red-900">Yes, delete my account</button
+						<button
+							class="bg-neutral-100 rounded px-4 py-2 text-neutral-700"
+							on:click={closeAlertDialog}>Cancel</button
+						><button class="bg-red-100 rounded px-4 py-2 text-red-900"
+							>Yes, delete my account</button
 						>
 					</div>
 				</AlertDialog.Portal>
@@ -113,7 +116,7 @@
 				<ContextMenu.Trigger
 					className="flex items-center justify-center bg-neutral-300 border-neutral-400 opacity-50 border-dashed border h-32 w-52 rounded-lg aspect-square text-neutral-600"
 				>
-				<p>Right click here</p>
+					<p>Right click here</p>
 				</ContextMenu.Trigger>
 				<ContextMenu.Portal
 					className="border bg-white rounded-lg border-neutral-200 w-60 flex flex-col p-[6px] text-[13px] text-black shadow-lg"
@@ -274,7 +277,7 @@
 		<Card>
 			<HoverCard.Root>
 				<HoverCard.Trigger
-					className="flex items-center justify-center bg-white h-10 rounded-full aspect-square focus:outline focus:outline-2 focus:outline-black text-neutral-600"
+					className="flex items-center justify-center bg-white h-10 rounded-full aspect-square text-neutral-600"
 				>
 					<Github size="15" />
 				</HoverCard.Trigger>
@@ -402,7 +405,10 @@
 						/>
 					</Select.Group>
 					<div class="h-[1px] mx-1 my-2 bg-neutral-200" />
-					<Select.Group label="vegetables" labelClass="pl-[25px] pb-1 pt-0.5 text-neutral-400 text-xs">
+					<Select.Group
+						label="vegetables"
+						labelClass="pl-[25px] pb-1 pt-0.5 text-neutral-400 text-xs"
+					>
 						<Select.Option
 							value="broccoli"
 							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
@@ -422,8 +428,6 @@
 		</Card>
 		<Card>
 			<Slider />
-			<input type="range" class="h-4 w-40" value={rangeValue}/>
-			{rangeValue}
 			<CardTitle title="Slider" />
 		</Card>
 		<Card>
@@ -434,9 +438,7 @@
 			<CardTitle title="Switch" />
 		</Card>
 		<Card>
-			<Tabs.Group
-				className="flex flex-col rounded-lg bg-white shadow min-h-[140px] min-w-[240px]"
-			>
+			<Tabs.Group className="flex flex-col rounded-lg bg-white shadow min-h-[140px] min-w-[240px]">
 				<Tabs.List
 					selected={storeTab}
 					className="flex flex-row  shadow-[0_-1px_0px_0px_inset] shadow-neutral-200 [&>*]:py-3 [&>*]:px-5 [&>*]:text-neutral-400 first:[&>*]:rounded-tl-lg data-[state='active']:[&>*]:shadow-[0_-2px_0px_0px_inset] data-[state='active']:[&>*]:shadow-black data-[state='active']:[&>*]:text-black focus:[&>*]:outline focus:[&>*]:outline-2 focus:[&>*]:outline-black focus:[&>*]:relative"
@@ -450,8 +452,7 @@
 						<div class="flex flex-col justify-between gap-6">
 							<span class="text-neutral-400">Save changes?</span>
 							<div class="flex flex-row justify-end">
-								<button class="shadow-sm rounded-md border px-4 py-[6px] -mr-2">Save</button
-								>
+								<button class="shadow-sm rounded-md border px-4 py-[6px] -mr-2">Save</button>
 							</div>
 						</div>
 					{/if}
@@ -505,11 +506,10 @@
 				<Tooltip.Trigger
 					className="focus:outline focus:outline-2 focus:outline-black text-neutral-600"
 				>
-					Tooltip
+					Placeholder
 				</Tooltip.Trigger>
-				<Tooltip.Portal
-					className="bg-black rounded flex flex-col text-[13px] text-white px-2 py-1"
-				> Tooltip Content!
+				<Tooltip.Portal className="bg-black rounded flex flex-col text-[13px] text-white px-2 py-1">
+					This is a tooltip example
 				</Tooltip.Portal>
 			</Tooltip.Root>
 			<CardTitle title="Tooltip" />

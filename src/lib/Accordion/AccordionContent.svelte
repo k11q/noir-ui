@@ -1,16 +1,12 @@
-<script>
-    	import { getContext, setContext } from 'svelte';
+<script lang="ts">
+	import { getContext, setContext } from "svelte";
+	import type { Writable } from "svelte/store";
 
-        const contentId = getContext('contentId');
-        const summaryId = getContext('summaryId')
+	let value:string = getContext('value')
+	let currentExpanded: Writable<string> = getContext('currentExpanded');
 
 </script>
 
-<div
-		id={contentId}
-		class="{$$props.class}"
-		role="region"
-		aria-labelledby={summaryId}
-	>
-		<slot>(content)</slot>
-	</div>
+{#if $currentExpanded===value}
+<slot />
+{/if}
