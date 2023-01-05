@@ -66,7 +66,7 @@
 			aria-valuemax={maxValue}
 			aria-orientation="horizontal"
 			tabindex="0"
-			class="block h-5 w-5 rounded-full shadow-sm bg-white focus:outline focus:outline-4 outline-[#00000098]"
+			class="block h-5 w-5 rounded-full shadow-sm bg-white focus:outline focus:outline-4 outline-[#0000006a]"
 		/>
 	</span>
 </span>

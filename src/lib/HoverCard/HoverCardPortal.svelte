@@ -78,6 +78,6 @@
 		<div class={className} role="listbox" aria-expanded={$open} style="margin-top:8px; pointer-events: auto;">
 			<slot />
 		</div>
-		<div style="background-color:currentColor; height:8px; position:absolute; inset:0px;margin-top:4px;  aspect-ratio: 1/1; margin-left:auto; margin-right:auto; transform:rotate(45deg);"/>
+		<div style="background-color:white; height:8px; position:absolute; inset:0px;margin-top:4px;  aspect-ratio: 1/1; margin-left:auto; margin-right:auto; transform:rotate(45deg);"/>
 	</div>
 {/if}

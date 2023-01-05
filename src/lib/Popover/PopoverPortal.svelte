@@ -7,9 +7,9 @@
 
 	export let open: Writable<boolean> = getContext('open');
 	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
-	let hoverCardPortal: Writable<HTMLElement> = getContext('hoverCardPortal');
 	export let className = '';
 
+	let popoverPortal: HTMLElement;
 	let menuLeft = 0;
 	let menuTop = 0;
 
@@ -20,13 +20,16 @@
 
 	$: !$open ? console.log('dropdownclosed') : ''
 
-	$: if ($hoverCardPortal) {
+	$: if (popoverPortal) {
 		if ($open) {
 			menuLeft =
 				$triggerButton.getBoundingClientRect().left +
 				$triggerButton.getBoundingClientRect().width / 2 -
-				$hoverCardPortal.getBoundingClientRect().width / 2;
+				popoverPortal.getBoundingClientRect().width / 2;
 			menuTop = $triggerButton.getBoundingClientRect().bottom;
+
+			trapFocus(popoverPortal);
+			document.querySelector('body')!.style.pointerEvents = 'none';
 
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);
 			window.addEventListener('mouseup', clearEvents);
@@ -37,11 +40,12 @@
 				window.removeEventListener('mouseup', clearEvents);
 			}
 		} else {
+			document.querySelector('body').style.pointerEvents = '';
 			window.removeEventListener('wheel', updatePosition);
 		}
 
 		function closeDialogWhenClickOutside(e: MouseEvent) {
-			const clickOutside = useClickOutside(e, $hoverCardPortal);
+			const clickOutside = useClickOutside(e, popoverPortal);
 			e.preventDefault();
 			e.stopPropagation();
 			if (clickOutside) {
@@ -54,7 +58,7 @@
 		menuLeft =
 				$triggerButton.getBoundingClientRect().left +
 				$triggerButton.getBoundingClientRect().width / 2 -
-				$hoverCardPortal.getBoundingClientRect().width / 2;
+				popoverPortal.getBoundingClientRect().width / 2;
 		menuTop = $triggerButton.getBoundingClientRect().bottom;
 	}
 
@@ -68,16 +72,16 @@
 
 {#if $open === true}
 	<div
-		bind:this={$hoverCardPortal}
+		bind:this={popoverPortal}
 		use:portal={'body'}
 		role="dialog"
 		aria-modal="true"
 		on:keydown={handleKeydown}
-		style="position: fixed; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; pointer-events:none"
+		style="position: fixed; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; transform-origin:118.5px -5px; pointer-events:auto"
 	>
-		<div class={className} role="listbox" aria-expanded={$open} style="margin-top:8px; pointer-events: auto;">
+		<div class={className} role="listbox" aria-expanded={$open} style="margin-top:8px">
 			<slot />
 		</div>
-		<div style="background-color:currentColor; height:8px; position:absolute; inset:0px;margin-top:4px;  aspect-ratio: 1/1; margin-left:auto; margin-right:auto; transform:rotate(45deg);"/>
+		<div style="background-color:white; height:8px; position:absolute; inset:0px;margin-top:4px;  aspect-ratio: 1/1; margin-left:auto; margin-right:auto; transform:rotate(45deg);"/>
 	</div>
 {/if}

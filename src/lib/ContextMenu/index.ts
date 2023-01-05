@@ -1,0 +1,5 @@
+export { default as Option } from './ContextMenuOption.svelte'
+export { default as Root } from './ContextMenuRoot.svelte'
+export { default as Portal } from './ContextMenuPortal.svelte'
+export { default as Trigger } from './ContextMenuTrigger.svelte'
+export { default as Group } from './ContextMenuGroup.svelte'

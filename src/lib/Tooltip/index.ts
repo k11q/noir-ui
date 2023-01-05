@@ -1,3 +1,3 @@
-import Tooltip from "./Tooltip.svelte"
-
-export default Tooltip
+export { default as Root } from './TooltipRoot.svelte'
+export { default as Portal } from './TooltipPortal.svelte'
+export { default as Trigger } from './TooltipTrigger.svelte'
