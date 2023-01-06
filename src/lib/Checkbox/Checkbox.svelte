@@ -50,6 +50,9 @@
 </label>
 
 <style>
+	input:checked + span > span {
+		display: contents;
+	}
 	input:not(:checked) + span > span {
 		display: none;
 	}

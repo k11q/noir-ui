@@ -37,6 +37,7 @@
 	import * as Collapsible from '$lib/Collapsible';
 
 	import { writable, type Writable } from 'svelte/store';
+	import CardStatus from '$lib/Card/CardStatus.svelte';
 
 	const storeTab: Writable<string> = writable('a');
 
@@ -49,9 +50,13 @@
 	}
 </script>
 
-<div class="w-full flex flex-col items-center gap-2 py-16 lg:px-12 px-5 text-[13px]">
-	<h1 class="text-2xl font-semibold">Noir UI</h1>
-	<h3 class="text-lg mb-8">Ready made accessible components</h3>
+<div class="w-full flex flex-col items-center gap-2 pb-16 pt-6 lg:px-12 px-5 text-[13px]">
+	<div class="w-full max-w-[1020px] flex flex-col items-start gap-2 mb-3">
+		<div class="flex flex-row items-end">
+	<img src="logo.svg" alt="Noir UI- Accessible Components Toolkit" class="w-full max-w-[200px]">
+	<h3 class="text-base leading-[1rem]">Components made easy</h3>
+</div>
+	</div>
 	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1020px] w-full gap-5">
 		<Card>
 			<Accordion.Root className="bg-white rounded-md min-w-[220px] flex flex-col absolute top-[50px] shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md" currentExpanded={accordionCurrentExpanded}>
@@ -69,6 +74,7 @@
 				</Accordion.Item>
 			</Accordion.Root>
 			<CardTitle title="Accordion" />
+			<CardStatus title="Ready" status={4} />
 		</Card>
 		<Card>
 			<AlertDialog.Root open={dialogOpen}>
@@ -97,18 +103,23 @@
 				</AlertDialog.Portal>
 			</AlertDialog.Root>
 			<CardTitle title="Alert Dialog" />
+			<CardStatus title="Ready" status={3} />
 		</Card>
 		<Card>
 			<div class="flex flex-col gap-3 text-neutral-600">
 				<Checkbox
-					labelClass="flex flex-row gap-3 items-center [&>input:focus+.checkbox]:outline [&>input:focus+.checkbox]:outline-2 [&>input:focus+.checkbox]:outline-black"
+					labelClass="flex flex-row gap-3 items-center [&>input:focus+.checkbox]:outline [&>input:focus+.checkbox]:outline-2 [&>input:focus+.checkbox]:outline-[#00000066]"
 					className="bg-white shadow h-6 aspect-square rounded flex items-center justify-center"
 				>
-					<Check size="15" slot="indicator" />
+				<div class="bg-black h-full w-full rounded flex items-center justify-center" slot="indicator">
+					<Check size="15" color="white" strokeWidth="3"/>
+				</div>
+					
 					<span class="select-none">Checkbox 1</span>
 				</Checkbox>
 			</div>
 			<CardTitle title="Checkbox" />
+			<CardStatus title="Ready" status={4} />
 		</Card>
 		<Card>
 			<Collapsible.Root expanded={collapsibleExpanded} className=" rounded-md min-w-[220px] flex flex-col gap-[6px] absolute top-[50px] shadow-sm">
@@ -125,6 +136,7 @@
 				<Collapsible.Content><div class="p-2 bg-white rounded-md shadow"> Content sini</div><div class="p-2 bg-white rounded-md shadow"> Content sini</div></Collapsible.Content>
 			</Collapsible.Root>
 			<CardTitle title="Collapsible" />
+			<CardStatus title="Ready" status={4} />
 		</Card>
 		<Card>
 			<ContextMenu.Root>
@@ -189,6 +201,7 @@
 				</ContextMenu.Portal>
 			</ContextMenu.Root>
 			<CardTitle title="Context Menu" />
+			<CardStatus title="Ready" status={1} />
 		</Card>
 		<Card>
 			<Dialog.Root>
@@ -223,6 +236,7 @@
 				</Dialog.Portal>
 			</Dialog.Root>
 			<CardTitle title="Dialog" />
+			<CardStatus title="Ready" status={3} />
 		</Card>
 		<Card>
 			<DropdownMenu.Root>
@@ -288,6 +302,7 @@
 			</DropdownMenu.Root>
 
 			<CardTitle title="Dropdown Menu" />
+			<CardStatus title="Ready" status={1} />
 		</Card>
 		<Card>
 			<HoverCard.Root>
@@ -305,9 +320,11 @@
 				</HoverCard.Portal>
 			</HoverCard.Root>
 			<CardTitle title="Hovercard" />
+			<CardStatus title="Ready" status={2} />
 		</Card>
 		<Card>
 			<CardTitle title="Menubar" />
+			<CardStatus title="Ready" status={1} />
 		</Card>
 		<Card>
 			<Popover.Root>
@@ -351,6 +368,7 @@
 				</Popover.Portal>
 			</Popover.Root>
 			<CardTitle title="Popover" />
+			<CardStatus title="Ready" status={3} />
 		</Card>
 		<Card>
 			<div class="flex flex-col gap-3 text-neutral-600">
@@ -383,6 +401,7 @@
 				</RadioGroup.Radio2>
 			</div>
 			<CardTitle title="Radio Group" />
+			<CardStatus title="Ready" status={4} />
 		</Card>
 		<Card>
 			<Select.Root>
@@ -440,6 +459,7 @@
 				</Select.Portal>
 			</Select.Root>
 			<CardTitle title="Select" />
+			<CardStatus title="Ready" status={1} />
 		</Card>
 		<Card>
 			<Slider.Root className='relative flex items-center w-[200px] touch-none select-none h-5'>
@@ -447,12 +467,14 @@
 				<Slider.Thumb className="block h-5 w-5 rounded-full shadow-sm bg-white focus:outline focus:outline-4 outline-[#0000006a]"/>
 			</Slider.Root>
 			<CardTitle title="Slider" />
+			<CardStatus title="Ready" status={3} />
 		</Card>
 		<Card>
 			<Switch
 				labelClass="[&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black"
 			/>
 			<CardTitle title="Switch" />
+			<CardStatus title="Ready" status={4} />
 		</Card>
 		<Card>
 			<Tabs.Group className="flex flex-col rounded-lg bg-white shadow min-h-[140px] min-w-[240px]">
@@ -477,6 +499,7 @@
 					{#if $storeTab === 'c'}Content C{/if}
 				</Tabs.Content>
 			</Tabs.Group>
+			<CardStatus title="Ready" status={2} />
 			<CardTitle title="Tabs" />
 		</Card>
 		<Card>
@@ -497,6 +520,7 @@
 				</Toast.Portal>
 			</Toast.Root>
 			<CardTitle title="Toast" />
+			<CardStatus title="Ready" status={2} />
 		</Card>
 		<Card>
 			<Toggle
@@ -506,6 +530,7 @@
 				<Italic size="14" />
 			</Toggle>
 			<CardTitle title="Toggle" />
+			<CardStatus title="Ready" status={3} />
 		</Card>
 		<Card>
 			<ToggleGroup.Root
@@ -517,6 +542,7 @@
 				<ToggleGroup.Item value="item3"><AlignRight size="15" /></ToggleGroup.Item>
 			</ToggleGroup.Root>
 			<CardTitle title="Toggle Group" />
+			<CardStatus title="Ready" status={3} />
 		</Card>
 		<Card>
 			<Tooltip.Root>
@@ -533,6 +559,7 @@
 				</Tooltip.Portal>
 			</Tooltip.Root>
 			<CardTitle title="Tooltip" />
+			<CardStatus title="Ready" status={2} />
 		</Card>
 	</div>
 </div>
