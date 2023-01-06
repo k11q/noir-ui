@@ -43,9 +43,3 @@
 <button bind:this={currentButton} on:click={toggleExpanded} on:keydown={handleKeydown} class={className} data-state={$expanded?'open':'closed'} aria-expanded={$expanded?'true':'false'} data-noir='accordion'>
 <slot />
 </button>
-
-<style>
-	button:focus {
-		outline:none;
-	}
-</style>

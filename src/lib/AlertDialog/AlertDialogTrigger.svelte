@@ -10,6 +10,7 @@
 
 	const openDialog = (e: MouseEvent) => {
 		e.preventDefault();
+		e.stopPropagation();
 		open.set(true);
 	};
 

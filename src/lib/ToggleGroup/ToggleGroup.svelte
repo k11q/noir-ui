@@ -11,13 +11,15 @@
 	export let loop = true;
 	export let className = '';
 
+	let toggleGroupElement: Writable<HTMLElement | null> = writable(null);
   let currentFocus: Writable<string | undefined> = writable(undefined);
 
 	setContext('selected', selected);
   setContext('currentFocus', currentFocus);
+  setContext('toggleGroupElement', toggleGroupElement)
 
 </script>
 
-<div role="group" data-orientation={orientation} class={className}>
+<div role="group" bind:this={$toggleGroupElement} data-orientation={orientation} class={className}>
 	<slot />
 </div>

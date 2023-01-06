@@ -8,7 +8,9 @@
 		AlignRight,
 		AlignJustify,
 		Settings2,
-		Github
+		Github,
+		ChevronsUpDown,
+		X
 	} from 'lucide-svelte';
 	
 	import { slide } from 'svelte/transition';
@@ -79,7 +81,7 @@
 				</AlertDialog.Trigger>
 				<AlertDialog.Portal
 					overlayClass="bg-neutral-400 opacity-50"
-					className="flex flex-col items-between justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[500px] min-h-[150px] first-letter:border bg-white rounded-lg border-neutral-200 p-6 gap-3 shadow-lg text-[13px]"
+					className="flex flex-col items-between justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[500px] min-h-[150px] first-letter:border bg-white rounded-lg border-neutral-200 p-6 gap-3 shadow-lg text-[13px]"
 				>
 					<div class="text-base font-medium">Are you absolutely sure?</div>
 					<p class="opacity-60">
@@ -111,9 +113,18 @@
 			<CardTitle title="Checkbox" />
 		</Card>
 		<Card>
-			<Collapsible.Root expanded={collapsibleExpanded} className="bg-white rounded-md min-w-[220px] flex flex-col absolute top-[50px] shadow-sm first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md">
-					<Collapsible.Trigger className="flex p-3 text-left justify-between items-center"><span> Is it accessible?</span><span class={`${$collapsibleExpanded? 'rotate-180' : ''}  duration-300 ease-in opacity-60`}><ChevronDown size="15"/></span></Collapsible.Trigger>
-					<Collapsible.Content><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide> Content sini</div></Collapsible.Content>
+			<Collapsible.Root expanded={collapsibleExpanded} className=" rounded-md min-w-[220px] flex flex-col gap-[6px] absolute top-[50px] shadow-sm">
+				<div class="flex items-center"><span class="flex-grow text-xs">Khairul Haaziq follows you</span>
+					<Collapsible.Trigger className="flex text-left justify-center items-center h-6 aspect-square bg-white rounded-full focus:outline focus:outline-black focus:outline-2">
+					<span class='opacity-60' transition:slide>
+						{#if $collapsibleExpanded}
+					<X size="14"/>
+					{:else}
+					<ChevronsUpDown size="14"/>
+					{/if}
+				</span></Collapsible.Trigger></div>
+				<div class="p-2  bg-white rounded-md"> Content sini</div>
+				<Collapsible.Content><div class="p-2 bg-white rounded-md"> Content sini</div><div class="p-2 bg-white rounded-md"> Content sini</div></Collapsible.Content>
 			</Collapsible.Root>
 			<CardTitle title="Collapsible" />
 		</Card>
