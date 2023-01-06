@@ -29,7 +29,11 @@
 			menuLeft = $menuPosition.x
 			menuTop = $menuPosition.y;
 
-			trapFocus(selectPortal);
+			const firstFocusableEl = trapFocus(selectPortal);
+			if(firstFocusableEl){
+				highlighted.set(firstFocusableEl.dataset.value)
+			}
+			
 			document.querySelector('body')!.style.pointerEvents = 'none';
 
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);

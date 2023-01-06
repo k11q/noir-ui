@@ -31,7 +31,10 @@
 				selectPortal.getBoundingClientRect().width / 2;
 			menuTop = $triggerButton.getBoundingClientRect().bottom;
 
-			trapFocus(selectPortal);
+			const firstFocusableEl = trapFocus(selectPortal);
+			if(firstFocusableEl){
+				highlighted.set(firstFocusableEl.dataset.value)
+			}
 			document.querySelector('body')!.style.pointerEvents = 'none';
 
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);

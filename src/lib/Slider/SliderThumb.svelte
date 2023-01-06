@@ -13,8 +13,11 @@
     let extraStep: Writable<number> = getContext('extraStep');
 
     function handleKeydown(e:KeyboardEvent){
-        console.log(e.key)
-        console.log(e.shiftKey)
+        //prevent default when enter/space
+        if(e.keyCode === 32 || e.key === 'Enter'){
+			e.preventDefault()
+        }
+        //add value
         if(e.key === "ArrowUp" || e.key === "ArrowRight"){
             if(e.shiftKey){
                 e.preventDefault()
@@ -35,6 +38,7 @@
                     value.set($value+$step)
                 }}
         }
+        //subtract value
         if(e.key === "ArrowDown" || e.key === "ArrowLeft"){
             if(e.shiftKey){e.preventDefault()
                 if($value-$extraStep >= $maxValue){
@@ -53,7 +57,6 @@
                     value.set($value-$step)
                 }}
         }
-        console.log($value)
     }
 
 </script>

@@ -54,7 +54,7 @@
 	<h3 class="text-lg mb-8">Ready made accessible components</h3>
 	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1020px] w-full gap-5">
 		<Card>
-			<Accordion.Root className="bg-white rounded-md min-w-[220px] flex flex-col absolute top-[50px] shadow-sm first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md" currentExpanded={accordionCurrentExpanded}>
+			<Accordion.Root className="bg-white rounded-md min-w-[220px] flex flex-col absolute top-[50px] shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md" currentExpanded={accordionCurrentExpanded}>
 				<Accordion.Item value="item-1" className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative">
 					<Accordion.Header className="flex p-3 text-left justify-between items-center"><span> Is it accessible?</span><span class={`${$accordionCurrentExpanded==='item-1'? 'rotate-180' : ''}  duration-300 ease-in opacity-60`}><ChevronDown size="15"/></span></Accordion.Header>
 					<Accordion.Content><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide> Content sini</div></Accordion.Content>
@@ -73,7 +73,7 @@
 		<Card>
 			<AlertDialog.Root open={dialogOpen}>
 				<AlertDialog.Trigger
-					className="bg-white py-2 px-3 rounded focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
+					className="bg-white py-2 px-3 rounded shadow focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
 				>
 					Delete Account
 				</AlertDialog.Trigger>
@@ -102,7 +102,7 @@
 			<div class="flex flex-col gap-3 text-neutral-600">
 				<Checkbox
 					labelClass="flex flex-row gap-3 items-center [&>input:focus+.checkbox]:outline [&>input:focus+.checkbox]:outline-2 [&>input:focus+.checkbox]:outline-black"
-					className="bg-white shadow-sm h-6 aspect-square rounded flex items-center justify-center"
+					className="bg-white shadow h-6 aspect-square rounded flex items-center justify-center"
 				>
 					<Check size="15" slot="indicator" />
 					<span class="select-none">Checkbox 1</span>
@@ -113,7 +113,7 @@
 		<Card>
 			<Collapsible.Root expanded={collapsibleExpanded} className=" rounded-md min-w-[220px] flex flex-col gap-[6px] absolute top-[50px] shadow-sm">
 				<div class="flex items-center"><span class="flex-grow text-xs">Khairul Haaziq follows you</span>
-					<Collapsible.Trigger className="flex text-left justify-center items-center h-6 aspect-square bg-white rounded-full focus:outline focus:outline-black focus:outline-2">
+					<Collapsible.Trigger className="flex text-left shadow justify-center items-center h-6 aspect-square bg-white rounded-full focus:outline focus:outline-black focus:outline-2">
 					<span class='opacity-60' transition:slide>
 						{#if $collapsibleExpanded}
 					<X size="14"/>
@@ -122,7 +122,7 @@
 					{/if}
 				</span></Collapsible.Trigger></div>
 				<div class="p-2  bg-white rounded-md"> Content sini</div>
-				<Collapsible.Content><div class="p-2 bg-white rounded-md"> Content sini</div><div class="p-2 bg-white rounded-md"> Content sini</div></Collapsible.Content>
+				<Collapsible.Content><div class="p-2 bg-white rounded-md shadow"> Content sini</div><div class="p-2 bg-white rounded-md shadow"> Content sini</div></Collapsible.Content>
 			</Collapsible.Root>
 			<CardTitle title="Collapsible" />
 		</Card>
@@ -193,7 +193,7 @@
 		<Card>
 			<Dialog.Root>
 				<Dialog.Trigger
-					className="bg-white py-2 px-3 rounded focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
+					className="bg-white py-2 px-3 rounded shadow focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
 				>
 					Edit Profile
 				</Dialog.Trigger>
@@ -227,7 +227,7 @@
 		<Card>
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger
-					className="flex items-center justify-center bg-white h-10 rounded-full aspect-square focus:outline focus:outline-2 focus:outline-black text-neutral-600"
+					className="flex items-center justify-center bg-white h-10 rounded-full shadow aspect-square focus:outline focus:outline-2 focus:outline-black text-neutral-600"
 				>
 					<AlignJustify size="15" />
 				</DropdownMenu.Trigger>
@@ -292,7 +292,7 @@
 		<Card>
 			<HoverCard.Root>
 				<HoverCard.Trigger
-					className="flex items-center justify-center bg-white h-10 rounded-full aspect-square text-neutral-600"
+					className="flex items-center justify-center shadow bg-white h-10 rounded-full aspect-square text-neutral-600"
 				>
 					<Github size="15" />
 				</HoverCard.Trigger>
@@ -312,7 +312,7 @@
 		<Card>
 			<Popover.Root>
 				<Popover.Trigger
-					className="flex items-center justify-center bg-white h-10 rounded-full aspect-square focus:outline focus:outline-2 focus:outline-black text-neutral-600"
+					className="flex items-center justify-center shadow bg-white h-10 rounded-full aspect-square focus:outline focus:outline-2 focus:outline-black text-neutral-600"
 				>
 					<Settings2 size="15" />
 				</Popover.Trigger>
@@ -358,7 +358,7 @@
 					name="radiogroup1"
 					value="default"
 					labelClass=" flex flex-row gap-3 items-center [&>input:focus+.radio]:outline [&>input:focus+.radio]:outline-2 [&>input:focus+.radio]:outline-black"
-					className="bg-white shadow-sm h-6 aspect-square rounded-full flex items-center justify-center"
+					className="bg-white shadow h-6 aspect-square rounded-full flex items-center justify-center"
 				>
 					<span class="block bg-black rounded-full h-[10px] aspect-square" slot="indicator" />
 					<span class="select-none">Default</span>
@@ -367,7 +367,7 @@
 					name="radiogroup1"
 					value="comfortable"
 					labelClass=" flex flex-row gap-3 items-center [&>input:focus+.radio]:outline [&>input:focus+.radio]:outline-2 [&>input:focus+.radio]:outline-black"
-					className="bg-white shadow-sm h-6 aspect-square rounded-full flex items-center justify-center"
+					className="bg-white shadow h-6 aspect-square rounded-full flex items-center justify-center"
 				>
 					<span class="block bg-black rounded-full h-[10px] aspect-square" slot="indicator" />
 					<span class="select-none">Comfortable</span>
@@ -376,7 +376,7 @@
 					name="radiogroup1"
 					value="compact"
 					labelClass=" flex flex-row gap-3 items-center [&>input:focus+.radio]:outline [&>input:focus+.radio]:outline-2 [&>input:focus+.radio]:outline-black"
-					className="bg-white shadow-sm h-6 aspect-square rounded-full flex items-center justify-center"
+					className="bg-white shadow h-6 aspect-square rounded-full flex items-center justify-center"
 				>
 					<span class="block bg-black rounded-full h-[10px] aspect-square" slot="indicator" />
 					<span class="select-none">Compact</span>
@@ -387,7 +387,7 @@
 		<Card>
 			<Select.Root>
 				<Select.Trigger
-					className="bg-white py-2 px-3 rounded focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center text-black"
+					className="bg-white py-2 px-3 rounded shadow focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center text-black"
 				>
 					<Select.Value placeholder="Select a value..." />
 					<span class="opacity-70 -mb-0.5">
@@ -450,7 +450,7 @@
 		</Card>
 		<Card>
 			<Switch
-				labelClass="[&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black shadow"
+				labelClass="[&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black"
 			/>
 			<CardTitle title="Switch" />
 		</Card>
