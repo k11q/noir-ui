@@ -7,6 +7,7 @@
 
 	let open: Writable<boolean> = getContext('open');
 	let alertDialogElement: Writable<HTMLElement> = getContext('alertDialogElement');
+		let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
 
 	const openDialog = (e: MouseEvent) => {
 		e.preventDefault();
@@ -16,6 +17,7 @@
 </script>
 
 <button
+bind:this={$triggerButton}
 	on:click={openDialog}
 	type="button"
 	role="combobox"

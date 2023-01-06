@@ -11,9 +11,11 @@
 	let open: Writable<boolean> = getContext('open');
 	let position: string = getContext('position');
 	let alertDialogElement: Writable<HTMLElement> = getContext('alertDialogElement');
+	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
 
 	const closeDialog = () => {
 		open.set(false);
+		$triggerButton.focus();
 	};
 
 	$: if ($alertDialogElement) {
@@ -24,10 +26,12 @@
 		} else {
 			window.removeEventListener('wheel', lockScroll);
 			window.removeEventListener('keydown', lockKeydown);
+
+			if ($triggerButton) {
+				$triggerButton.focus();
+			}
 		}
 	}
-
-	$: !$open ? console.log('closed') : '';
 
 	function lockScroll(e: WheelEvent) {
 		e.preventDefault();
