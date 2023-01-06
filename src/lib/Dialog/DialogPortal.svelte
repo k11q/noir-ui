@@ -20,8 +20,10 @@
 		if($open){
 			trapFocus($alertDialogElement)
 			window.addEventListener('wheel', lockScroll,{passive:false});
+			window.addEventListener('keydown', lockKeydown);
 		}else {
 			window.removeEventListener('wheel', lockScroll);
+			window.removeEventListener('keydown', lockKeydown);
 		}
     }
 
@@ -29,6 +31,12 @@
 
 	function lockScroll(e: WheelEvent){
 		e.preventDefault()
+	}
+
+	function lockKeydown(e: KeyboardEvent){
+		if((e.key === "ArrowDown" || e.key === "ArrowUp") && document.activeElement===document.querySelector('body') || !document.activeElement){
+			e.preventDefault()
+		}
 	}
 
 </script>
