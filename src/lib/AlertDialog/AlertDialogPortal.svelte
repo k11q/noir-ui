@@ -16,29 +16,35 @@
 		open.set(false);
 	};
 
-	$: if($alertDialogElement){
-		if($open){
-			trapFocus($alertDialogElement)
-			window.addEventListener('wheel', lockScroll,{passive:false});
+	$: if ($alertDialogElement) {
+		if ($open) {
+			trapFocus($alertDialogElement);
+			window.addEventListener('wheel', lockScroll, { passive: false });
 			window.addEventListener('keydown', lockKeydown);
-		}else {
+		} else {
 			window.removeEventListener('wheel', lockScroll);
 			window.removeEventListener('keydown', lockKeydown);
 		}
-    }
-
-	$: !$open ? console.log('closed') :''
-
-	function lockScroll(e: WheelEvent){
-		e.preventDefault()
 	}
 
-	function lockKeydown(e: KeyboardEvent){
-		if(e.key === "ArrowDown" || e.key === "ArrowUp"){
-			e.preventDefault()
+	$: !$open ? console.log('closed') : '';
+
+	function lockScroll(e: WheelEvent) {
+		e.preventDefault();
+	}
+
+	function lockKeydown(e: KeyboardEvent) {
+		const activeElement = document.activeElement;
+		const inputs = ['input', 'select', 'textarea'];
+
+		if (
+			(e.key === 'ArrowDown' || e.key === 'ArrowUp') &&
+			activeElement &&
+			inputs.indexOf(activeElement.tagName.toLowerCase()) === -1
+		) {
+			e.preventDefault();
 		}
 	}
-
 </script>
 
 {#if $open === true}
@@ -62,7 +68,16 @@
 			? 'margin: auto;'
 			: ''} min-width: max-content; z-index: auto; transform-origin:118.5px -5px; pointer-events:auto"
 	/>
-	<div in:fly="{{ y: 60, duration: 200 }}" out:fade="{{ duration: 100 }}" bind:this={$alertDialogElement} class={className} aria-expanded={$open} use:portal={'body'} role="dialog" aria-modal="true">
+	<div
+		in:fly={{ y: 60, duration: 200 }}
+		out:fade={{ duration: 100 }}
+		bind:this={$alertDialogElement}
+		class={className}
+		aria-expanded={$open}
+		use:portal={'body'}
+		role="dialog"
+		aria-modal="true"
+	>
 		<slot />
 	</div>
 {/if}
