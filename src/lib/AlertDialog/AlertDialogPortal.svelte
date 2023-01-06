@@ -20,10 +20,13 @@
 
 	$: if ($alertDialogElement) {
 		if ($open) {
+			console.log('test2')
 			trapFocus($alertDialogElement);
+			document.querySelector('body')!.style.pointerEvents = 'none';
 			window.addEventListener('wheel', lockScroll, { passive: false });
 			window.addEventListener('keydown', lockKeydown);
 		} else {
+			document.querySelector('body')!.style.pointerEvents = '';
 			window.removeEventListener('wheel', lockScroll);
 			window.removeEventListener('keydown', lockKeydown);
 
@@ -38,16 +41,19 @@
 	}
 
 	function lockKeydown(e: KeyboardEvent) {
+		if(e.key === 'ArrowDown' || e.key === 'ArrowUp'){
 		const activeElement = document.activeElement;
 		const inputs = ['input', 'select', 'textarea'];
 
-		if (
-			(e.key === 'ArrowDown' || e.key === 'ArrowUp') &&
-			activeElement &&
+		if (activeElement &&
 			inputs.indexOf(activeElement.tagName.toLowerCase()) === -1
 		) {
 			e.preventDefault();
+		}}
+		if(e.key === 'Escape'){
+			closeDialog()
 		}
+		
 	}
 </script>
 
@@ -55,7 +61,6 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
 		use:portal={'body'}
-		on:click|preventDefault={closeDialog}
 		role="dialog"
 		aria-modal="true"
 		class={overlayClass}
@@ -81,6 +86,7 @@
 		use:portal={'body'}
 		role="dialog"
 		aria-modal="true"
+		style="pointer-events:auto"
 	>
 		<slot />
 	</div>
