@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
 	import { slide } from 'svelte/transition';
+	import { writable, type Writable } from 'svelte/store';
 
-	export let checked = false;
+	export let checked: Writable<boolean> = writable(false);
 	export let defaultChecked = false;
 	export let disabled = false;
 	export let required = false;
@@ -9,10 +10,21 @@
 	export let value = '';
 	export let labelClass = '';
 
+	function toggleChecked(){
+		checked.set(!$checked)
+	}
+
+	function handleKeydown(e: KeyboardEvent){
+		if(e.key === 'Enter'){
+			e.preventDefault()
+			toggleChecked()
+		}
+	}
+
 </script>
 
 <label class={labelClass}>
-	<input type="checkbox" bind:checked role="switch" {name} {value}/>
+	<input type="checkbox" bind:checked={$checked} role="switch" on:keydown={handleKeydown} {name} {value}/>
 	<span transition:slide/>
 </label>
 

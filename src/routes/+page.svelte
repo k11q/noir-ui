@@ -27,7 +27,7 @@
 	import * as AlertDialog from '$lib/AlertDialog';
 	import * as ToggleGroup from '$lib/ToggleGroup';
 	import * as Dialog from '$lib/Dialog';
-	import Slider from '$lib/Slider';
+	import * as Slider from '$lib/Slider';
 	import Switch from '$lib/Switch';
 	import * as Tooltip from '$lib/Tooltip';
 	import * as Toast from '$lib/Toast';
@@ -47,8 +47,6 @@
 	function closeAlertDialog(){
 		dialogOpen.set(false)
 	}
-
-	let switchChecked = false;
 </script>
 
 <div class="w-full flex flex-col items-center gap-2 py-16 lg:px-12 px-5 text-[13px]">
@@ -444,12 +442,14 @@
 			<CardTitle title="Select" />
 		</Card>
 		<Card>
-			<Slider />
+			<Slider.Root>
+				<Slider.Range />
+				<Slider.Thumb />
+			</Slider.Root>
 			<CardTitle title="Slider" />
 		</Card>
 		<Card>
 			<Switch
-				bind:checked={switchChecked}
 				labelClass="[&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black"
 			/>
 			<CardTitle title="Switch" />
