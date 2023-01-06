@@ -2,6 +2,7 @@
     import { writable, type Writable } from 'svelte/store';
 	import { setContext } from "svelte";
 
+	export let className = ''
     export let defaultValue: Writable<number> = writable(40);
 	export let value: Writable<number> = writable(40);
 	export let minValue: Writable<number> = writable(0);
@@ -71,7 +72,7 @@
 </script>
 
 <span
-	class="relative flex items-center w-[200px] touch-none select-none h-5"
+	class={className}
 	bind:this={$rootSliderElement}
 	on:pointerdown={changeValue}
 >

@@ -2,6 +2,8 @@
     import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
 
+    export let className = ''
+
 	let value: Writable<number> = getContext('value');
     let minValue: Writable<number> = getContext('minValue');
 	let maxValue: Writable<number> = getContext('maxValue');
@@ -66,6 +68,6 @@
         aria-orientation="horizontal"
         on:keydown={handleKeydown}
         tabindex="0"
-        class="block h-5 w-5 rounded-full shadow-sm bg-white focus:outline focus:outline-4 outline-[#0000006a]"
+        class={className}
     ></span>
 </span>

@@ -3,8 +3,11 @@
 	import { getContext } from 'svelte';
 
 	let value: Writable<number> = getContext('value');
+
+    export let rangeClass = ''
+    export let trackerClass = ''
 </script>
 
-<span class="rounded-full h-[3px] flex-grow bg-gray-400 relative">
-    <span class="rounded-full absolute bg-black h-full left-0" style="right: {100 - $value}%" />
+<span class={rangeClass}>
+    <span class={trackerClass} style="right: {100 - $value}%" />
 </span>

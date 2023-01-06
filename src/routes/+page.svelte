@@ -442,15 +442,15 @@
 			<CardTitle title="Select" />
 		</Card>
 		<Card>
-			<Slider.Root>
-				<Slider.Range />
-				<Slider.Thumb />
+			<Slider.Root className='relative flex items-center w-[200px] touch-none select-none h-5'>
+				<Slider.Range rangeClass="rounded-full h-[3px] flex-grow bg-gray-400 relative" trackerClass="rounded-full absolute bg-black h-full left-0" />
+				<Slider.Thumb className="block h-5 w-5 rounded-full shadow-sm bg-white focus:outline focus:outline-4 outline-[#0000006a]"/>
 			</Slider.Root>
 			<CardTitle title="Slider" />
 		</Card>
 		<Card>
 			<Switch
-				labelClass="[&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black"
+				labelClass="[&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black shadow"
 			/>
 			<CardTitle title="Switch" />
 		</Card>
@@ -458,7 +458,7 @@
 			<Tabs.Group className="flex flex-col rounded-lg bg-white shadow min-h-[140px] min-w-[240px]">
 				<Tabs.List
 					selected={storeTab}
-					className="flex flex-row  shadow-[0_-1px_0px_0px_inset] shadow-neutral-200 [&>*]:py-3 [&>*]:px-5 [&>*]:text-neutral-400 first:[&>*]:rounded-tl-lg data-[state='active']:[&>*]:shadow-[0_-2px_0px_0px_inset] data-[state='active']:[&>*]:shadow-black data-[state='active']:[&>*]:text-black focus:[&>*]:outline focus:[&>*]:outline-2 focus:[&>*]:outline-black focus:[&>*]:relative"
+					className="flex flex-row  shadow shadow-[0_-1px_0px_0px_inset] shadow-neutral-200 [&>*]:py-3 [&>*]:px-5 [&>*]:text-neutral-400 first:[&>*]:rounded-tl-lg data-[state='active']:[&>*]:shadow-[0_-2px_0px_0px_inset] data-[state='active']:[&>*]:shadow-black data-[state='active']:[&>*]:text-black focus:[&>*]:outline focus:[&>*]:outline-2 focus:[&>*]:outline-black focus:[&>*]:relative"
 				>
 					<Tabs.Trigger value="a">Tab 1</Tabs.Trigger>
 					<Tabs.Trigger value="b">Tab 2</Tabs.Trigger>
@@ -482,7 +482,7 @@
 		<Card>
 			<Toast.Root duration={3000}>
 				<Toast.Trigger
-					className="bg-white py-2 px-3 rounded focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
+					className="bg-white py-2 px-3 rounded shadow focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
 				>
 					Add to calendar
 				</Toast.Trigger>
@@ -501,7 +501,7 @@
 		<Card>
 			<Toggle
 				labelClass="[&>input:checked+span]:bg-[#00000010] [&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black"
-				className="flex items-center justify-center focus:outline bg-white shadow-sm h-10 aspect-square rounded text-neutral-600"
+				className="flex items-center justify-center focus:outline bg-white shadow h-10 aspect-square rounded text-neutral-600"
 			>
 				<Italic size="14" />
 			</Toggle>
@@ -509,7 +509,7 @@
 		</Card>
 		<Card>
 			<ToggleGroup.Root
-				className="text-neutral-600 flex [&>*>span]:flex [&>*>span]:items-center [&>*>span]:justify-center rounded bg-white shadow-sm [&>span]:first:[&>*]:rounded-l [&>span]:last:[&>*]:rounded-r [&>span]:last:[&>*]:border-r-0 [&>*>span]:border-r [&>*>span]:border-neutral-200 [&>*>span]:h-10 [&>*>span]:aspect-square focus:[&>*>span]:relative
+				className="text-neutral-600 flex [&>*>span]:flex [&>*>span]:items-center [&>*>span]:justify-center rounded bg-white shadow [&>span]:first:[&>*]:rounded-l [&>span]:last:[&>*]:rounded-r [&>span]:last:[&>*]:border-r-0 [&>*>span]:border-r [&>*>span]:border-neutral-200 [&>*>span]:h-10 [&>*>span]:aspect-square focus:[&>*>span]:relative
 				[&>*>input:checked+span]:bg-[#00000010] [&>*>input:focus+span]:outline [&>*>input:focus+span]:outline-2 [&>*>input:focus+span]:outline-black [&>*>input:focus+span]:relative"
 			>
 				<ToggleGroup.Item value="item1"><AlignLeft size="15" /></ToggleGroup.Item>
