@@ -12,21 +12,54 @@
 
 	let menuLeft = 0;
 	let menuTop = 0;
+	let position = 'bottom';
 
 	const closeDialog = () => {
 		open.set(false);
 		$triggerButton.focus();
 	};
 
-	$: !$open ? console.log('dropdownclosed') : ''
+	$: !$open ? console.log('dropdownclosed') : '';
 
 	$: if ($hoverCardPortal) {
 		if ($open) {
-			menuLeft =
+			const originLeft =
 				$triggerButton.getBoundingClientRect().left +
 				$triggerButton.getBoundingClientRect().width / 2 -
 				$hoverCardPortal.getBoundingClientRect().width / 2;
-			menuTop = $triggerButton.getBoundingClientRect().bottom;
+
+			const originTop = $triggerButton.getBoundingClientRect().bottom + 8;
+
+			const portalRect = $hoverCardPortal.getBoundingClientRect();
+
+			if (
+				originLeft + portalRect.width < window.innerWidth &&
+				originTop + portalRect.height < window.innerHeight
+			) {
+				menuLeft = originLeft;
+				menuTop =
+					originTop - portalRect.height - $triggerButton.getBoundingClientRect().height - 16;
+				position = 'top';
+			} else if (
+				originLeft + portalRect.width > window.innerWidth &&
+				originTop + portalRect.height < window.innerHeight
+			) {
+				menuLeft = originLeft - portalRect.width;
+				menuTop =
+					originTop - portalRect.height - $triggerButton.getBoundingClientRect().height - 16;
+				position = 'top';
+			} else if (
+				originLeft + portalRect.width < window.innerWidth &&
+				originTop + portalRect.height > window.innerHeight
+			) {
+				menuLeft = originLeft;
+				menuTop = originTop;
+				position = 'bottom';
+			} else {
+				menuLeft = originLeft - portalRect.width;
+				menuTop = originTop;
+				position = 'bottom';
+			}
 
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);
 			window.addEventListener('mouseup', clearEvents);
@@ -50,16 +83,15 @@
 		}
 	}
 
-	function closeDialogWhenScroll(e: WheelEvent){
-			open.set(false);
+	function closeDialogWhenScroll(e: WheelEvent) {
+		open.set(false);
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
 		if (e.key === 'Escape') {
-			closeDialog()
+			closeDialog();
 		}
 	}
-
 </script>
 
 {#if $open === true}
@@ -71,9 +103,19 @@
 		on:keydown={handleKeydown}
 		style="position: fixed; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; pointer-events:none"
 	>
-		<div class={className} role="listbox" aria-expanded={$open} style="margin-top:8px; pointer-events: auto;">
+		<div
+			class={className}
+			role="listbox"
+			aria-expanded={$open}
+			style="position:relative; pointer-events: auto;"
+		>
 			<slot />
+			<div
+				style="background-color:black; height:8px; position:absolute; inset:0px;{position ==
+				'bottom'
+					? 'margin-top:-4px'
+					: 'bottom: 0px; margin-bottom:-4px; top:auto'};  aspect-ratio: 1/1; margin-left:auto; margin-right:auto; transform:rotate(45deg);"
+			/>
 		</div>
-		<div style="background-color:currentColor; height:8px; position:absolute; inset:0px;margin-top:4px;  aspect-ratio: 1/1; margin-left:auto; margin-right:auto; transform:rotate(45deg);"/>
 	</div>
 {/if}

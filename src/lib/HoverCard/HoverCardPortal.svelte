@@ -12,41 +12,53 @@
 
 	let menuLeft = 0;
 	let menuTop = 0;
-	let position = 'bottom'
+	let position = 'bottom';
 
 	const closeDialog = () => {
 		open.set(false);
 		$triggerButton.focus();
 	};
 
-	$: !$open ? console.log('dropdownclosed') : ''
+	$: !$open ? console.log('dropdownclosed') : '';
 
 	$: if ($hoverCardPortal) {
 		if ($open) {
-			const originLeft = $triggerButton.getBoundingClientRect().left +
+			const originLeft =
+				$triggerButton.getBoundingClientRect().left +
 				$triggerButton.getBoundingClientRect().width / 2 -
 				$hoverCardPortal.getBoundingClientRect().width / 2;
-			
-			const originTop =$triggerButton.getBoundingClientRect().bottom+8;
 
-			const portalRect = $hoverCardPortal.getBoundingClientRect()
+			const originTop = $triggerButton.getBoundingClientRect().bottom + 8;
 
-			if(originLeft+portalRect.width<window.innerWidth && originTop+portalRect.height<window.innerHeight){
-				menuLeft = originLeft
+			const portalRect = $hoverCardPortal.getBoundingClientRect();
+
+			if (
+				originLeft + portalRect.width < window.innerWidth &&
+				originTop + portalRect.height < window.innerHeight
+			) {
+				menuLeft = originLeft;
 				menuTop = originTop;
-				position = 'bottom'
-			}else if(originLeft+portalRect.width>window.innerWidth && originTop+portalRect.height<window.innerHeight){
-				menuLeft = originLeft-portalRect.width
+				position = 'bottom';
+			} else if (
+				originLeft + portalRect.width > window.innerWidth &&
+				originTop + portalRect.height < window.innerHeight
+			) {
+				menuLeft = originLeft - portalRect.width;
 				menuTop = originTop;
-				position = 'bottom'
-			}else if(originLeft+portalRect.width<window.innerWidth && originTop+portalRect.height>window.innerHeight){
-				menuLeft = originLeft
-				menuTop = originTop-portalRect.height-$triggerButton.getBoundingClientRect().height-16;
-				position = 'top'
-			}else {
-				menuLeft = originLeft-portalRect.width
-				menuTop = originTop-portalRect.height-$triggerButton.getBoundingClientRect().height-16;
-				position = 'top'
+				position = 'bottom';
+			} else if (
+				originLeft + portalRect.width < window.innerWidth &&
+				originTop + portalRect.height > window.innerHeight
+			) {
+				menuLeft = originLeft;
+				menuTop =
+					originTop - portalRect.height - $triggerButton.getBoundingClientRect().height - 16;
+				position = 'top';
+			} else {
+				menuLeft = originLeft - portalRect.width;
+				menuTop =
+					originTop - portalRect.height - $triggerButton.getBoundingClientRect().height - 16;
+				position = 'top';
 			}
 
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);
@@ -71,40 +83,49 @@
 		}
 	}
 
-	function updatePosition(e: WheelEvent){
-		const originLeft = $triggerButton.getBoundingClientRect().left +
-				$triggerButton.getBoundingClientRect().width / 2 -
-				$hoverCardPortal.getBoundingClientRect().width / 2;
-			
-			const originTop =$triggerButton.getBoundingClientRect().bottom+8;
+	function updatePosition(e: WheelEvent) {
+		const originLeft =
+			$triggerButton.getBoundingClientRect().left +
+			$triggerButton.getBoundingClientRect().width / 2 -
+			$hoverCardPortal.getBoundingClientRect().width / 2;
 
-			const portalRect = $hoverCardPortal.getBoundingClientRect()
+		const originTop = $triggerButton.getBoundingClientRect().bottom + 8;
 
-			if(originLeft+portalRect.width<window.innerWidth && originTop+portalRect.height<window.innerHeight){
-				menuLeft = originLeft
-				menuTop = originTop;
-				position = 'bottom'
-			}else if(originLeft+portalRect.width>window.innerWidth && originTop+portalRect.height<window.innerHeight){
-				menuLeft = originLeft-portalRect.width
-				menuTop = originTop;
-				position = 'bottom'
-			}else if(originLeft+portalRect.width<window.innerWidth && originTop+portalRect.height>window.innerHeight){
-				menuLeft = originLeft
-				menuTop = originTop-portalRect.height-$triggerButton.getBoundingClientRect().height-16;
-				position = 'top'
-			}else {
-				menuLeft = originLeft-portalRect.width
-				menuTop = originTop-portalRect.height-$triggerButton.getBoundingClientRect().height-16;
-				position = 'top'
-			}
+		const portalRect = $hoverCardPortal.getBoundingClientRect();
+
+		if (
+			originLeft + portalRect.width < window.innerWidth &&
+			originTop + portalRect.height < window.innerHeight
+		) {
+			menuLeft = originLeft;
+			menuTop = originTop;
+			position = 'bottom';
+		} else if (
+			originLeft + portalRect.width > window.innerWidth &&
+			originTop + portalRect.height < window.innerHeight
+		) {
+			menuLeft = originLeft - portalRect.width;
+			menuTop = originTop;
+			position = 'bottom';
+		} else if (
+			originLeft + portalRect.width < window.innerWidth &&
+			originTop + portalRect.height > window.innerHeight
+		) {
+			menuLeft = originLeft;
+			menuTop = originTop - portalRect.height - $triggerButton.getBoundingClientRect().height - 16;
+			position = 'top';
+		} else {
+			menuLeft = originLeft - portalRect.width;
+			menuTop = originTop - portalRect.height - $triggerButton.getBoundingClientRect().height - 16;
+			position = 'top';
+		}
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
 		if (e.key === 'Escape') {
-			closeDialog()
+			closeDialog();
 		}
 	}
-
 </script>
 
 {#if $open === true}
@@ -116,9 +137,19 @@
 		on:keydown={handleKeydown}
 		style="position: fixed; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; pointer-events:none"
 	>
-		<div class={className} role="listbox" aria-expanded={$open} style="pointer-events: auto; position:relative">
+		<div
+			class={className}
+			role="listbox"
+			aria-expanded={$open}
+			style="pointer-events: auto; position:relative"
+		>
 			<slot />
-			<div style="background-color:white; height:8px; position:absolute; inset:0px;{position=='bottom'?'margin-top:-4px':'bottom: 0px; margin-bottom:-4px; top:auto'};  aspect-ratio: 1/1; margin-left:auto; margin-right:auto; transform:rotate(45deg);"/>
+			<div
+				style="background-color:white; height:8px; position:absolute; inset:0px;{position ==
+				'bottom'
+					? 'margin-top:-4px'
+					: 'bottom: 0px; margin-bottom:-4px; top:auto'};  aspect-ratio: 1/1; margin-left:auto; margin-right:auto; transform:rotate(45deg);"
+			/>
 		</div>
 	</div>
 {/if}

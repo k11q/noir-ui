@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { useClickOutside } from '$lib/utils/click-outside';
 	import { trapFocus } from '$lib/utils/trap-focus';
-	import { writable, type Writable } from 'svelte/store';
-	import { getContext, setContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
+	import { getContext } from 'svelte';
 	import { portal } from '../Portal/Portal.svelte';
 
 	export let open: Writable<boolean> = getContext('open');
 	export let selected: Writable<any> = getContext('selected');
-	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
 	export let className = '';
 
+	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
 	let highlighted: Writable<any> = getContext('highlighted');
 	let selectPortal: HTMLElement;
 	let menuLeft = 0;

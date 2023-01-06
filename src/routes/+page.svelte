@@ -64,7 +64,7 @@
 	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1020px] w-full gap-5">
 		<Card>
 			<Accordion.Root
-				className="bg-white rounded-md min-w-[220px] flex flex-col absolute top-[50px] shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md"
+				className="bg-white rounded-md min-w-44 sm:min-w-[220px] flex flex-col absolute top-[50px] shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md"
 				currentExpanded={accordionCurrentExpanded}
 			>
 				<Accordion.Item
@@ -172,7 +172,7 @@
 		<Card>
 			<Collapsible.Root
 				expanded={collapsibleExpanded}
-				className=" rounded-md min-w-[220px] flex flex-col gap-[6px] absolute top-[50px] shadow-sm"
+				className=" rounded-md min-w-44 sm:min-w-[220px] flex flex-col gap-[6px] absolute top-[50px] shadow-sm"
 			>
 				<div class="flex items-center">
 					<span class="flex-grow text-xs">Khairul Haaziq follows you</span>
@@ -200,7 +200,7 @@
 		<Card>
 			<ContextMenu.Root>
 				<ContextMenu.Trigger
-					className="flex items-center justify-center bg-neutral-300 border-neutral-400 opacity-50 border-dashed border h-32 w-52 rounded-md aspect-square text-neutral-600"
+					className="flex items-center justify-center bg-neutral-300 border-neutral-400 opacity-50 border-dashed border h-32 w-44 sm:w-52 rounded-md text-neutral-600"
 				>
 					<p>Right click here</p>
 				</ContextMenu.Trigger>
@@ -544,10 +544,10 @@
 			<CardStatus title="Ready" status={4} />
 		</Card>
 		<Card>
-			<Tabs.Group className="flex flex-col rounded-lg bg-white shadow min-h-[140px] min-w-[240px]">
+			<Tabs.Group className="flex flex-col rounded-lg bg-white shadow min-h-[140px] min-w-44 sm:min-w-[240px]">
 				<Tabs.List
 					selected={storeTab}
-					className="flex flex-row  shadow shadow-[0_-1px_0px_0px_inset] shadow-neutral-200 [&>*]:py-3 [&>*]:px-5 [&>*]:text-neutral-400 first:[&>*]:rounded-tl-lg data-[state='active']:[&>*]:shadow-[0_-2px_0px_0px_inset] data-[state='active']:[&>*]:shadow-black data-[state='active']:[&>*]:text-black focus:[&>*]:outline focus:[&>*]:outline-2 focus:[&>*]:outline-black focus:[&>*]:relative"
+					className="flex flex-row shadow-[0_-1px_0px_0px_inset] shadow-neutral-200 [&>*]:py-3 [&>*]:px-5 [&>*]:text-neutral-400 first:[&>*]:rounded-tl-lg data-[state='active']:[&>*]:shadow-[0_-2px_0px_0px_inset] data-[state='active']:[&>*]:shadow-black data-[state='active']:[&>*]:text-black focus:[&>*]:outline focus:[&>*]:outline-2 focus:[&>*]:outline-black focus:[&>*]:relative"
 				>
 					<Tabs.Trigger value="a">Tab 1</Tabs.Trigger>
 					<Tabs.Trigger value="b">Tab 2</Tabs.Trigger>

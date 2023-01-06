@@ -1,54 +1,60 @@
 <script lang="ts">
 	import { useClickOutside } from '$lib/utils/click-outside';
 	import { trapFocus } from '$lib/utils/trap-focus';
-	import { writable, type Writable } from 'svelte/store';
-	import { getContext, setContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
+	import { getContext } from 'svelte';
 	import { portal } from '../Portal/Portal.svelte';
 
 	export let open: Writable<boolean> = getContext('open');
 	export let selected: Writable<any> = getContext('selected');
-	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
 	export let className = '';
 
 	let highlighted: Writable<any> = getContext('highlighted');
-	let menuPosition: Writable<{x:number, y:number}> = getContext('menuPosition');
+	let menuPosition: Writable<{ x: number; y: number }> = getContext('menuPosition');
 	let selectPortal: HTMLElement;
 	let menuLeft = 0;
 	let menuTop = 0;
-
 
 	const closeDialog = () => {
 		highlighted.set('');
 		open.set(false);
 	};
 
-	$: !$open ? console.log('dropdownclosed') : ''
+	$: !$open ? console.log('dropdownclosed') : '';
 
 	$: if (selectPortal) {
 		if ($open) {
-
 			//collision aware
-			const portalRect = selectPortal.getBoundingClientRect()
+			const portalRect = selectPortal.getBoundingClientRect();
 
-			if($menuPosition.x+portalRect.width<window.innerWidth && $menuPosition.y+portalRect.height<window.innerHeight){
-				menuLeft = $menuPosition.x
+			if (
+				$menuPosition.x + portalRect.width < window.innerWidth &&
+				$menuPosition.y + portalRect.height < window.innerHeight
+			) {
+				menuLeft = $menuPosition.x;
 				menuTop = $menuPosition.y;
-			}else if($menuPosition.x+portalRect.width>window.innerWidth && $menuPosition.y+portalRect.height<window.innerHeight){
-				menuLeft = $menuPosition.x-portalRect.width
+			} else if (
+				$menuPosition.x + portalRect.width > window.innerWidth &&
+				$menuPosition.y + portalRect.height < window.innerHeight
+			) {
+				menuLeft = $menuPosition.x - portalRect.width;
 				menuTop = $menuPosition.y;
-			}else if($menuPosition.x+portalRect.width<window.innerWidth && $menuPosition.y+portalRect.height>window.innerHeight){
-				menuLeft = $menuPosition.x
-				menuTop = $menuPosition.y-portalRect.height;
-			}else {
-				menuLeft = $menuPosition.x-portalRect.width
-				menuTop = $menuPosition.y-portalRect.height;
+			} else if (
+				$menuPosition.x + portalRect.width < window.innerWidth &&
+				$menuPosition.y + portalRect.height > window.innerHeight
+			) {
+				menuLeft = $menuPosition.x;
+				menuTop = $menuPosition.y - portalRect.height;
+			} else {
+				menuLeft = $menuPosition.x - portalRect.width;
+				menuTop = $menuPosition.y - portalRect.height;
 			}
 
 			const firstFocusableEl = trapFocus(selectPortal);
-			if(firstFocusableEl){
-				highlighted.set(firstFocusableEl.dataset.value)
+			if (firstFocusableEl) {
+				highlighted.set(firstFocusableEl.dataset.value);
 			}
-			
+
 			document.querySelector('body')!.style.pointerEvents = 'none';
 
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);
@@ -75,11 +81,10 @@
 			const firstElement = selectPortal.querySelector('[role="option"]') as HTMLElement;
 
 			if (selectPortal.querySelector('[data-highlighted="true"]')) {
-
 				const highlightedElement = selectPortal.querySelector(
 					'[data-highlighted="true"]'
 				) as HTMLElement;
-				
+
 				const highlightedElementIndex = allOptions.indexOf(highlightedElement);
 
 				if (highlightedElementIndex === allOptions.length - 1) {
@@ -98,7 +103,7 @@
 				const highlightedElement = selectPortal.querySelector(
 					'[data-highlighted="true"]'
 				) as HTMLElement;
-				
+
 				const highlightedElementIndex = allOptions.indexOf(highlightedElement);
 
 				if (highlightedElementIndex === 0) {
@@ -115,11 +120,11 @@
 			if (highlighted) {
 				selected.set($highlighted);
 			}
-			closeDialog()
+			closeDialog();
 		}
 
 		if (e.key === 'Escape') {
-			closeDialog()
+			closeDialog();
 		}
 	}
 </script>

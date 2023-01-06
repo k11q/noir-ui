@@ -12,42 +12,53 @@
 	let popoverPortal: HTMLElement;
 	let menuLeft = 0;
 	let menuTop = 0;
-	let position = 'top'
+	let position = 'top';
 
 	const closeDialog = () => {
 		open.set(false);
 		$triggerButton.focus();
 	};
 
-	$: !$open ? console.log('dropdownclosed') : ''
+	$: !$open ? console.log('dropdownclosed') : '';
 
 	$: if (popoverPortal) {
 		if ($open) {
-
-			const originLeft = $triggerButton.getBoundingClientRect().left +
+			const originLeft =
+				$triggerButton.getBoundingClientRect().left +
 				$triggerButton.getBoundingClientRect().width / 2 -
 				popoverPortal.getBoundingClientRect().width / 2;
-			
-			const originTop =$triggerButton.getBoundingClientRect().bottom+8;
 
-			const portalRect = popoverPortal.getBoundingClientRect()
+			const originTop = $triggerButton.getBoundingClientRect().bottom + 8;
 
-			if(originLeft+portalRect.width<window.innerWidth && originTop+portalRect.height<window.innerHeight){
-				menuLeft = originLeft
+			const portalRect = popoverPortal.getBoundingClientRect();
+
+			if (
+				originLeft + portalRect.width < window.innerWidth &&
+				originTop + portalRect.height < window.innerHeight
+			) {
+				menuLeft = originLeft;
 				menuTop = originTop;
-				position = 'bottom'
-			}else if(originLeft+portalRect.width>window.innerWidth && originTop+portalRect.height<window.innerHeight){
-				menuLeft = originLeft-portalRect.width
+				position = 'bottom';
+			} else if (
+				originLeft + portalRect.width > window.innerWidth &&
+				originTop + portalRect.height < window.innerHeight
+			) {
+				menuLeft = originLeft - portalRect.width;
 				menuTop = originTop;
-				position = 'bottom'
-			}else if(originLeft+portalRect.width<window.innerWidth && originTop+portalRect.height>window.innerHeight){
-				menuLeft = originLeft
-				menuTop = originTop-portalRect.height-$triggerButton.getBoundingClientRect().height-16;
-				position = 'top'
-			}else {
-				menuLeft = originLeft-portalRect.width
-				menuTop = originTop-portalRect.height-$triggerButton.getBoundingClientRect().height-16;
-				position = 'top'
+				position = 'bottom';
+			} else if (
+				originLeft + portalRect.width < window.innerWidth &&
+				originTop + portalRect.height > window.innerHeight
+			) {
+				menuLeft = originLeft;
+				menuTop =
+					originTop - portalRect.height - $triggerButton.getBoundingClientRect().height - 16;
+				position = 'top';
+			} else {
+				menuLeft = originLeft - portalRect.width;
+				menuTop =
+					originTop - portalRect.height - $triggerButton.getBoundingClientRect().height - 16;
+				position = 'top';
 			}
 
 			trapFocus(popoverPortal);
@@ -76,40 +87,49 @@
 		}
 	}
 
-	function updatePosition(e: WheelEvent){
-		const originLeft = $triggerButton.getBoundingClientRect().left +
-				$triggerButton.getBoundingClientRect().width / 2 -
-				popoverPortal.getBoundingClientRect().width / 2;
-			
-			const originTop =$triggerButton.getBoundingClientRect().bottom+8;
+	function updatePosition(e: WheelEvent) {
+		const originLeft =
+			$triggerButton.getBoundingClientRect().left +
+			$triggerButton.getBoundingClientRect().width / 2 -
+			popoverPortal.getBoundingClientRect().width / 2;
 
-			const portalRect = popoverPortal.getBoundingClientRect()
+		const originTop = $triggerButton.getBoundingClientRect().bottom + 8;
 
-			if(originLeft+portalRect.width<window.innerWidth && originTop+portalRect.height<window.innerHeight){
-				menuLeft = originLeft
-				menuTop = originTop;
-				position = 'bottom'
-			}else if(originLeft+portalRect.width>window.innerWidth && originTop+portalRect.height<window.innerHeight){
-				menuLeft = originLeft-portalRect.width
-				menuTop = originTop;
-				position = 'bottom'
-			}else if(originLeft+portalRect.width<window.innerWidth && originTop+portalRect.height>window.innerHeight){
-				menuLeft = originLeft
-				menuTop = originTop-portalRect.height-$triggerButton.getBoundingClientRect().height-16;
-				position = 'top'
-			}else {
-				menuLeft = originLeft-portalRect.width
-				menuTop = originTop-portalRect.height-$triggerButton.getBoundingClientRect().height-16;
-				position = 'top'
-			}
+		const portalRect = popoverPortal.getBoundingClientRect();
+
+		if (
+			originLeft + portalRect.width < window.innerWidth &&
+			originTop + portalRect.height < window.innerHeight
+		) {
+			menuLeft = originLeft;
+			menuTop = originTop;
+			position = 'bottom';
+		} else if (
+			originLeft + portalRect.width > window.innerWidth &&
+			originTop + portalRect.height < window.innerHeight
+		) {
+			menuLeft = originLeft - portalRect.width;
+			menuTop = originTop;
+			position = 'bottom';
+		} else if (
+			originLeft + portalRect.width < window.innerWidth &&
+			originTop + portalRect.height > window.innerHeight
+		) {
+			menuLeft = originLeft;
+			menuTop = originTop - portalRect.height - $triggerButton.getBoundingClientRect().height - 16;
+			position = 'top';
+		} else {
+			menuLeft = originLeft - portalRect.width;
+			menuTop = originTop - portalRect.height - $triggerButton.getBoundingClientRect().height - 16;
+			position = 'top';
+		}
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
 		if (e.key === 'Escape') {
-			closeDialog()
+			closeDialog();
 		}
 	}
-
 </script>
 
 {#if $open === true}
@@ -123,8 +143,12 @@
 	>
 		<div class={className} role="listbox" aria-expanded={$open} style="position:relative">
 			<slot />
-			<div style="background-color:white; height:8px; position:absolute; inset:0px;{position=='bottom'?'margin-top:-4px':'bottom: 0px; margin-bottom:-4px; top:auto'};  aspect-ratio: 1/1; margin-left:auto; margin-right:auto; transform:rotate(45deg);"/>
+			<div
+				style="background-color:white; height:8px; position:absolute; inset:0px;{position ==
+				'bottom'
+					? 'margin-top:-4px'
+					: 'bottom: 0px; margin-bottom:-4px; top:auto'};  aspect-ratio: 1/1; margin-left:auto; margin-right:auto; transform:rotate(45deg);"
+			/>
 		</div>
-		
 	</div>
 {/if}
