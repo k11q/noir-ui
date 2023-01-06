@@ -26,8 +26,23 @@
 
 	$: if (selectPortal) {
 		if ($open) {
-			menuLeft = $menuPosition.x
-			menuTop = $menuPosition.y;
+
+			//collision aware
+			const portalRect = selectPortal.getBoundingClientRect()
+
+			if($menuPosition.x+portalRect.width<window.innerWidth && $menuPosition.y+portalRect.height<window.innerHeight){
+				menuLeft = $menuPosition.x
+				menuTop = $menuPosition.y;
+			}else if($menuPosition.x+portalRect.width>window.innerWidth && $menuPosition.y+portalRect.height<window.innerHeight){
+				menuLeft = $menuPosition.x-portalRect.width
+				menuTop = $menuPosition.y;
+			}else if($menuPosition.x+portalRect.width<window.innerWidth && $menuPosition.y+portalRect.height>window.innerHeight){
+				menuLeft = $menuPosition.x
+				menuTop = $menuPosition.y-portalRect.height;
+			}else {
+				menuLeft = $menuPosition.x-portalRect.width
+				menuTop = $menuPosition.y-portalRect.height;
+			}
 
 			const firstFocusableEl = trapFocus(selectPortal);
 			if(firstFocusableEl){

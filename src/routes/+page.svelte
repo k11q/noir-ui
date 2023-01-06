@@ -12,7 +12,7 @@
 		ChevronsUpDown,
 		X
 	} from 'lucide-svelte';
-	
+
 	import { slide } from 'svelte/transition';
 	import Card from '$lib/Card/Card.svelte';
 	import CardTitle from '$lib/Card/CardTitle.svelte';
@@ -45,32 +45,78 @@
 	const accordionCurrentExpanded: Writable<string> = writable('');
 	const collapsibleExpanded: Writable<boolean> = writable(false);
 
-	function closeAlertDialog(){
-		dialogOpen.set(false)
+	function closeAlertDialog() {
+		dialogOpen.set(false);
 	}
 </script>
 
 <div class="w-full flex flex-col items-center gap-2 pb-16 pt-6 lg:px-12 px-5 text-[13px]">
 	<div class="w-full max-w-[1020px] flex flex-col items-start gap-2 mb-3">
 		<div class="flex flex-row items-end">
-	<img src="logo.svg" alt="Noir UI- Accessible Components Toolkit" class="w-full max-w-[200px]">
-	<h3 class="text-base leading-[1rem]">Components made easy</h3>
-</div>
+			<img
+				src="logo.svg"
+				alt="Noir UI- Accessible Components Toolkit"
+				class="w-full max-w-[200px]"
+			/>
+			<h3 class="text-base leading-[1rem]">Components made easy</h3>
+		</div>
 	</div>
 	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1020px] w-full gap-5">
 		<Card>
-			<Accordion.Root className="bg-white rounded-md min-w-[220px] flex flex-col absolute top-[50px] shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md" currentExpanded={accordionCurrentExpanded}>
-				<Accordion.Item value="item-1" className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative">
-					<Accordion.Header className="flex p-3 text-left justify-between items-center"><span> Is it accessible?</span><span class={`${$accordionCurrentExpanded==='item-1'? 'rotate-180' : ''}  duration-300 ease-in opacity-60`}><ChevronDown size="15"/></span></Accordion.Header>
-					<Accordion.Content><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide> Content sini</div></Accordion.Content>
+			<Accordion.Root
+				className="bg-white rounded-md min-w-[220px] flex flex-col absolute top-[50px] shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md"
+				currentExpanded={accordionCurrentExpanded}
+			>
+				<Accordion.Item
+					value="item-1"
+					className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
+				>
+					<Accordion.Header className="flex p-3 text-left justify-between items-center"
+						><span> Is it accessible?</span><span
+							class={`${
+								$accordionCurrentExpanded === 'item-1' ? 'rotate-180' : ''
+							}  duration-300 ease-in opacity-60`}><ChevronDown size="15" /></span
+						></Accordion.Header
+					>
+					<Accordion.Content
+						><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide>
+							Content sini
+						</div></Accordion.Content
+					>
 				</Accordion.Item>
-				<Accordion.Item value="item-2" className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative">
-					<Accordion.Header className="flex p-3 text-left justify-between items-center border-t"><span> Is it unstyled?</span><span class={`${$accordionCurrentExpanded==='item-2'? 'rotate-180' : ''}  duration-300 ease-in opacity-60`}><ChevronDown size="15"/></span></Accordion.Header>
-					<Accordion.Content><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide> Content sini</div></Accordion.Content>
+				<Accordion.Item
+					value="item-2"
+					className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
+				>
+					<Accordion.Header className="flex p-3 text-left justify-between items-center border-t"
+						><span> Is it unstyled?</span><span
+							class={`${
+								$accordionCurrentExpanded === 'item-2' ? 'rotate-180' : ''
+							}  duration-300 ease-in opacity-60`}><ChevronDown size="15" /></span
+						></Accordion.Header
+					>
+					<Accordion.Content
+						><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide>
+							Content sini
+						</div></Accordion.Content
+					>
 				</Accordion.Item>
-				<Accordion.Item value="item-3" className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative">
-					<Accordion.Header className="flex p-3 text-left justify-between items-center border-t"><span> Can it be animated?</span><span class={`${$accordionCurrentExpanded==='item-3'? 'rotate-180' : ''}  duration-300 ease-in opacity-60`}><ChevronDown size="15"/></span></Accordion.Header>
-					<Accordion.Content><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide> Content sini</div></Accordion.Content>
+				<Accordion.Item
+					value="item-3"
+					className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
+				>
+					<Accordion.Header className="flex p-3 text-left justify-between items-center border-t"
+						><span> Can it be animated?</span><span
+							class={`${
+								$accordionCurrentExpanded === 'item-3' ? 'rotate-180' : ''
+							}  duration-300 ease-in opacity-60`}><ChevronDown size="15" /></span
+						></Accordion.Header
+					>
+					<Accordion.Content
+						><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide>
+							Content sini
+						</div></Accordion.Content
+					>
 				</Accordion.Item>
 			</Accordion.Root>
 			<CardTitle title="Accordion" />
@@ -107,33 +153,46 @@
 		</Card>
 		<Card>
 			<div class="flex flex-col gap-3 text-neutral-600">
-				<Checkbox
-					labelClass="flex flex-row gap-3 items-center [&>input:focus+.checkbox]:outline [&>input:focus+.checkbox]:outline-2 [&>input:focus+.checkbox]:outline-[#00000066]"
-					className="bg-white shadow h-6 aspect-square rounded flex items-center justify-center"
-				>
-				<div class="bg-black h-full w-full rounded flex items-center justify-center" slot="indicator">
-					<Check size="15" color="white" strokeWidth="3"/>
-				</div>
-					
-					<span class="select-none">Checkbox 1</span>
+				<!-- svelte-ignore a11y-label-has-associated-control -->
+				<label class="flex flex-row gap-3 items-center [&>label>input:focus+.checkbox]:outline [&>label>input:focus+.checkbox]:outline-2 [&>label>input:focus+.checkbox]:outline-[#00000066]">
+				<Checkbox className="bg-white shadow h-6 aspect-square rounded flex items-center justify-center">
+					<div
+						class="bg-black h-full w-full rounded flex items-center justify-center"
+						slot="indicator"
+					>
+						<Check size="{15}" color="white" strokeWidth="{3}" />
+					</div>
 				</Checkbox>
+				<span class="select-none">Checkbox 1</span>
+			</label>
 			</div>
 			<CardTitle title="Checkbox" />
 			<CardStatus title="Ready" status={4} />
 		</Card>
 		<Card>
-			<Collapsible.Root expanded={collapsibleExpanded} className=" rounded-md min-w-[220px] flex flex-col gap-[6px] absolute top-[50px] shadow-sm">
-				<div class="flex items-center"><span class="flex-grow text-xs">Khairul Haaziq follows you</span>
-					<Collapsible.Trigger className="flex text-left shadow justify-center items-center h-6 aspect-square bg-white rounded-full focus:outline focus:outline-black focus:outline-2">
-					<span class='opacity-60' transition:slide>
-						{#if $collapsibleExpanded}
-					<X size="14"/>
-					{:else}
-					<ChevronsUpDown size="14"/>
-					{/if}
-				</span></Collapsible.Trigger></div>
-				<div class="p-2  bg-white rounded-md"> Content sini</div>
-				<Collapsible.Content><div class="p-2 bg-white rounded-md shadow"> Content sini</div><div class="p-2 bg-white rounded-md shadow"> Content sini</div></Collapsible.Content>
+			<Collapsible.Root
+				expanded={collapsibleExpanded}
+				className=" rounded-md min-w-[220px] flex flex-col gap-[6px] absolute top-[50px] shadow-sm"
+			>
+				<div class="flex items-center">
+					<span class="flex-grow text-xs">Khairul Haaziq follows you</span>
+					<Collapsible.Trigger
+						className="flex text-left shadow justify-center items-center h-6 aspect-square bg-white rounded-full focus:outline focus:outline-black focus:outline-2"
+					>
+						<span class="opacity-60" transition:slide>
+							{#if $collapsibleExpanded}
+								<X size="14" />
+							{:else}
+								<ChevronsUpDown size="14" />
+							{/if}
+						</span></Collapsible.Trigger
+					>
+				</div>
+				<div class="p-2  bg-white rounded">Content sini</div>
+				<Collapsible.Content
+					><div class="p-2 bg-white rounded shadow">Content sini</div>
+					<div class="p-2 bg-white rounded shadow">Content sini</div></Collapsible.Content
+				>
 			</Collapsible.Root>
 			<CardTitle title="Collapsible" />
 			<CardStatus title="Ready" status={4} />
@@ -141,7 +200,7 @@
 		<Card>
 			<ContextMenu.Root>
 				<ContextMenu.Trigger
-					className="flex items-center justify-center bg-neutral-300 border-neutral-400 opacity-50 border-dashed border h-32 w-52 rounded-lg aspect-square text-neutral-600"
+					className="flex items-center justify-center bg-neutral-300 border-neutral-400 opacity-50 border-dashed border h-32 w-52 rounded-md aspect-square text-neutral-600"
 				>
 					<p>Right click here</p>
 				</ContextMenu.Trigger>
@@ -320,7 +379,7 @@
 				</HoverCard.Portal>
 			</HoverCard.Root>
 			<CardTitle title="Hovercard" />
-			<CardStatus title="Ready" status={2} />
+			<CardStatus title="Ready" status={3} />
 		</Card>
 		<Card>
 			<CardTitle title="Menubar" />
@@ -462,17 +521,25 @@
 			<CardStatus title="Ready" status={1} />
 		</Card>
 		<Card>
-			<Slider.Root className='relative flex items-center w-[200px] touch-none select-none h-5'>
-				<Slider.Range rangeClass="rounded-full h-[3px] flex-grow bg-gray-400 relative" trackerClass="rounded-full absolute bg-black h-full left-0" />
-				<Slider.Thumb className="block h-5 w-5 rounded-full shadow-sm bg-white focus:outline focus:outline-4 outline-[#0000006a]"/>
+			<Slider.Root className="relative flex items-center w-[200px] touch-none select-none h-5">
+				<Slider.Range
+					rangeClass="rounded-full h-[3px] flex-grow bg-gray-400 relative"
+					trackerClass="rounded-full absolute bg-black h-full left-0"
+				/>
+				<Slider.Thumb
+					className="block h-5 w-5 rounded-full shadow-sm bg-white focus:outline focus:outline-4 outline-[#0000006a]"
+				/>
 			</Slider.Root>
 			<CardTitle title="Slider" />
 			<CardStatus title="Ready" status={3} />
 		</Card>
 		<Card>
-			<Switch
-				labelClass="[&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black"
-			/>
+			<!-- svelte-ignore a11y-label-has-associated-control -->
+			<label class="flex gap-3 items-start max-w-[200px] [&>label>input:focus+span>span]:outline [&>label>input:focus+span>span]:outline-2 [&>label>input:focus+span>span]:outline-black">
+			<Switch />
+			<span class="select-none text-neutral-500">A switch is essentially a checkbox, it works without javascript!</span>
+		</label>
+			<!-- svelte-ignore a11y-label-has-associated-control -->
 			<CardTitle title="Switch" />
 			<CardStatus title="Ready" status={4} />
 		</Card>
@@ -548,12 +615,8 @@
 			<Tooltip.Root>
 				<p>
 					Example of inline
-				<Tooltip.Trigger
-					className="font-semibold"
-				>
-					Tooltip!
-				</Tooltip.Trigger>
-			</p>
+					<Tooltip.Trigger className="font-semibold">Tooltip!</Tooltip.Trigger>
+				</p>
 				<Tooltip.Portal className="bg-black rounded flex flex-col text-[13px] text-white px-2 py-1">
 					This is a tooltip example
 				</Tooltip.Portal>

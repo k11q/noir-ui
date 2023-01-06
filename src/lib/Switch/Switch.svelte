@@ -8,41 +8,61 @@
 	export let required = false;
 	export let name = '';
 	export let value = '';
+	export let id = '';
 	export let labelClass = '';
 
-	function toggleChecked(){
-		checked.set(!$checked)
+	let switchElement: HTMLElement;
+
+	function toggleChecked() {
+		checked.set(!$checked);
 	}
 
-	function handleKeydown(e: KeyboardEvent){
-		if(e.key === 'Enter'){
-			e.preventDefault()
-			toggleChecked()
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === 'Enter') {
+			e.preventDefault();
+			toggleChecked();
 		}
 	}
-
 </script>
 
-<label class={labelClass}>
-	<input type="checkbox" bind:checked={$checked} role="switch" on:keydown={handleKeydown} {name} {value}/>
-	<span transition:slide/>
+<label>
+<input
+	type="checkbox"
+	bind:checked={$checked}
+	on:keydown={handleKeydown}
+	{id}
+	{name}
+	{value}
+	aria-hidden="true"
+/>
+<span
+bind:this={switchElement}
+	class={labelClass}
+	{value}
+	role="checkbox"
+	aria-checked={$checked}
+	data-state={$checked ? 'checked' : 'unchecked'}
+>
+	<span><span></span></span>
+</span>
 </label>
 
 <style>
-	label {
+	input + span {
 		position: relative;
 		display: inline-block;
 		width: 42px;
 		height: 25px;
 	}
 
-	label input {
+	input {
 		opacity: 0;
 		width: 0;
 		height: 0;
+		position: absolute;
 	}
 
-	label> span {
+	input + span > span {
 		position: absolute;
 		cursor: pointer;
 		top: 0;
@@ -55,9 +75,8 @@
 		border-radius: 34px;
 	}
 
-	label> span:before {
+	input + span > span>span {
 		position: absolute;
-		content: '';
 		height: 19px;
 		width: 19px;
 		left: 3px;
@@ -68,17 +87,17 @@
 		border-radius: 50%;
 	}
 
-	input:checked + span {
+	input:checked + span > span {
 		background-color: black;
 	}
 
-	input:checked + span {
+	input:checked + span > span {
 		box-shadow: 0 0 1px black;
 	}
-
-	input:checked + span:before {
+	input:checked + span > span>span {
 		-webkit-transform: translateX(17px);
 		-ms-transform: translateX(17px);
 		transform: translateX(17px);
 	}
+
 </style>

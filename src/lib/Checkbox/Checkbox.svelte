@@ -11,28 +11,16 @@
 	export let name = '';
 	export let value = '';
 	export let id = '';
-	export let labelClass = '';
 
 	let checkboxButton: HTMLElement;
 
 	setContext('checked', checked);
 
-	function toggleCheck() {
-		checked.set(!$checked);
-	}
-
 	$: defaultChecked ? checked.set(true) : '';
 
-	function handleChange() {
-		if (document.activeElement === checkboxButton) {
-			return;
-		} else {
-			checkboxButton.focus();
-		}
-	}
 </script>
 
-<label class={labelClass}>
+<label>
 	<input type="checkbox" {id} bind:checked={$checked} {value} {name} aria-hidden="true" />
 	<span
 		bind:this={checkboxButton}
@@ -46,7 +34,6 @@
 			<slot name="indicator" />
 		</span>
 	</span>
-	<slot />
 </label>
 
 <style>
