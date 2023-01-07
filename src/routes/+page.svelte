@@ -75,7 +75,7 @@
 						><span> Is it accessible?</span><span
 							class={`${
 								$accordionCurrentExpanded === 'item-1' ? 'rotate-180' : ''
-							}  duration-300 ease-in opacity-60`}><ChevronDown size="15" /></span
+							} duration-300 ease-in opacity-60`}><ChevronDown size="15" /></span
 						></Accordion.Header
 					>
 					<Accordion.Content
@@ -92,7 +92,7 @@
 						><span> Is it unstyled?</span><span
 							class={`${
 								$accordionCurrentExpanded === 'item-2' ? 'rotate-180' : ''
-							}  duration-300 ease-in opacity-60`}><ChevronDown size="15" /></span
+							} duration-300 ease-in opacity-60`}><ChevronDown size="15" /></span
 						></Accordion.Header
 					>
 					<Accordion.Content
@@ -109,7 +109,7 @@
 						><span> Can it be animated?</span><span
 							class={`${
 								$accordionCurrentExpanded === 'item-3' ? 'rotate-180' : ''
-							}  duration-300 ease-in opacity-60`}><ChevronDown size="15" /></span
+							} duration-300 ease-in opacity-60`}><ChevronDown size="15" /></span
 						></Accordion.Header
 					>
 					<Accordion.Content
@@ -119,8 +119,9 @@
 					>
 				</Accordion.Item>
 			</Accordion.Root>
-			<CardTitle title="Accordion" />
-			<CardStatus title="Ready" status={4} />
+			<CardTitle>
+				<span>Accordion</span><CardStatus status={4} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<AlertDialog.Root open={dialogOpen}>
@@ -148,8 +149,9 @@
 					</div>
 				</AlertDialog.Portal>
 			</AlertDialog.Root>
-			<CardTitle title="Alert Dialog" />
-			<CardStatus title="Ready" status={3} />
+			<CardTitle>
+				<span>Alert Dialog</span><CardStatus status={4} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<div class="flex flex-col gap-3 text-neutral-600">
@@ -166,8 +168,9 @@
 				<span class="select-none">Checkbox 1</span>
 			</label>
 			</div>
-			<CardTitle title="Checkbox" />
-			<CardStatus title="Ready" status={4} />
+			<CardTitle>
+				<span>Checkbox</span><CardStatus status={4} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<Collapsible.Root
@@ -188,14 +191,15 @@
 						</span></Collapsible.Trigger
 					>
 				</div>
-				<div class="p-2  bg-white rounded">Content sini</div>
+				<div class="p-2 bg-white rounded">Content sini</div>
 				<Collapsible.Content
 					><div class="p-2 bg-white rounded shadow">Content sini</div>
 					<div class="p-2 bg-white rounded shadow">Content sini</div></Collapsible.Content
 				>
 			</Collapsible.Root>
-			<CardTitle title="Collapsible" />
-			<CardStatus title="Ready" status={4} />
+			<CardTitle>
+				<span>Collapsible</span><CardStatus status={4} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<ContextMenu.Root>
@@ -259,8 +263,9 @@
 					</ContextMenu.Group>
 				</ContextMenu.Portal>
 			</ContextMenu.Root>
-			<CardTitle title="Context Menu" />
-			<CardStatus title="Ready" status={1} />
+			<CardTitle>
+				<span>Context Menu</span><CardStatus status={1} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<Dialog.Root>
@@ -294,8 +299,9 @@
 					</div>
 				</Dialog.Portal>
 			</Dialog.Root>
-			<CardTitle title="Dialog" />
-			<CardStatus title="Ready" status={3} />
+			<CardTitle>
+				<span>Dialog</span><CardStatus status={4} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<DropdownMenu.Root>
@@ -359,9 +365,9 @@
 					</DropdownMenu.Group>
 				</DropdownMenu.Portal>
 			</DropdownMenu.Root>
-
-			<CardTitle title="Dropdown Menu" />
-			<CardStatus title="Ready" status={1} />
+			<CardTitle>
+				<span>Dropdown Menu</span><CardStatus status={1} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<HoverCard.Root>
@@ -378,12 +384,14 @@
 					<p class="opacity-40 text-[11px] mt-4">Copyright hovercard</p>
 				</HoverCard.Portal>
 			</HoverCard.Root>
-			<CardTitle title="Hovercard" />
-			<CardStatus title="Ready" status={3} />
+			<CardTitle>
+				<span>Hover Card</span><CardStatus status={4} />
+			</CardTitle>
 		</Card>
 		<Card>
-			<CardTitle title="Menubar" />
-			<CardStatus title="Ready" status={1} />
+			<CardTitle>
+				<span>Menubar</span><CardStatus status={1} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<Popover.Root>
@@ -426,8 +434,9 @@
 					</fieldset>
 				</Popover.Portal>
 			</Popover.Root>
-			<CardTitle title="Popover" />
-			<CardStatus title="Ready" status={3} />
+			<CardTitle>
+				<span>Popover</span><CardStatus status={3} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<div class="flex flex-col gap-3 text-neutral-600">
@@ -459,8 +468,9 @@
 					<span class="select-none">Compact</span>
 				</RadioGroup.Radio2>
 			</div>
-			<CardTitle title="Radio Group" />
-			<CardStatus title="Ready" status={4} />
+			<CardTitle>
+				<span>Radio Group</span><CardStatus status={4} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<Select.Root>
@@ -517,8 +527,9 @@
 					</Select.Group>
 				</Select.Portal>
 			</Select.Root>
-			<CardTitle title="Select" />
-			<CardStatus title="Ready" status={1} />
+			<CardTitle>
+				<span>Select</span><CardStatus status={1} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<Slider.Root className="relative flex items-center w-[200px] touch-none select-none h-5">
@@ -530,8 +541,9 @@
 					className="block h-5 w-5 rounded-full shadow-sm bg-white focus:outline focus:outline-4 outline-[#0000006a]"
 				/>
 			</Slider.Root>
-			<CardTitle title="Slider" />
-			<CardStatus title="Ready" status={3} />
+			<CardTitle>
+				<span>Slider</span><CardStatus status={3} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<!-- svelte-ignore a11y-label-has-associated-control -->
@@ -539,9 +551,9 @@
 			<Switch />
 			<span class="select-none text-neutral-500">A switch is essentially a checkbox, it works without javascript!</span>
 		</label>
-			<!-- svelte-ignore a11y-label-has-associated-control -->
-			<CardTitle title="Switch" />
-			<CardStatus title="Ready" status={4} />
+			<CardTitle>
+				<span>Switch</span><CardStatus status={4} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<Tabs.Group className="flex flex-col rounded-lg bg-white shadow min-h-[140px] min-w-44 sm:min-w-[240px]">
@@ -566,8 +578,9 @@
 					{#if $storeTab === 'c'}Content C{/if}
 				</Tabs.Content>
 			</Tabs.Group>
-			<CardStatus title="Ready" status={2} />
-			<CardTitle title="Tabs" />
+			<CardTitle>
+				<span>Tabs</span><CardStatus status={2} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<Toast.Root duration={3000}>
@@ -586,8 +599,9 @@
 					<button class="bg-neutral-200 rounded px-2 py-1">Undo</button>
 				</Toast.Portal>
 			</Toast.Root>
-			<CardTitle title="Toast" />
-			<CardStatus title="Ready" status={2} />
+			<CardTitle>
+				<span>Toast</span><CardStatus status={2} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<Toggle
@@ -596,8 +610,9 @@
 			>
 				<Italic size="14" />
 			</Toggle>
-			<CardTitle title="Toggle" />
-			<CardStatus title="Ready" status={3} />
+			<CardTitle>
+				<span>Toggle</span><CardStatus status={3} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<ToggleGroup.Root
@@ -608,8 +623,9 @@
 				<ToggleGroup.Item value="item2"><AlignCenter size="15" /></ToggleGroup.Item>
 				<ToggleGroup.Item value="item3"><AlignRight size="15" /></ToggleGroup.Item>
 			</ToggleGroup.Root>
-			<CardTitle title="Toggle Group" />
-			<CardStatus title="Ready" status={3} />
+			<CardTitle>
+				<span>Toggle Group</span><CardStatus status={3} />
+			</CardTitle>
 		</Card>
 		<Card>
 			<Tooltip.Root>
@@ -621,8 +637,9 @@
 					This is a tooltip example
 				</Tooltip.Portal>
 			</Tooltip.Root>
-			<CardTitle title="Tooltip" />
-			<CardStatus title="Ready" status={3} />
+			<CardTitle>
+				<span>Tooltip</span><CardStatus status={3} />
+			</CardTitle>
 		</Card>
 	</div>
 </div>

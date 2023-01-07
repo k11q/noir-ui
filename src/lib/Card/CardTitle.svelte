@@ -2,4 +2,4 @@
     export let title:string;
 </script>
 
-<p class="absolute left-4 top-3 text-blackA-10 select-none">{title}</p>
+<p class="absolute left-4 top-3 select-none flex gap-2"><slot/></p>
