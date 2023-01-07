@@ -61,25 +61,10 @@
 				position = 'top';
 			}
 
-			window.addEventListener('mousedown', closeDialogWhenClickOutside);
-			window.addEventListener('mouseup', clearEvents);
 			window.addEventListener('wheel', updatePosition);
 
-			function clearEvents() {
-				window.removeEventListener('mousedown', closeDialogWhenClickOutside);
-				window.removeEventListener('mouseup', clearEvents);
-			}
 		} else {
 			window.removeEventListener('wheel', updatePosition);
-		}
-
-		function closeDialogWhenClickOutside(e: MouseEvent) {
-			const clickOutside = useClickOutside(e, $hoverCardPortal);
-			e.preventDefault();
-			e.stopPropagation();
-			if (clickOutside) {
-				closeDialog();
-			}
 		}
 	}
 

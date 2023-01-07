@@ -2,8 +2,9 @@
 	import { writable, type Writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 
-    export let currentExpanded: Writable<string> = writable('');
+    
     export let defaultExpanded = ''
+    let currentExpanded: Writable<string> = writable(defaultExpanded);
     export let className = '';
     let rootAccordion: Writable<HTMLElement | null> = writable(null);
 

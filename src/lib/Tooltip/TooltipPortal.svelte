@@ -7,12 +7,12 @@
 
 	export let open: Writable<boolean> = getContext('open');
 	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
-	let hoverCardPortal: Writable<HTMLElement> = getContext('hoverCardPortal');
+	let tooltipPortal: Writable<HTMLElement> = getContext('tooltipPortal');
 	export let className = '';
 
 	let menuLeft = 0;
 	let menuTop = 0;
-	let position = 'bottom';
+	let position = 'top';
 
 	const closeDialog = () => {
 		open.set(false);
@@ -21,43 +21,25 @@
 
 	$: !$open ? console.log('dropdownclosed') : '';
 
-	$: if ($hoverCardPortal) {
+	$: if ($tooltipPortal) {
 		if ($open) {
 			const originLeft =
 				$triggerButton.getBoundingClientRect().left +
 				$triggerButton.getBoundingClientRect().width / 2 -
-				$hoverCardPortal.getBoundingClientRect().width / 2;
+				$tooltipPortal.getBoundingClientRect().width / 2;
 
-			const originTop = $triggerButton.getBoundingClientRect().bottom + 8;
+			const portalRect = $tooltipPortal.getBoundingClientRect();
+			const originTop = $triggerButton.getBoundingClientRect().top - portalRect.height - 8;
+			
+			menuLeft = originLeft;
+			console.log('origintop'+originTop)
+				console.log('portalRect.height'+portalRect.height)
 
-			const portalRect = $hoverCardPortal.getBoundingClientRect();
-
-			if (
-				originLeft + portalRect.width < window.innerWidth &&
-				originTop + portalRect.height < window.innerHeight
-			) {
-				menuLeft = originLeft;
-				menuTop =
-					originTop - portalRect.height - $triggerButton.getBoundingClientRect().height - 16;
-				position = 'top';
-			} else if (
-				originLeft + portalRect.width > window.innerWidth &&
-				originTop + portalRect.height < window.innerHeight
-			) {
-				menuLeft = originLeft - portalRect.width;
-				menuTop =
-					originTop - portalRect.height - $triggerButton.getBoundingClientRect().height - 16;
-				position = 'top';
-			} else if (
-				originLeft + portalRect.width < window.innerWidth &&
-				originTop + portalRect.height > window.innerHeight
-			) {
-				menuLeft = originLeft;
+			if (originTop > 0) {
 				menuTop = originTop;
-				position = 'bottom';
+				position = 'top';
 			} else {
-				menuLeft = originLeft - portalRect.width;
-				menuTop = originTop;
+				menuTop = $triggerButton.getBoundingClientRect().bottom + 8;
 				position = 'bottom';
 			}
 
@@ -74,7 +56,7 @@
 		}
 
 		function closeDialogWhenClickOutside(e: MouseEvent) {
-			const clickOutside = useClickOutside(e, $hoverCardPortal);
+			const clickOutside = useClickOutside(e, $tooltipPortal);
 			e.preventDefault();
 			e.stopPropagation();
 			if (clickOutside) {
@@ -96,7 +78,7 @@
 
 {#if $open === true}
 	<div
-		bind:this={$hoverCardPortal}
+		bind:this={$tooltipPortal}
 		use:portal={'body'}
 		role="dialog"
 		aria-modal="true"

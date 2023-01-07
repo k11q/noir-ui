@@ -65,29 +65,26 @@
 			document.querySelector('body')!.style.pointerEvents = 'none';
 
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);
-			window.addEventListener('mouseup', clearEvents);
 			window.addEventListener('wheel', updatePosition);
-
-			function clearEvents() {
-				window.removeEventListener('mousedown', closeDialogWhenClickOutside);
-				window.removeEventListener('mouseup', clearEvents);
-			}
 		} else {
-			document.querySelector('body').style.pointerEvents = '';
 			window.removeEventListener('wheel', updatePosition);
+			window.removeEventListener('mousedown', closeDialogWhenClickOutside);
+			document.querySelector('body').style.pointerEvents = '';
 		}
-
-		function closeDialogWhenClickOutside(e: MouseEvent) {
+	}
+	function closeDialogWhenClickOutside(e: MouseEvent) {
 			const clickOutside = useClickOutside(e, popoverPortal);
-			e.preventDefault();
-			e.stopPropagation();
+			console.log('clickoutside')
+			
 			if (clickOutside) {
+				e.preventDefault();
+				e.stopPropagation();
 				closeDialog();
 			}
 		}
-	}
 
 	function updatePosition(e: WheelEvent) {
+		console.log('updateposition')
 		const originLeft =
 			$triggerButton.getBoundingClientRect().left +
 			$triggerButton.getBoundingClientRect().width / 2 -

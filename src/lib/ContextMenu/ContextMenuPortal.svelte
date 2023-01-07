@@ -65,13 +65,13 @@
 			window.removeEventListener('wheel', closeDialog);
 		}
 
-		function closeDialogWhenClickOutside(e: MouseEvent) {
+	}
+	function closeDialogWhenClickOutside(e: MouseEvent) {
 			const clickOutside = useClickOutside(e, selectPortal);
 			if (clickOutside) {
 				closeDialog();
 			}
 		}
-	}
 
 	function handleKeydown(e: KeyboardEvent) {
 		e.preventDefault();

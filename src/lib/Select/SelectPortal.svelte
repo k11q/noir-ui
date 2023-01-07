@@ -14,6 +14,8 @@
 	let selectPortal: HTMLElement;
 	let menuLeft = 0;
 	let menuTop = 0;
+	let menuHeight = 0;
+	let initialMenuHeight = 0;
 
 	const closeDialog = () => {
 		highlighted.set('');
@@ -25,6 +27,8 @@
 
 	$: if (selectPortal) {
 		if ($open) {
+			const listBoxElRect = selectPortal.querySelector('[role="listbox"]').getBoundingClientRect()
+			initialMenuHeight = listBoxElRect.height
 			menuLeft =
 				$triggerButton.getBoundingClientRect().left +
 				$triggerButton.getBoundingClientRect().width / 2 -
@@ -33,21 +37,38 @@
 			if (selectedElement()) {
 				let distance =
 					selectedElement()!.getBoundingClientRect().top - selectPortal.getBoundingClientRect().top;
-				menuTop =
-					$triggerButton.getBoundingClientRect().top +
+				const top = $triggerButton.getBoundingClientRect().top +
 					$triggerButton.getBoundingClientRect().height / 2 -
 					selectedElement()!.getBoundingClientRect().height / 2 -
 					distance;
+				if(top<0){
+					menuTop = 0
+					menuHeight = initialMenuHeight + top
+				} else {
+					menuTop = top
+					menuHeight = initialMenuHeight
+					
+				}
+					
 			} else {
 				const firstOption = selectPortal.querySelector('[role="option"]');
 				if (firstOption) {
 					let distance =
 						firstOption.getBoundingClientRect().top - selectPortal.getBoundingClientRect().top;
-					menuTop =
+					const top =
 						$triggerButton.getBoundingClientRect().top +
 						$triggerButton.getBoundingClientRect().height / 2 -
 						firstOption.getBoundingClientRect().height / 2 -
 						distance;
+					
+						if(top<0){
+							menuTop = 0
+					menuHeight = initialMenuHeight + top
+					
+				} else {
+					menuTop = top
+					menuHeight = initialMenuHeight
+				}
 				}
 			}
 
@@ -57,18 +78,13 @@
 			document.querySelector('body')!.style.pointerEvents = 'none';
 
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);
-			window.addEventListener('mouseup', clearEvents);
-
-			function clearEvents() {
-				window.removeEventListener('mousedown', closeDialogWhenClickOutside);
-				window.removeEventListener('mouseup', clearEvents);
-			}
 		} else {
 			document.querySelector('body').style.pointerEvents = '';
+			window.removeEventListener('mousedown', closeDialogWhenClickOutside);
 			window.removeEventListener('scroll', updatePortalPosition);
 		}
-
-		function closeDialogWhenClickOutside(e: MouseEvent) {
+	}
+	function closeDialogWhenClickOutside(e: MouseEvent) {
 			const clickOutside = useClickOutside(e, selectPortal);
 			e.preventDefault();
 			e.stopPropagation();
@@ -106,7 +122,6 @@
 				}
 			}
 		}
-	}
 
 	function selectedElement() {
 		if (selectPortal.querySelector('[data-state="checked"]')) {
@@ -177,9 +192,9 @@
 		role="dialog"
 		aria-modal="true"
 		on:keydown={handleKeydown}
-		style="position: fixed; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; transform-origin:118.5px -5px; pointer-events:auto"
+		style="position: fixed;display:flex; {menuHeight>0? `height: ${menuHeight}px;`: ''} top:0px flex-direction: column; flex: 1; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; pointer-events:auto"
 	>
-		<div class={className} role="listbox" aria-expanded={$open}>
+		<div class={className} role="listbox" aria-expanded={$open} style=" margin-top:auto">
 			<slot />
 		</div>
 	</div>

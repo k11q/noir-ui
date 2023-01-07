@@ -59,19 +59,16 @@
 			document.querySelector('body')!.style.pointerEvents = 'none';
 
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);
-			window.addEventListener('mouseup', clearEvents);
 			window.addEventListener('wheel', disableScroll,{passive:false});
 
-			function clearEvents() {
-				window.removeEventListener('mousedown', closeDialogWhenClickOutside);
-				window.removeEventListener('mouseup', clearEvents);
-			}
 		} else {
 			document.querySelector('body').style.pointerEvents = '';
 			window.removeEventListener('wheel', disableScroll);
+			window.removeEventListener('mousedown', closeDialogWhenClickOutside);
 		}
-
-		function closeDialogWhenClickOutside(e: MouseEvent) {
+		
+	}
+	function closeDialogWhenClickOutside(e: MouseEvent) {
 			const clickOutside = useClickOutside(e, selectPortal);
 			e.preventDefault();
 			e.stopPropagation();
@@ -79,7 +76,6 @@
 				closeDialog();
 			}
 		}
-	}
 
 	function disableScroll(e: WheelEvent){
 		e.preventDefault()

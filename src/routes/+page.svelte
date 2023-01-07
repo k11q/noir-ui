@@ -51,7 +51,7 @@
 </script>
 
 <div class="w-full flex flex-col items-center gap-2 pb-16 pt-6 lg:px-12 px-5 text-[13px]">
-	<div class="w-full max-w-[1020px] flex flex-col items-start gap-2 mb-3">
+	<div class="w-full max-w-[1020px] flex flex-col items-start gap-2 mt-12 mb-6">
 		<div class="flex flex-row items-end">
 			<img
 				src="logo.svg"
@@ -64,8 +64,8 @@
 	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1020px] w-full gap-5">
 		<Card>
 			<Accordion.Root
-				className="bg-white rounded-md min-w-44 sm:min-w-[220px] flex flex-col absolute top-[50px] shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md"
-				currentExpanded={accordionCurrentExpanded}
+				className="bg-white rounded-md min-w-44 sm:w-[220px] flex flex-col absolute top-[40px] shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md"
+				defaultExpanded="item-1"
 			>
 				<Accordion.Item
 					value="item-1"
@@ -80,7 +80,7 @@
 					>
 					<Accordion.Content
 						><div class="p-3 border-t bg-neutral-100 opacity-60" transition:slide>
-							Content sini
+							Yes. It adheres to the WAI-ARIA design pattern.
 						</div></Accordion.Content
 					>
 				</Accordion.Item>
@@ -622,7 +622,7 @@
 				</Tooltip.Portal>
 			</Tooltip.Root>
 			<CardTitle title="Tooltip" />
-			<CardStatus title="Ready" status={2} />
+			<CardStatus title="Ready" status={3} />
 		</Card>
 	</div>
 </div>

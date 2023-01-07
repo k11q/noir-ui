@@ -3,7 +3,8 @@
 	import { getContext } from 'svelte';
 	import { portal } from '../Portal/Portal.svelte';
 	import { trapFocus } from '$lib/utils/trap-focus';
-	import { fade, fly } from 'svelte/transition';
+	import { fade, scale } from 'svelte/transition';
+	import { quintOut } from "svelte/easing";
 
 	export let className = '';
 	export let overlayClass = '';
@@ -64,7 +65,7 @@
 		role="dialog"
 		aria-modal="true"
 		class={overlayClass}
-		transition:fade
+		transition:fade={{duration:200}}
 		style="position: fixed; inset:0; left: {position === 'bottom-left' || position === 'top-left'
 			? '20px'
 			: ''}; top: {position === 'top-right' || position === 'top-left'
@@ -78,7 +79,7 @@
 			: ''} min-width: max-content; z-index: auto; transform-origin:118.5px -5px; pointer-events:auto"
 	/>
 	<div
-		in:fly={{ y: 60, duration: 200 }}
+		in:scale={{ duration: 200, easing: quintOut }}
 		out:fade={{ duration: 100 }}
 		bind:this={$alertDialogElement}
 		class={className}

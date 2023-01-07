@@ -60,29 +60,6 @@
 		  }, delayDuration))
 		: '';
 
-	$: if (dialogElement) {
-		if (open) {
-			window.addEventListener('scroll', watchPosition);
-
-			window.addEventListener('mousedown', closeDialogWhenClickOutside);
-			window.addEventListener('mouseup', clearEvents);
-
-			function clearEvents() {
-				window.removeEventListener('mousedown', closeDialogWhenClickOutside);
-				window.removeEventListener('mouseup', clearEvents);
-			}
-		}
-
-		function closeDialogWhenClickOutside(e: MouseEvent) {
-			e.preventDefault();
-			e.stopPropagation();
-		}
-
-		function watchPosition() {
-			menuLeft = triggerButton.getBoundingClientRect().left;
-			menuTop = triggerButton.getBoundingClientRect().bottom;
-		}
-	}
 </script>
 
 <button
