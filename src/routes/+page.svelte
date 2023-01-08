@@ -46,7 +46,7 @@
 	const collapsibleExpanded: Writable<boolean> = writable(false);
 	const checkedDropdown = writable(false);
 	const checkedDropdown2 = writable(false);
-	const selectedMenu = writable('');
+	const selectedMenu = writable('Khairul Haaziq');
 
 	$:$accordionCurrentExpanded ? console.log($accordionCurrentExpanded) : ''
 
@@ -67,7 +67,7 @@
 </script>
 
 <div class="w-full flex flex-col items-center gap-2 pb-16 pt-6 lg:px-12 px-5 text-[13px]">
-	<div class="w-full max-w-[1020px] flex flex-col items-start gap-2 mt-12 mb-6">
+	<div class="w-full max-w-[1400px] flex flex-col items-start gap-2 mt-12 mb-6">
 		<div class="flex flex-row items-end">
 			<img
 				src="logo.svg"
@@ -77,11 +77,11 @@
 			<h3 class="text-base leading-[1rem]">Components made easy</h3>
 		</div>
 	</div>
-	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1020px] w-full gap-5">
+	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1400px] w-full gap-5">
 		<Card>
 			<Accordion.Root
-				currentExpanded={accordionCurrentExpanded}
-				class="bg-white rounded-md min-w-44 sm:w-[220px] flex flex-col absolute top-[40px] shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*>*]:last:[&>*]:rounded-b-md"
+				defaultExpanded={accordionCurrentExpanded}
+				class="bg-white rounded-md min-w-44 sm:w-[220px] flex flex-col shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*>*]:last:[&>*]:rounded-b-md"
 			>
 				<Accordion.Item
 					value="item-1"
@@ -90,7 +90,7 @@
 					<Accordion.Header class="flex p-3 text-left justify-between items-center"
 						><span> Is it accessible?</span><span
 							class:rotate-180={$accordionCurrentExpanded === 'item-1'}
-							class='duration-300 ease-in opacity-60'><ChevronDown size="15" /></span
+							class='duration-300 ease-in opacity-60'><ChevronDown size={15} /></span
 						></Accordion.Header
 					>
 					<Accordion.Content
@@ -106,7 +106,7 @@
 					<Accordion.Header class="flex p-3 text-left justify-between items-center border-t"
 						><span> Is it unstyled?</span><span
 						class:rotate-180={$accordionCurrentExpanded === 'item-2'}
-						class='duration-300 ease-in opacity-60'><ChevronDown size="15" /></span
+						class='duration-300 ease-in opacity-60'><ChevronDown size={15} /></span
 						></Accordion.Header
 					>
 					<Accordion.Content
@@ -122,7 +122,7 @@
 					<Accordion.Header class="flex p-3 text-left justify-between items-center border-t"
 						><span> Can it be animated?</span><span
 						class:rotate-180={$accordionCurrentExpanded === 'item-3'}
-						class='duration-300 ease-in opacity-60'><ChevronDown size="15" /></span
+						class='duration-300 ease-in opacity-60'><ChevronDown size={15} /></span
 						></Accordion.Header
 					>
 					<Accordion.Content
@@ -145,7 +145,7 @@
 				</AlertDialog.Trigger>
 				<AlertDialog.Portal
 					overlayClass="bg-neutral-400 opacity-50"
-					className="flex flex-col items-between justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[500px] min-h-[150px] first-letter:border bg-white rounded-lg border-neutral-200 p-6 gap-3 shadow-lg text-[13px]"
+					class="flex flex-col items-between justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[500px] min-h-[150px] first-letter:border bg-white rounded-lg border-neutral-200 p-6 gap-3 shadow-lg text-[13px]"
 				>
 					<div class="text-base font-medium">Are you absolutely sure?</div>
 					<p class="opacity-60">
@@ -170,7 +170,7 @@
 			<div class="flex flex-col gap-3 text-neutral-600">
 				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<label class="flex flex-row gap-3 items-center [&>label>input:focus+.checkbox]:outline [&>label>input:focus+.checkbox]:outline-2 [&>label>input:focus+.checkbox]:outline-[#00000066]">
-				<Checkbox className="bg-white shadow h-6 aspect-square rounded flex items-center justify-center">
+				<Checkbox class="bg-white shadow h-6 aspect-square rounded flex items-center justify-center">
 					<div
 						class="bg-black h-full w-full rounded flex items-center justify-center"
 						slot="indicator"
@@ -182,7 +182,7 @@
 			</label>
 			<!-- svelte-ignore a11y-label-has-associated-control -->
 			<label class="flex flex-row gap-3 items-center [&>label>input:focus+.checkbox]:outline [&>label>input:focus+.checkbox]:outline-2 [&>label>input:focus+.checkbox]:outline-[#00000066]">
-				<Checkbox className="bg-white shadow h-6 aspect-square rounded flex items-center justify-center">
+				<Checkbox class="bg-white shadow h-6 aspect-square rounded flex items-center justify-center">
 					<div
 						class="bg-black h-full w-full rounded flex items-center justify-center"
 						slot="indicator"
@@ -194,7 +194,7 @@
 			</label>
 			<!-- svelte-ignore a11y-label-has-associated-control -->
 			<label class="flex flex-row gap-3 items-center [&>label>input:focus+.checkbox]:outline [&>label>input:focus+.checkbox]:outline-2 [&>label>input:focus+.checkbox]:outline-[#00000066]">
-				<Checkbox className="bg-white shadow h-6 aspect-square rounded flex items-center justify-center">
+				<Checkbox class="bg-white shadow h-6 aspect-square rounded flex items-center justify-center">
 					<div
 						class="bg-black h-full w-full rounded flex items-center justify-center"
 						slot="indicator"
@@ -211,19 +211,19 @@
 		</Card>
 		<Card>
 			<Collapsible.Root
-				expanded={collapsibleExpanded}
-				className=" rounded-md min-w-44 sm:min-w-[220px] flex flex-col gap-[6px] absolute top-[50px] shadow-sm"
+			defaultOpen={true}
+				class=" rounded-md min-w-44 sm:min-w-[220px] flex flex-col gap-[6px] shadow-sm"
 			>
 				<div class="flex items-center">
 					<span class="flex-grow text-xs">Khairul Haaziq follows you</span>
 					<Collapsible.Trigger
-						className="flex text-left shadow justify-center items-center h-6 aspect-square bg-white rounded-full focus:outline focus:outline-black focus:outline-2"
+						class="flex text-left shadow justify-center items-center h-6 aspect-square bg-white rounded-full focus:outline focus:outline-black focus:outline-2"
 					>
 						<span class="opacity-60" transition:slide>
 							{#if $collapsibleExpanded}
-								<X size="14" />
+								<X size={14} />
 							{:else}
-								<ChevronsUpDown size="14" />
+								<ChevronsUpDown size={14} />
 							{/if}
 						</span></Collapsible.Trigger
 					>
@@ -307,13 +307,13 @@
 		<Card>
 			<Dialog.Root>
 				<Dialog.Trigger
-					className="bg-white py-2 px-3 rounded shadow focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
+					class="bg-white py-2 px-3 rounded shadow focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
 				>
 					Edit Profile
 				</Dialog.Trigger>
 				<Dialog.Portal
 					overlayClass="bg-neutral-400 opacity-50"
-					className="flex flex-col items-between justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[450px] min-h-[150px] first-letter:border bg-white rounded-lg border-neutral-200 p-6 gap-3 shadow-lg text-[13px]"
+					class="flex flex-col items-between justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[450px] min-h-[150px] first-letter:border bg-white rounded-lg border-neutral-200 p-6 gap-3 shadow-lg text-[13px]"
 				>
 					<div class="text-base font-medium">Edit profile</div>
 					<p class="opacity-60">Make changes to your profile here. Click save when you're done.</p>
@@ -345,7 +345,7 @@
 				<DropdownMenu.Trigger
 					className="flex items-center justify-center bg-white h-10 rounded-full shadow aspect-square focus:outline focus:outline-2 focus:outline-black text-neutral-600"
 				>
-					<AlignJustify size="15" />
+					<AlignJustify size={15} />
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Portal
 					class="border bg-white rounded-lg border-neutral-200 w-60 flex flex-col p-[6px] text-[13px] text-black shadow-lg"
@@ -354,7 +354,7 @@
 						<DropdownMenu.Option
 						on:change={addNewTab}
 							value="New Tab"
-							class="flex pl-[25px] py-1 pr-2 items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white [&>*]:data-[highlighted='true']:text-white rounded"
+							class="flex pl-[25px] pr-2 items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white [&>*]:data-[highlighted='true']:text-white rounded"
 							>New Tab<span class="flex flex-grow items-center text-neutral-500 justify-end tracking-wide"
 								>⌘+T</span
 							></DropdownMenu.Option
@@ -429,9 +429,9 @@
 		<Card>
 			<HoverCard.Root>
 				<HoverCard.Trigger
-					className="flex items-center justify-center shadow bg-white h-10 rounded-full aspect-square text-neutral-600"
+					class="flex items-center justify-center shadow bg-white h-10 rounded-full aspect-square text-neutral-600"
 				>
-					<Github size="15" />
+					<Github size={15} />
 				</HoverCard.Trigger>
 				<HoverCard.Portal
 					className="border bg-white rounded-lg border-neutral-200 w-64 flex flex-col gap-3 p-5 text-[13px] text-black shadow-lg"
@@ -450,7 +450,7 @@
 				<Popover.Trigger
 					className="flex items-center justify-center shadow bg-white h-10 rounded-full aspect-square focus:outline focus:outline-2 focus:outline-black text-neutral-600"
 				>
-					<Settings2 size="15" />
+					<Settings2 size={15} />
 				</Popover.Trigger>
 				<Popover.Portal
 					className="border bg-white rounded-lg border-neutral-200 w-64 flex flex-col gap-3 p-5 text-[13px] text-black shadow-lg"
@@ -531,7 +531,7 @@
 				>
 					<Select.Value placeholder="Select a value..." />
 					<span class="opacity-70 -mb-0.5">
-						<ChevronDown size="15" />
+						<ChevronDown size={15} />
 					</span>
 				</Select.Trigger>
 				<Select.Portal
@@ -658,9 +658,9 @@
 		<Card>
 			<Toggle
 				labelClass="[&>input:checked+span]:bg-[#00000010] [&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black"
-				class="flex items-center justify-center focus:outline bg-white shadow h-10 aspect-square rounded text-neutral-600"
+				class="flex items-center justify-center focus:outline bg-white hover:bg-neutral-100 shadow h-10 aspect-square rounded text-neutral-600"
 			>
-				<Italic size="14" />
+				<Italic size={14} />
 			</Toggle>
 			<CardTitle>
 				<span>Toggle</span><CardStatus status={3} />
@@ -671,9 +671,9 @@
 				class="text-neutral-600 flex [&>*>span]:flex [&>*>span]:items-center [&>*>span]:justify-center rounded bg-white shadow [&>span]:first:[&>*]:rounded-l [&>span]:last:[&>*]:rounded-r [&>span]:last:[&>*]:border-r-0 [&>*>span]:border-r [&>*>span]:border-neutral-200 [&>*>span]:h-10 [&>*>span]:aspect-square focus:[&>*>span]:relative
 				[&>*>input:checked+span]:bg-[#00000010] [&>*>input:focus+span]:outline [&>*>input:focus+span]:outline-2 [&>*>input:focus+span]:outline-black [&>*>input:focus+span]:relative"
 			>
-				<ToggleGroup.Item value="item1"><AlignLeft size="15" /></ToggleGroup.Item>
-				<ToggleGroup.Item value="item2"><AlignCenter size="15" /></ToggleGroup.Item>
-				<ToggleGroup.Item value="item3"><AlignRight size="15" /></ToggleGroup.Item>
+				<ToggleGroup.Item value="item1" class="hover:bg-neutral-100"><AlignLeft size={15} /></ToggleGroup.Item>
+				<ToggleGroup.Item value="item2" class="hover:bg-neutral-100"><AlignCenter size={15} /></ToggleGroup.Item>
+				<ToggleGroup.Item value="item3" class="hover:bg-neutral-100"><AlignRight size={15} /></ToggleGroup.Item>
 			</ToggleGroup.Root>
 			<CardTitle>
 				<span>Toggle Group</span><CardStatus status={3} />

@@ -1,45 +1,25 @@
 <script lang="ts">
-	import { getContext, setContext } from "svelte";
-	import { writable, type Writable } from "svelte/store";
+	import { getContext } from "svelte";
+	import type { Writable } from "svelte/store";
 
-	export let className = ''
-	let expanded:Writable<boolean> = getContext('expanded')
-	let rootAccordion: Writable<HTMLElement> = getContext('rootAccordion');
+	let open:Writable<boolean> = getContext('open')
 	let currentButton: HTMLElement;
 
-	function toggleExpanded(){
-		expanded.set(!$expanded)
+	function toggleOpen(){
+		open.set(!$open)
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
         if(e.keyCode === 32 || e.key === 'Enter'){
 			e.preventDefault()
-            toggleExpanded()
+            toggleOpen()
         }
-		const allAccordion = [...$rootAccordion.querySelectorAll('[data-noir-collection-item]')]
-		const currentButtonIndex = allAccordion.indexOf(currentButton)
-		if(e.key === 'ArrowDown'){
-			console.log('arrowdown')
-			e.preventDefault()
-			if(allAccordion[currentButtonIndex+1]){
-				allAccordion[currentButtonIndex+1].focus()
-			} else {
-				allAccordion[0].focus()
-			}
-		}
-		if(e.key === 'ArrowUp'){
-			console.log('arrowdown')
-			e.preventDefault()
-			if(allAccordion[currentButtonIndex-1]){
-				allAccordion[currentButtonIndex-1].focus()
-			} else {
-				allAccordion[allAccordion.length-1].focus()
-			}
-		}
 	}
 
+	let className = ''
+	export {className as class}
 </script>
 
-<button bind:this={currentButton} on:click={toggleExpanded} on:keydown={handleKeydown} class={className} data-state={$expanded?'open':'closed'} aria-expanded={$expanded?'true':'false'} data-noir-collection-item>
+<button bind:this={currentButton} on:click={toggleOpen} on:keydown={handleKeydown} class={className} data-state={$open?'open':'closed'} aria-expanded={$open?'true':'false'} data-noir-collection-item>
 <slot />
 </button>

@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { getContext, setContext } from "svelte";
+	import { getContext } from "svelte";
 	import type { Writable } from "svelte/store";
 
-	let expanded:Writable<boolean> = getContext('expanded')
-
+	const open:Writable<boolean> = getContext('open')
 </script>
 
-{#if $expanded}
+{#if $open}
 <slot />
 {/if}

@@ -87,7 +87,6 @@
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
-		console.log($highlighted)
 		e.preventDefault();
 		const allOptions = [...selectPortal.querySelectorAll('[data-noir-collection-item]')];
 
@@ -140,8 +139,9 @@
 				if(highlightedInput){
 					const currentCheckedState = highlightedInput.checked
 					action.set({id:$highlighted, value:!currentCheckedState})
-					console.log($action)
+					console.log('')
 				}else {
+					console.log('')
 					action.set({id:$highlighted, value:'custom action'})
 				}
 			}}

@@ -10,10 +10,11 @@
 	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
 
 	const openDialog = (e: MouseEvent) => {
-		e.preventDefault();
-		e.stopPropagation();
+		e.preventDefault()
+		e.stopPropagation()
 		open.set(true);
 	};
+
 </script>
 
 <button

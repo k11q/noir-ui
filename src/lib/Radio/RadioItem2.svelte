@@ -6,7 +6,6 @@
 	export let defaultChecked = false;
 	 let checked: Writable<boolean> = writable(false);
     export let name = ''
-	export let onCheckedChange: (checked: boolean | 'indeterminate') => void;
 	export let disabled = false;
 	export let required = false;
 	export let value = '';

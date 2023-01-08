@@ -2,16 +2,25 @@
 	import { getContext, setContext } from "svelte";
 	import type { Writable } from "svelte/store";
 
-	let className = ''
+	//PROPS:
+	//props #1: value
 	export let value = ''
 
+	//exposing class
+	let className = ''
+	export {className as class}
+
+	//exposing style
+	export let style:string | undefined = undefined
+
+	//data
+	const currentExpanded: Writable<string> = getContext('currentExpanded');
+
+	//pass down props
 	setContext('value', value)
 
-	let currentExpanded: Writable<string> = getContext('currentExpanded');
-
-	export {className as class}
 </script>
 
-<div class={className} data-state={$currentExpanded===value?'open':'closed'}>
+<div class={className} data-state={$currentExpanded===value?'open':'closed'} {style}>
 <slot />
 </div>

@@ -2,10 +2,17 @@
 	import { writable, type Writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 
-    export let open: Writable<boolean> = writable(false);
-    export let defaultOpen = false
+    export let defaultOpen:boolean | undefined = undefined;
+
+    export let open: Writable<boolean> = writable(defaultOpen);
+
+    export let modal:boolean = true;
+
+    export let id:string|undefined = undefined
+
     export let position: 'bottom-right' | 'bottom-left' | 'top-left' | 'top-right' | 'center' = setContext('position','center');
-    export let dir: "ltr" | "rtl" = "ltr"
+
+    export let dir: "ltr" | "rtl" = "ltr";
 
     let alertDialogElement: Writable<HTMLElement | null> = writable(null);
 	let triggerButton: Writable<HTMLElement | null> = writable(null);

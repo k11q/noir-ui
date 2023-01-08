@@ -4,30 +4,46 @@
 	import { portal } from '../Portal/Portal.svelte';
 	import { trapFocus } from '$lib/utils/trap-focus';
 	import { fade, scale } from 'svelte/transition';
-	import { quintOut } from "svelte/easing";
+	import { quintOut } from 'svelte/easing';
 
-	export let className = '';
+	//exposing class
+	let className = '';
+	export {className as class}
+
+	//exposing overlay class
 	export let overlayClass = '';
 
-	let open: Writable<boolean> = getContext('open');
-	let position: string = getContext('position');
-	let alertDialogElement: Writable<HTMLElement> = getContext('alertDialogElement');
-	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
+	//exposing style
+	export let style:string | undefined = undefined
 
-	const closeDialog = () => {
+	//utils
+	const open: Writable<boolean> = getContext('open');
+	const position: string = getContext('position');
+	const alertDialogElement: Writable<HTMLElement> = getContext('alertDialogElement');
+	const triggerButton: Writable<HTMLElement> = getContext('triggerButton');
+
+	//close dialog
+	function closeDialog() {
 		open.set(false);
 		$triggerButton.focus();
 	};
 
+	//callback function to run when
 	$: if ($alertDialogElement) {
 		if ($open) {
-			console.log('test2')
 			trapFocus($alertDialogElement);
-			document.querySelector('body')!.style.pointerEvents = 'none';
-			window.addEventListener('wheel', lockScroll, { passive: false });
+
+			document.querySelector(
+				'body'
+			)!.style.pointerEvents = 'none';
+			window.addEventListener('wheel', lockScroll, {
+				passive: false
+			});
 			window.addEventListener('keydown', lockKeydown);
 		} else {
-			document.querySelector('body')!.style.pointerEvents = '';
+			document.querySelector(
+				'body'
+			)!.style.pointerEvents = '';
 			window.removeEventListener('wheel', lockScroll);
 			window.removeEventListener('keydown', lockKeydown);
 
@@ -37,24 +53,29 @@
 		}
 	}
 
+	//prevent scroll
 	function lockScroll(e: WheelEvent) {
 		e.preventDefault();
 	}
 
+	//handle keydown
 	function lockKeydown(e: KeyboardEvent) {
-		if(e.key === 'ArrowDown' || e.key === 'ArrowUp'){
-		const activeElement = document.activeElement;
-		const inputs = ['input', 'select', 'textarea'];
+		if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+			const activeElement = document.activeElement;
+			const inputs = ['input', 'select', 'textarea'];
 
-		if (activeElement &&
-			inputs.indexOf(activeElement.tagName.toLowerCase()) === -1
-		) {
-			e.preventDefault();
-		}}
-		if(e.key === 'Escape'){
-			closeDialog()
+			if (
+				activeElement &&
+				inputs.indexOf(
+					activeElement.tagName.toLowerCase()
+				) === -1
+			) {
+				e.preventDefault();
+			}
 		}
-		
+		if (e.key === 'Escape') {
+			closeDialog();
+		}
 	}
 </script>
 
@@ -65,14 +86,18 @@
 		role="dialog"
 		aria-modal="true"
 		class={overlayClass}
-		transition:fade={{duration:200}}
-		style="position: fixed; inset:0; left: {position === 'bottom-left' || position === 'top-left'
+		transition:fade={{ duration: 200 }}
+		style="position: fixed; inset:0; left: {position ===
+			'bottom-left' || position === 'top-left'
 			? '20px'
-			: ''}; top: {position === 'top-right' || position === 'top-left'
+			: ''}; top: {position === 'top-right' ||
+		position === 'top-left'
 			? '20px'
-			: ''};right: {position === 'bottom-right' || position === 'top-right'
+			: ''};right: {position === 'bottom-right' ||
+		position === 'top-right'
 			? '20px'
-			: ''}; bottom: {position === 'bottom-right' || position === 'bottom-left'
+			: ''}; bottom: {position === 'bottom-right' ||
+		position === 'bottom-left'
 			? '20px'
 			: ''}; {position === 'center'
 			? 'margin: auto;'
@@ -83,11 +108,11 @@
 		out:fade={{ duration: 100 }}
 		bind:this={$alertDialogElement}
 		class={className}
+		style={`pointer-events:auto ${style}`}
 		aria-expanded={$open}
 		use:portal={'body'}
 		role="dialog"
 		aria-modal="true"
-		style="pointer-events:auto"
 	>
 		<slot />
 	</div>

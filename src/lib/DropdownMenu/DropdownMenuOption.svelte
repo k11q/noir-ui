@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
+	import { writable, type Writable } from 'svelte/store';
 	import { Check } from 'lucide-svelte';
 	import { capitalise } from '$lib/utils/capitalise';
     import { createEventDispatcher } from 'svelte';
@@ -19,7 +19,7 @@
     export {className as class}
 	export let selected: Writable<any> = getContext('selected');
 	export let value: string;
-	export let checked:Writable<boolean>;
+	export let checked:Writable<boolean> = writable(false);
 	export let open: Writable<boolean> = getContext('open');
     export let name = ''
 

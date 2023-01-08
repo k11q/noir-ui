@@ -2,19 +2,26 @@
 	import { writable, type Writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 
-    
-    export let defaultExpanded = ''
-    export let currentExpanded: Writable<string> = writable(defaultExpanded);
+    //PROPS
+    //props #1: default expanded value
+	export let defaultExpanded: Writable<string> = writable('');
+
+    //exposing class
     let className = '';
-    let rootAccordion: Writable<HTMLElement | null> = writable(null);
+    export { className as class };
 
-    setContext('defaultExpanded', defaultExpanded)
-    setContext('currentExpanded', currentExpanded)
-    setContext('rootAccordion',rootAccordion)
+    //exposing style
+    export let style = ''
 
-    export {className as class}
+    //utils
+    const currentExpanded: Writable<string> = defaultExpanded;
+	const rootAccordion: Writable<HTMLElement | null> = writable(null);
+
+    //pass down props
+	setContext('currentExpanded', currentExpanded);
+	setContext('rootAccordion', rootAccordion);
 </script>
 
-<div class={className} bind:this={$rootAccordion}>
-<slot />
+<div class={className} bind:this={$rootAccordion} {style}>
+	<slot />
 </div>

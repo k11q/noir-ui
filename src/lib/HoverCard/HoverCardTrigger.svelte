@@ -3,16 +3,11 @@
 	import { getContext } from 'svelte';
 	import { useCheckPositionInside } from '$lib/utils/check-position-inside';
 
-	export let className = '';
-	export let delayDuration = 700;
-
-	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
-	let hoverCardPortal: Writable<HTMLElement> = getContext('hoverCardPortal');
-	let open: Writable<boolean> = getContext('open');
+	const triggerButton: Writable<HTMLElement> = getContext('triggerButton');
+	const hoverCardPortal: Writable<HTMLElement> = getContext('hoverCardPortal');
+	const open: Writable<boolean> = getContext('open');
 	let hover = false;
-
-	let runCheck: NodeJS.Timeout;
-
+	let runCheck: NodeJS.Timeout | undefined;
 	let x = 0;
 	let y = 0;
 
@@ -51,6 +46,9 @@
 			window.removeEventListener('mousemove', setMousePosition);
 		}
 	}
+
+	let className = '';
+	export {className as class}
 
 </script>
 

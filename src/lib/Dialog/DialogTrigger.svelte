@@ -1,18 +1,18 @@
 <script lang="ts">
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
-	import { trapFocus } from '$lib/utils/trap-focus';
-
-	export let className = '';
 
 	let open: Writable<boolean> = getContext('open');
-	let alertDialogElement: Writable<HTMLElement> = getContext('alertDialogElement');
-		let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
+	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
 
 	const openDialog = (e: MouseEvent) => {
 		e.preventDefault();
 		open.set(true);
 	};
+
+	//expose class
+	let className = '';
+	export {className as class}
 
 </script>
 

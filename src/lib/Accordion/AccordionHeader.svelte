@@ -1,13 +1,22 @@
 <script lang="ts">
-	import { getContext, setContext } from "svelte";
-	import { writable, type Writable } from "svelte/store";
+	import { getContext } from "svelte";
+	import type { Writable } from "svelte/store";
 
+	//PROPS: no props.
+
+	//exposing class
 	let className = ''
-	let value:string = getContext('value')
-	let currentExpanded: Writable<string> = getContext('currentExpanded');
-	let rootAccordion: Writable<HTMLElement> = getContext('rootAccordion');
+	export {className as class}
+
+	//exposing style
+	export let style:string | undefined = undefined
+
+	const value:string = getContext('value')
+	const currentExpanded: Writable<string> = getContext('currentExpanded');
+	const rootAccordion: Writable<HTMLElement> = getContext('rootAccordion');
 	let currentButton: HTMLElement;
 
+	//toggle expanded
 	function toggleExpanded(){
 		if($currentExpanded===value){
 			currentExpanded.set('')
@@ -16,15 +25,17 @@
 		}
 	}
 
+	//handle keydown events
 	function handleKeydown(e: KeyboardEvent) {
         if(e.keyCode === 32 || e.key === 'Enter'){
 			e.preventDefault()
             toggleExpanded()
         }
+
 		const allAccordion = [...$rootAccordion.querySelectorAll('[data-noir-collection-item]')]
 		const currentButtonIndex = allAccordion.indexOf(currentButton)
+
 		if(e.key === 'ArrowDown'){
-			console.log('arrowdown')
 			e.preventDefault()
 			if(allAccordion[currentButtonIndex+1]){
 				allAccordion[currentButtonIndex+1].focus()
@@ -32,8 +43,8 @@
 				allAccordion[0].focus()
 			}
 		}
+
 		if(e.key === 'ArrowUp'){
-			console.log('arrowdown')
 			e.preventDefault()
 			if(allAccordion[currentButtonIndex-1]){
 				allAccordion[currentButtonIndex-1].focus()
@@ -42,11 +53,9 @@
 			}
 		}
 	}
-
-	export {className as class}
 </script>
 
-<button bind:this={currentButton} on:click={toggleExpanded} on:keydown={handleKeydown} class={className} data-state={$currentExpanded===value?'open':'closed'} aria-expanded={$currentExpanded===value?'true':'false'} data-noir-collection-item>
+<button bind:this={currentButton} on:click={toggleExpanded} on:keydown={handleKeydown} class={className} data-state={$currentExpanded===value?'open':'closed'} aria-expanded={$currentExpanded===value?'true':'false'} data-noir-collection-item {style}>
 <slot />
 </button>
 

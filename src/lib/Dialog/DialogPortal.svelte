@@ -5,7 +5,8 @@
 	import { trapFocus } from '$lib/utils/trap-focus';
 	import { fade, fly } from 'svelte/transition';
 
-	export let className = '';
+	let className = '';
+	export {className as class}
 	export let overlayClass = '';
 
 	let open: Writable<boolean> = getContext('open');
