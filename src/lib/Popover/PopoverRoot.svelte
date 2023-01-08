@@ -2,15 +2,16 @@
 	import { writable, type Writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 
-    export let open: Writable<boolean> = writable(false);
     export let defaultOpen = false
-    export let dir: "ltr" | "rtl" = "ltr"
+    export let open: Writable<boolean> = writable(defaultOpen);
+    
+    //TODO: add openchange callback
 
-    let portalElement: Writable<HTMLElement | null> = writable(null);
-	let triggerButton: Writable<HTMLElement | null> = writable(null);
+    export let modal = false
+
+	const triggerButton: Writable<HTMLElement | null> = writable(null);
 
     setContext('open', open)
-    setContext('portalElement', portalElement)
     setContext('triggerButton', triggerButton)
 
 </script>

@@ -1,5 +1,5 @@
 <script>
-    	import { getContext } from "svelte";
+	import { getContext } from 'svelte';
 
-    let label = getContext('label')
+	let label = getContext('label');
 </script>
