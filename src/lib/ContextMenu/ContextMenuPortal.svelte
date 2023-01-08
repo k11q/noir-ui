@@ -7,7 +7,7 @@
 
 	export let open: Writable<boolean> = getContext('open');
 	export let selected: Writable<any> = getContext('selected');
-	export let className = '';
+	let className = '';
 
 	let highlighted: Writable<any> = getContext('highlighted');
 	let menuPosition: Writable<{ x: number; y: number }> = getContext('menuPosition');
@@ -75,10 +75,11 @@
 
 	function handleKeydown(e: KeyboardEvent) {
 		e.preventDefault();
-		const allOptions = [...selectPortal.querySelectorAll('[role="option"]')];
+		const allOptions = [...selectPortal.querySelectorAll('[data-noir-collection-item]')];
+		console.log(allOptions)
 
 		if (e.key === 'ArrowDown') {
-			const firstElement = selectPortal.querySelector('[role="option"]') as HTMLElement;
+			const firstElement = selectPortal.querySelector('[data-noir-collection-item]') as HTMLElement;
 
 			if (selectPortal.querySelector('[data-highlighted="true"]')) {
 				const highlightedElement = selectPortal.querySelector(
@@ -127,6 +128,8 @@
 			closeDialog();
 		}
 	}
+
+	export {className as class}
 </script>
 
 {#if $open === true}

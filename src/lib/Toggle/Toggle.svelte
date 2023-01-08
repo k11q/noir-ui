@@ -7,12 +7,13 @@
 	export let name = '';
 
 	export let labelClass = '';
-	export let className = '';
+	let className = '';
 	export let style = '';
 
 	$: dataState = pressed ? 'on' : 'off';
 	$: ariaPressed = pressed ? 'true' : ('false' as 'true' | 'false');
 
+	export {className as class}
 </script>
 
 <label class={labelClass}>
@@ -20,7 +21,6 @@
 <span
 	class={className}
 	{style}
-	aria-pressed={ariaPressed}
 	data-state={dataState}
 	data-disabled={disabled}
 >

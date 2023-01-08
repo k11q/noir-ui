@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { writable, type Writable } from 'svelte/store';
-	import { getContext, setContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
+	import { getContext } from 'svelte';
 
-	export let className = '';
+	let className = '';
 
 	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
 	let open: Writable<boolean> = getContext('open');
@@ -31,6 +31,8 @@
             }
         }
 	}
+
+	export {className as class}
 </script>
 
 <button

@@ -9,7 +9,7 @@
 	export let disabled = false;
 	export let orientation: 'horizontal' | 'vertical' = 'horizontal';
 	export let loop = true;
-	export let className = '';
+	let className = '';
 
 	let toggleGroupElement: Writable<HTMLElement | null> = writable(null);
   let currentFocus: Writable<string | undefined> = writable(undefined);
@@ -18,6 +18,7 @@
   setContext('currentFocus', currentFocus);
   setContext('toggleGroupElement', toggleGroupElement)
 
+	export {className as class}
 </script>
 
 <div role="group" bind:this={$toggleGroupElement} data-orientation={orientation} class={className}>

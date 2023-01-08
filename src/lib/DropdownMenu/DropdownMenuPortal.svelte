@@ -1,20 +1,24 @@
 <script lang="ts">
 	import { useClickOutside } from '$lib/utils/click-outside';
 	import { trapFocus } from '$lib/utils/trap-focus';
-	import type { Writable } from 'svelte/store';
-	import { getContext } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
+	import { getContext, setContext } from 'svelte';
 	import { portal } from '../Portal/Portal.svelte';
 
 	export let open: Writable<boolean> = getContext('open');
-	export let selected: Writable<any> = getContext('selected');
-	export let className = '';
+	let className = '';
+	export {className as class}
 
 	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
 	let highlighted: Writable<any> = getContext('highlighted');
+	let highlightedElement: Writable<HTMLElement> = getContext('highlightedElement');
 	let selectPortal: HTMLElement;
 	let menuLeft = 0;
 	let menuTop = 0;
 	let position = 'bottom'
+	let action: Writable<any> = writable(undefined)
+	
+	setContext('action', action)
 
 	const closeDialog = () => {
 		highlighted.set('');
@@ -52,9 +56,10 @@
 				position = 'top'
 			}
 
-			const firstFocusableEl = trapFocus(selectPortal);
-			if(firstFocusableEl){
-				highlighted.set(firstFocusableEl.dataset.value)
+			trapFocus(selectPortal);
+			const firstElement = selectPortal.querySelector('[data-noir-collection-item]')
+			if(firstElement){
+				highlighted.set(firstElement.dataset.value)
 			}
 			document.querySelector('body')!.style.pointerEvents = 'none';
 
@@ -82,11 +87,12 @@
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
+		console.log($highlighted)
 		e.preventDefault();
-		const allOptions = [...selectPortal.querySelectorAll('[role="option"]')];
+		const allOptions = [...selectPortal.querySelectorAll('[data-noir-collection-item]')];
 
 		if (e.key === 'ArrowDown') {
-			const firstElement = selectPortal.querySelector('[role="option"]') as HTMLElement;
+			const firstElement = selectPortal.querySelector('[data-noir-collection-item]') as HTMLElement;
 
 			if (selectPortal.querySelector('[data-highlighted="true"]')) {
 
@@ -127,7 +133,18 @@
 
 		if (e.keyCode === 32 || e.key === 'Enter') {
 			if (highlighted) {
-				selected.set($highlighted);
+				if(selectPortal){
+				let highlightedElement = selectPortal.querySelector('[data-highlighted="true"]')
+				if(highlightedElement){
+				let highlightedInput = highlightedElement.querySelector('input');
+				if(highlightedInput){
+					const currentCheckedState = highlightedInput.checked
+					action.set({id:$highlighted, value:!currentCheckedState})
+					console.log($action)
+				}else {
+					action.set({id:$highlighted, value:'custom action'})
+				}
+			}}
 			}
 			closeDialog()
 		}

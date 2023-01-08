@@ -19,11 +19,11 @@
 <button
 	on:click={openDialog}
 	type="button"
-	role="combobox"
 	aria-expanded={$open}
 	data-state={$open ? 'open' : 'closed'}
 	class={className}
 	aria-haspopup="dialog"
+	aria-label="Aria Name"
 >
 	<slot />
 </button>

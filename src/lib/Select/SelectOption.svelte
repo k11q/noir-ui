@@ -34,6 +34,7 @@
 	bind:this={optionElement}
 	class={className}
 	role="option"
+	data-noir-collection-item
 	aria-selected={$selected === value ? 'true' : 'false'}
 	aria-labelledby={value}
 	data-state={$selected === value ? 'checked' : 'unchecked'}
@@ -45,7 +46,6 @@
 	on:mouseleave={removeHighlighted}
 	on:keyup
 	on:keypress
-	style="display:flex; padding-left:25px; position:relative; align-items-center; cursor:default;"
 >
 	<input hidden type="checkbox" {value} />
 	{#if $selected === value}

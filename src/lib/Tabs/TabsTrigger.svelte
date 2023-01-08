@@ -24,7 +24,7 @@
 			event.target.click();
 		}
 
-		const allTabs = [...$rootTabEl.querySelectorAll('[data-noir="tabs-trigger"]')]
+		const allTabs = [...$rootTabEl.querySelectorAll('[data-noir-collection-item]')]
 		const currentButtonIndex = allTabs.indexOf(currentButton)
 
 		if(event.key === 'ArrowRight'){
@@ -62,7 +62,7 @@
 	data-testid="tab"
 	data-state={state}
 	aria-selected={isSelected}
-	data-noir="tabs-trigger"
+	data-noir-collection-item
 >
 	<!-- Slot: Default -->
 	{#if $$slots.default}<slot />{/if}

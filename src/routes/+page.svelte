@@ -42,11 +42,27 @@
 	const storeTab: Writable<string> = writable('a');
 
 	const dialogOpen: Writable<boolean> = writable(false);
-	const accordionCurrentExpanded: Writable<string> = writable('');
+	const accordionCurrentExpanded: Writable<string> = writable('item-1');
 	const collapsibleExpanded: Writable<boolean> = writable(false);
+	const checkedDropdown = writable(false);
+	const checkedDropdown2 = writable(false);
+	const selectedMenu = writable('');
+
+	$:$accordionCurrentExpanded ? console.log($accordionCurrentExpanded) : ''
 
 	function closeAlertDialog() {
 		dialogOpen.set(false);
+	}
+
+	function handleChange() {
+		console.log('buatlapape')
+	}
+
+	function addNewTab(){
+		alert('Added New Tab!')
+	}
+	function addNewWindow(){
+		alert('Added New Window!')
 	}
 </script>
 
@@ -64,18 +80,17 @@
 	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1020px] w-full gap-5">
 		<Card>
 			<Accordion.Root
-				className="bg-white rounded-md min-w-44 sm:w-[220px] flex flex-col absolute top-[40px] shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*]:last:[&>*]:rounded-b-md"
-				defaultExpanded="item-1"
+				currentExpanded={accordionCurrentExpanded}
+				class="bg-white rounded-md min-w-44 sm:w-[220px] flex flex-col absolute top-[40px] shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*>*]:last:[&>*]:rounded-b-md"
 			>
 				<Accordion.Item
 					value="item-1"
-					className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
+					class="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
 				>
-					<Accordion.Header className="flex p-3 text-left justify-between items-center"
+					<Accordion.Header class="flex p-3 text-left justify-between items-center"
 						><span> Is it accessible?</span><span
-							class={`${
-								$accordionCurrentExpanded === 'item-1' ? 'rotate-180' : ''
-							} duration-300 ease-in opacity-60`}><ChevronDown size="15" /></span
+							class:rotate-180={$accordionCurrentExpanded === 'item-1'}
+							class='duration-300 ease-in opacity-60'><ChevronDown size="15" /></span
 						></Accordion.Header
 					>
 					<Accordion.Content
@@ -86,13 +101,12 @@
 				</Accordion.Item>
 				<Accordion.Item
 					value="item-2"
-					className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
+					class="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
 				>
-					<Accordion.Header className="flex p-3 text-left justify-between items-center border-t"
+					<Accordion.Header class="flex p-3 text-left justify-between items-center border-t"
 						><span> Is it unstyled?</span><span
-							class={`${
-								$accordionCurrentExpanded === 'item-2' ? 'rotate-180' : ''
-							} duration-300 ease-in opacity-60`}><ChevronDown size="15" /></span
+						class:rotate-180={$accordionCurrentExpanded === 'item-2'}
+						class='duration-300 ease-in opacity-60'><ChevronDown size="15" /></span
 						></Accordion.Header
 					>
 					<Accordion.Content
@@ -103,13 +117,12 @@
 				</Accordion.Item>
 				<Accordion.Item
 					value="item-3"
-					className="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
+					class="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
 				>
-					<Accordion.Header className="flex p-3 text-left justify-between items-center border-t"
+					<Accordion.Header class="flex p-3 text-left justify-between items-center border-t"
 						><span> Can it be animated?</span><span
-							class={`${
-								$accordionCurrentExpanded === 'item-3' ? 'rotate-180' : ''
-							} duration-300 ease-in opacity-60`}><ChevronDown size="15" /></span
+						class:rotate-180={$accordionCurrentExpanded === 'item-3'}
+						class='duration-300 ease-in opacity-60'><ChevronDown size="15" /></span
 						></Accordion.Header
 					>
 					<Accordion.Content
@@ -167,6 +180,30 @@
 				</Checkbox>
 				<span class="select-none">Checkbox 1</span>
 			</label>
+			<!-- svelte-ignore a11y-label-has-associated-control -->
+			<label class="flex flex-row gap-3 items-center [&>label>input:focus+.checkbox]:outline [&>label>input:focus+.checkbox]:outline-2 [&>label>input:focus+.checkbox]:outline-[#00000066]">
+				<Checkbox className="bg-white shadow h-6 aspect-square rounded flex items-center justify-center">
+					<div
+						class="bg-black h-full w-full rounded flex items-center justify-center"
+						slot="indicator"
+					>
+						<Check size="{15}" color="white" strokeWidth="{3}" />
+					</div>
+				</Checkbox>
+				<span class="select-none">Checkbox 2</span>
+			</label>
+			<!-- svelte-ignore a11y-label-has-associated-control -->
+			<label class="flex flex-row gap-3 items-center [&>label>input:focus+.checkbox]:outline [&>label>input:focus+.checkbox]:outline-2 [&>label>input:focus+.checkbox]:outline-[#00000066]">
+				<Checkbox className="bg-white shadow h-6 aspect-square rounded flex items-center justify-center">
+					<div
+						class="bg-black h-full w-full rounded flex items-center justify-center"
+						slot="indicator"
+					>
+						<Check size="{15}" color="white" strokeWidth="{3}" />
+					</div>
+				</Checkbox>
+				<span class="select-none">Checkbox 2</span>
+			</label>
 			</div>
 			<CardTitle>
 				<span>Checkbox</span><CardStatus status={4} />
@@ -204,43 +241,43 @@
 		<Card>
 			<ContextMenu.Root>
 				<ContextMenu.Trigger
-					className="flex items-center justify-center bg-neutral-300 border-neutral-400 opacity-50 border-dashed border h-32 w-44 sm:w-52 rounded-md text-neutral-600"
+					class="flex items-center justify-center bg-neutral-300 border-neutral-400 opacity-50 border-dashed border h-32 w-44 sm:w-52 rounded-md text-neutral-600"
 				>
 					<p>Right click here</p>
 				</ContextMenu.Trigger>
 				<ContextMenu.Portal
-					className="border bg-white rounded-lg border-neutral-200 w-60 flex flex-col p-[6px] text-[13px] text-black shadow-lg"
+					class="border bg-white rounded-lg border-neutral-200 w-60 flex flex-col p-[6px] text-[13px] text-black shadow-lg"
 				>
 					<ContextMenu.Group>
 						<ContextMenu.Option
 							value="New Tab"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white [&>*]:data-[highlighted='true']:text-white rounded"
+							class="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white [&>*]:data-[highlighted='true']:text-white rounded"
 							><span class="flex flex-grow items-center text-neutral-500 justify-end tracking-wide"
 								>⌘+T</span
 							></ContextMenu.Option
 						>
 						<ContextMenu.Option
 							value="New Window"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 						<ContextMenu.Option
 							value="New Private Window"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 						<ContextMenu.Option
 							value="More Tools"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 					</ContextMenu.Group>
 					<div class="h-[1px] mx-1 my-1 bg-neutral-200" />
 					<ContextMenu.Group>
 						<ContextMenu.Option
 							value="Show Bookmarks"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 						<ContextMenu.Option
 							value="Show Full URLs"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 					</ContextMenu.Group>
 					<div class="h-[1px] mx-1 my-1 bg-neutral-200" />
@@ -250,15 +287,15 @@
 					>
 						<ContextMenu.Option
 							value="Khairul Haaziq"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 						<ContextMenu.Option
 							value="spinach"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 						<ContextMenu.Option
 							value="aubergine"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 					</ContextMenu.Group>
 				</ContextMenu.Portal>
@@ -311,39 +348,47 @@
 					<AlignJustify size="15" />
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Portal
-					className="border bg-white rounded-lg border-neutral-200 w-60 flex flex-col p-[6px] text-[13px] text-black shadow-lg"
+					class="border bg-white rounded-lg border-neutral-200 w-60 flex flex-col p-[6px] text-[13px] text-black shadow-lg"
 				>
 					<DropdownMenu.Group>
 						<DropdownMenu.Option
+						on:change={addNewTab}
 							value="New Tab"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white [&>*]:data-[highlighted='true']:text-white rounded"
-							><span class="flex flex-grow items-center text-neutral-500 justify-end tracking-wide"
+							class="flex pl-[25px] py-1 pr-2 items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white [&>*]:data-[highlighted='true']:text-white rounded"
+							>New Tab<span class="flex flex-grow items-center text-neutral-500 justify-end tracking-wide"
 								>⌘+T</span
 							></DropdownMenu.Option
 						>
 						<DropdownMenu.Option
+						on:change={addNewWindow}
 							value="New Window"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
+							 class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+						>New Window</DropdownMenu.Option>
 						<DropdownMenu.Option
 							value="New Private Window"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
+							 class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+						>New Private Window</DropdownMenu.Option>
 						<DropdownMenu.Option
 							value="More Tools"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
+							 class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+						>More Tools</DropdownMenu.Option>
 					</DropdownMenu.Group>
 					<div class="h-[1px] mx-1 my-1 bg-neutral-200" />
 					<DropdownMenu.Group>
 						<DropdownMenu.Option
-							value="Show Bookmarks"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
+						on:change={handleChange}
+						checked={checkedDropdown}
+						type="checkbox"
+						value="Show Bookmarks"
+						class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+						>Show Bookmarks</DropdownMenu.Option>
 						<DropdownMenu.Option
-							value="Show Full URLs"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
+						on:change={handleChange}
+						checked={checkedDropdown2}
+						type="checkbox"
+						value="Show full URLs"
+						class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+						>Show Full URLs</DropdownMenu.Option>
 					</DropdownMenu.Group>
 					<div class="h-[1px] mx-1 my-1 bg-neutral-200" />
 					<DropdownMenu.Group
@@ -351,17 +396,29 @@
 						labelClass="pl-[25px] pb-1 pt-0.5 text-neutral-400 text-xs"
 					>
 						<DropdownMenu.Option
-							value="Khairul Haaziq"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
+						selected={selectedMenu}
+						on:change={handleChange}
+						name="DM Group 1"
+						type="radio"
+						value="Khairul Haaziq"
+						class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+						>Khairul Haaziq</DropdownMenu.Option>
 						<DropdownMenu.Option
-							value="spinach"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
+						selected={selectedMenu}
+						on:change={handleChange}
+						name="DM Group 1"
+						type="radio"
+						value="Luqman Hakim"
+						class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+						>Luqman Hakim</DropdownMenu.Option>
 						<DropdownMenu.Option
-							value="aubergine"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
+						selected={selectedMenu}
+						on:change={handleChange}
+						name="DM Group 1"
+						type="radio"
+						value="Nurul Hanisah"
+						class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+						>Nurul Hanisah</DropdownMenu.Option>
 					</DropdownMenu.Group>
 				</DropdownMenu.Portal>
 			</DropdownMenu.Root>
@@ -386,11 +443,6 @@
 			</HoverCard.Root>
 			<CardTitle>
 				<span>Hover Card</span><CardStatus status={4} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<CardTitle>
-				<span>Menubar</span><CardStatus status={1} />
 			</CardTitle>
 		</Card>
 		<Card>
@@ -488,23 +540,23 @@
 					<Select.Group label="fruits" labelClass="pl-[25px] pb-1 pt-0.5 text-neutral-400 text-xs">
 						<Select.Option
 							value="apple"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 						<Select.Option
 							value="banana"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 						<Select.Option
 							value="blueberry"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 						<Select.Option
 							value="grapes"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 						<Select.Option
 							value="pineapple"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 					</Select.Group>
 					<div class="h-[1px] mx-1 my-2 bg-neutral-200" />
@@ -514,15 +566,15 @@
 					>
 						<Select.Option
 							value="broccoli"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 						<Select.Option
 							value="spinach"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 						<Select.Option
 							value="aubergine"
-							className="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
+							 className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
 					</Select.Group>
 				</Select.Portal>
@@ -606,7 +658,7 @@
 		<Card>
 			<Toggle
 				labelClass="[&>input:checked+span]:bg-[#00000010] [&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black"
-				className="flex items-center justify-center focus:outline bg-white shadow h-10 aspect-square rounded text-neutral-600"
+				class="flex items-center justify-center focus:outline bg-white shadow h-10 aspect-square rounded text-neutral-600"
 			>
 				<Italic size="14" />
 			</Toggle>
@@ -616,7 +668,7 @@
 		</Card>
 		<Card>
 			<ToggleGroup.Root
-				className="text-neutral-600 flex [&>*>span]:flex [&>*>span]:items-center [&>*>span]:justify-center rounded bg-white shadow [&>span]:first:[&>*]:rounded-l [&>span]:last:[&>*]:rounded-r [&>span]:last:[&>*]:border-r-0 [&>*>span]:border-r [&>*>span]:border-neutral-200 [&>*>span]:h-10 [&>*>span]:aspect-square focus:[&>*>span]:relative
+				class="text-neutral-600 flex [&>*>span]:flex [&>*>span]:items-center [&>*>span]:justify-center rounded bg-white shadow [&>span]:first:[&>*]:rounded-l [&>span]:last:[&>*]:rounded-r [&>span]:last:[&>*]:border-r-0 [&>*>span]:border-r [&>*>span]:border-neutral-200 [&>*>span]:h-10 [&>*>span]:aspect-square focus:[&>*>span]:relative
 				[&>*>input:checked+span]:bg-[#00000010] [&>*>input:focus+span]:outline [&>*>input:focus+span]:outline-2 [&>*>input:focus+span]:outline-black [&>*>input:focus+span]:relative"
 			>
 				<ToggleGroup.Item value="item1"><AlignLeft size="15" /></ToggleGroup.Item>

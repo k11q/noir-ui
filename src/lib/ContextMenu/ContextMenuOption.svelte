@@ -5,7 +5,8 @@
 	import { capitalise } from '$lib/utils/capitalise';
 	import { trapFocus } from '$lib/utils/trap-focus';
 
-	export let className = '';
+	let className = '';
+	export {className as class}
 	export let selected: Writable<any> = getContext('selected');
 	export let value: string;
 	export let checked = false;
@@ -28,13 +29,13 @@
 	function removeHighlighted() {
 		highlighted.set(undefined);
 	}
-
 </script>
 
 <div
 	bind:this={optionElement}
 	class={className}
 	role="option"
+	data-noir-collection-item
 	aria-selected={$selected === value ? 'true' : 'false'}
 	aria-labelledby={value}
 	data-state={$selected === value ? 'checked' : 'unchecked'}

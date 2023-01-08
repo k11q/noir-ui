@@ -8,5 +8,7 @@
 </script>
 
 {#if $currentExpanded===value}
+<div data-state={$currentExpanded===value?'open':'closed'} role="region">
 <slot />
+</div>
 {/if}

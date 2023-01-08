@@ -6,16 +6,16 @@
     export let defaultOpen = false
     export let dir: "ltr" | "rtl" = "ltr"
 
-    let value: Writable<string | undefined> = writable(undefined);
     let highlighted: Writable<string | undefined> = writable(undefined);
+    let highlightedElement: Writable<HTMLElement | null> = writable(null);
     let portalElement: Writable<HTMLElement | null> = writable(null);
 	let triggerButton: Writable<HTMLElement | null> = writable(null);
 
-    setContext('selected', value)
     setContext('open', open)
     setContext('portalElement', portalElement)
     setContext('triggerButton', triggerButton)
     setContext('highlighted', highlighted)
+    setContext('highlightedElement', highlightedElement)
 
 </script>
 

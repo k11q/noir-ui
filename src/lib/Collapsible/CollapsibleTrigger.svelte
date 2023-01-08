@@ -16,7 +16,7 @@
 			e.preventDefault()
             toggleExpanded()
         }
-		const allAccordion = [...$rootAccordion.querySelectorAll('[data-noir="accordion"]')]
+		const allAccordion = [...$rootAccordion.querySelectorAll('[data-noir-collection-item]')]
 		const currentButtonIndex = allAccordion.indexOf(currentButton)
 		if(e.key === 'ArrowDown'){
 			console.log('arrowdown')
@@ -40,6 +40,6 @@
 
 </script>
 
-<button bind:this={currentButton} on:click={toggleExpanded} on:keydown={handleKeydown} class={className} data-state={$expanded?'open':'closed'} aria-expanded={$expanded?'true':'false'} data-noir='accordion'>
+<button bind:this={currentButton} on:click={toggleExpanded} on:keydown={handleKeydown} class={className} data-state={$expanded?'open':'closed'} aria-expanded={$expanded?'true':'false'} data-noir-collection-item>
 <slot />
 </button>

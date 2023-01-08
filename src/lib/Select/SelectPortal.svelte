@@ -51,7 +51,7 @@
 				}
 					
 			} else {
-				const firstOption = selectPortal.querySelector('[role="option"]');
+				const firstOption = selectPortal.querySelector('[data-noir-collection-item]');
 				if (firstOption) {
 					let distance =
 						firstOption.getBoundingClientRect().top - selectPortal.getBoundingClientRect().top;
@@ -109,7 +109,7 @@
 						selectedElement()!.getBoundingClientRect().height / 2 -
 						distance;
 				} else {
-					const firstOption = selectPortal.querySelector('[role="option"]');
+					const firstOption = selectPortal.querySelector('[data-noir-collection-item]');
 					if (firstOption) {
 						let distance =
 							firstOption.getBoundingClientRect().top - selectPortal.getBoundingClientRect().top;
@@ -131,10 +131,10 @@
 
 	function handleKeydown(e: KeyboardEvent) {
 		e.preventDefault();
-		const allOptions = [...selectPortal.querySelectorAll('[role="option"]')];
+		const allOptions = [...selectPortal.querySelectorAll('[data-noir-collection-item]')];
 
 		if (e.key === 'ArrowDown') {
-			const firstElement = selectPortal.querySelector('[role="option"]') as HTMLElement;
+			const firstElement = selectPortal.querySelector('[data-noir-collection-item]') as HTMLElement;
 
 			if (selectPortal.querySelector('[data-highlighted="true"]')) {
 				const highlightedElement = selectPortal.querySelector(

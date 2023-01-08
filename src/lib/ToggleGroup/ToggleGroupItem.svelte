@@ -12,17 +12,16 @@
 	export let name = '';
 
 	export let labelClass = '';
-	export let className = '';
+	let className = '';
 	export let style = '';
 
 	let toggleGroupElement: Writable<HTMLElement> = getContext('toggleGroupElement');
 	let currentToggleElement: HTMLElement;
 
 	$: dataState = pressed ? 'on' : 'off';
-	$: ariaPressed = pressed ? 'true' : ('false' as 'true' | 'false');
 
 	function handleKeydown(e: KeyboardEvent) {
-		const allToggleItem = [...$toggleGroupElement.querySelectorAll('[data-noir="toggle-item"]')];
+		const allToggleItem = [...$toggleGroupElement.querySelectorAll('[data-noir-collection-item]')];
 		if (allToggleItem.length) {
 			const currentTabIndex = allToggleItem.indexOf(currentToggleElement);
 
@@ -45,6 +44,8 @@
 			}
 		}
 	}
+
+	export {className as class}
 </script>
 
 <label class={labelClass}>
@@ -55,13 +56,12 @@
 		role="switch"
 		{name}
 		{value}
-		data-noir="toggle-item"
+		data-noir-collection-item
 		on:keydown={handleKeydown}
 	/>
 	<span
 		class={className}
 		{style}
-		aria-pressed={ariaPressed}
 		data-state={dataState}
 		data-disabled={disabled}
 	>
