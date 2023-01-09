@@ -2,7 +2,6 @@
 	import { getContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { Check } from 'lucide-svelte';
-	import { capitalise } from '$lib/utils/capitalise';
     import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
@@ -31,8 +30,11 @@
     function handleClick(){
         if(type==='radio'){
             selected.set(value);
-        }
-		if(type==='default'){
+			open.set(false)
+        }else if(type==='checkbox'){
+			checked.set(!$checked)
+			open.set(false)
+		} else {
 			sayHello()
 		}
     }
@@ -51,33 +53,37 @@
                 checked.set($action.value)
             }else if(type==='radio'){
                 selected.set(value);
-            }else if(type==='default'){
-				console.log('else')
-				sayHello()
-			}
+            }
+			sayHello()
 			console.log($action)
             action.set(undefined)
         }
     }
 
+	$: if($highlighted === value){
+		if(optionElement){
+		optionElement.focus()
+		}
+	}
+
 </script>
 
-<label
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<div
 	bind:this={optionElement}
 	class={className}
-	role="option"
-	data-noir-collection-item
-	aria-selected={type !== 'default' ? type === 'radio' && $selected === value || type === 'checkbox' && $checked ? 'true' : 'false' : null}
-	aria-labelledby={value}
-	data-state={type !== 'default' ? type === 'radio' && $selected === value || type === 'checkbox' && $checked ? 'checked' : 'unchecked' : null}
-	data-highlighted={$highlighted === value}
-	data-value={value}
-	
-    on:click={handleClick}
+	on:click={handleClick}
 	on:mouseenter={setHighlighted}
 	on:mouseleave={removeHighlighted}
 	on:keyup
 	on:keypress
+	tabindex="{$highlighted === value ? 0 : -1}"
+	role={type !== 'default' ? type === 'radio' ? 'menuitemradio' : 'menuitemcheckbox' : 'menuitem'}
+	data-noir-collection-item
+	aria-selected={type !== 'default' ? type === 'radio' && $selected === value || type === 'checkbox' && $checked ? 'true' : 'false' : null}
+	data-state={type !== 'default' ? type === 'radio' && $selected === value || type === 'checkbox' && $checked ? 'checked' : 'unchecked' : null}
+	data-highlighted={$highlighted === value}
+	data-value={value}
 >
 	{#if type === 'checkbox'}
 		<input type="checkbox" {value} bind:checked={$checked} on:change={sayHello}/>
@@ -103,7 +109,7 @@
 		</span>
 	{/if}
 	<slot />
-</label>
+</div>
 
 <style>
     input {
@@ -111,4 +117,7 @@
         height: 0px;
         width: 0px;
     }
+	div[data-noir-collection-item]:focus{
+		outline:none
+	}
 </style>

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { writable, type Writable } from 'svelte/store';
-	import { setContext } from 'svelte';
 	
 	export let defaultChecked = false;
 	let checked: Writable<boolean> = writable(false);

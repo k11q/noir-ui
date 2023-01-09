@@ -141,7 +141,7 @@
 		on:keydown={handleKeydown}
 		style="position: fixed; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; pointer-events:auto"
 	>
-		<div class={className} role="listbox" aria-expanded={$open}>
+		<div class={className} role="menu" aria-expanded={$open}>
 			<slot />
 		</div>
 	</div>

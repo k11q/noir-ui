@@ -28,6 +28,12 @@
 	function removeHighlighted() {
 		highlighted.set(undefined);
 	}
+
+	$: if($highlighted === value){
+		if(optionElement){
+		optionElement.focus()
+		}
+	}
 </script>
 
 <div
@@ -40,7 +46,7 @@
 	data-state={$selected === value ? 'checked' : 'unchecked'}
 	data-highlighted={$highlighted === value}
 	data-value={value}
-	tabindex="0"
+	tabindex={$highlighted === value ? 0 : -1}
 	on:click={changeSelected}
 	on:mouseenter={setHighlighted}
 	on:mouseleave={removeHighlighted}

@@ -44,7 +44,7 @@
 	const dialogOpen: Writable<boolean> = writable(false);
 	const accordionCurrentExpanded: Writable<string> = writable('item-1');
 	const collapsibleExpanded: Writable<boolean> = writable(false);
-	const checkedDropdown = writable(false);
+	const checkedDropdown = writable(true);
 	const checkedDropdown2 = writable(false);
 	const selectedMenu = writable('Khairul Haaziq');
 
@@ -481,20 +481,11 @@
 							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 							>Luqman Hakim</DropdownMenu.Option
 						>
-						<DropdownMenu.Option
-							selected={selectedMenu}
-							on:change={handleChange}
-							name="DM Group 1"
-							type="radio"
-							value="Nurul Hanisah"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-							>Nurul Hanisah</DropdownMenu.Option
-						>
 					</DropdownMenu.Group>
 				</DropdownMenu.Portal>
 			</DropdownMenu.Root>
 			<CardTitle>
-				<span>Dropdown Menu</span><CardStatus status={1} />
+				<span>Dropdown Menu</span><CardStatus status={2} />
 			</CardTitle>
 		</Card>
 		<Card>
@@ -710,35 +701,86 @@
 			</CardTitle>
 		</Card>
 		<Card>
-			<Tabs.Group
-				className="flex flex-col rounded-lg bg-white shadow min-h-[140px] min-w-44 sm:min-w-[240px]"
+			<Tabs.Root
+				selected={storeTab}
+				name="tabla"
+				class="flex flex-col rounded-lg bg-white shadow min-h-[140px] w-[300px]"
 			>
 				<Tabs.List
-					selected={storeTab}
-					className="flex flex-row shadow-[0_-1px_0px_0px_inset] shadow-neutral-200 [&>*]:py-3 [&>*]:px-5 [&>*]:text-neutral-400 first:[&>*]:rounded-tl-lg data-[state='active']:[&>*]:shadow-[0_-2px_0px_0px_inset] data-[state='active']:[&>*]:shadow-black data-[state='active']:[&>*]:text-black focus:[&>*]:outline focus:[&>*]:outline-2 focus:[&>*]:outline-black focus:[&>*]:relative"
+					class="flex flex-row shadow-[0_-1px_0px_0px_inset] shadow-neutral-200 [&>*]:py-3 [&>*]:px-5 [&>*]:text-neutral-400 first:[&>*]:rounded-tl-lg data-[state='active']:[&>*]:shadow-[0_-2px_0px_0px_inset] data-[state='active']:[&>*]:shadow-black data-[state='active']:[&>*]:text-black focus-within:[&>*]:outline focus-within:[&>*]:outline-2 focus-within:[&>*]:outline-black focus-within:[&>*]:relative"
 				>
-					<Tabs.Trigger value="a">Tab 1</Tabs.Trigger>
-					<Tabs.Trigger value="b">Tab 2</Tabs.Trigger>
-					<Tabs.Trigger value="c">Tab 3</Tabs.Trigger>
+					<Tabs.Item value="a">Account</Tabs.Item>
+					<Tabs.Item value="b">Password</Tabs.Item>
 				</Tabs.List>
-				<Tabs.Content className="mt-2 py-3 px-5">
-					{#if $storeTab === 'a'}
-						<div class="flex flex-col justify-between gap-6">
-							<span class="text-neutral-400"
-								>Save changes?</span
-							>
-							<div class="flex flex-row justify-end">
-								<button
-									class="shadow-sm rounded-md border px-4 py-[6px] -mr-2"
-									>Save</button
-								>
-							</div>
-						</div>
-					{/if}
-					{#if $storeTab === 'b'}Content B{/if}
-					{#if $storeTab === 'c'}Content C{/if}
+				<Tabs.Content class="p-5 flex flex-col gap-3" value="a">
+					<p class="text-neutral-400">
+						Make changes to your account here. Click save when
+						you're done.
+					</p>
+					<fieldset class="flex flex-col gap-1">
+						<label class="Label" for="name"> Name </label>
+						<input
+							class="rounded border border-neutral-200 px-3 py-2"
+							id="name"
+							value="Pedro Duarte"
+						/>
+					</fieldset>
+					<fieldset class="flex flex-col gap-1">
+						<label class="Label" for="username">
+							Username
+						</label>
+						<input
+							class="rounded border border-neutral-200 px-3 py-2"
+							id="username"
+							value="@peduarte"
+						/>
+					</fieldset>
+					<div class="flex flex-col mt-5 items-end"
+					>
+						<button class="bg-green-200 rounded px-3 py-2">Save changes</button>
+					</div>
 				</Tabs.Content>
-			</Tabs.Group>
+				<Tabs.Content class="p-5 flex flex-col gap-3" value="b">
+					<p class="text-neutral-400">
+						Make changes to your account here. Click save when
+						you're done.
+					</p>
+					<fieldset class="flex flex-col gap-1">
+						<label class="Label" for="currentPassword">
+							Current password
+						</label>
+						<input
+							class="rounded border border-neutral-200 px-3 py-2"
+							id="currentPassword"
+							type="password"
+						/>
+					</fieldset>
+					<fieldset class="flex flex-col gap-1">
+						<label class="Label" for="newPassword">
+							New password
+						</label>
+						<input
+							class="rounded border border-neutral-200 px-3 py-2"
+							id="newPassword"
+							type="password"
+						/>
+					</fieldset>
+					<fieldset class="flex flex-col gap-1">
+						<label class="Label" for="confirmPassword">
+							Confirm password
+						</label>
+						<input
+							class="rounded border border-neutral-200 px-3 py-2"
+							id="confirmPassword"
+							type="password"
+						/>
+					</fieldset>
+					<div class="flex flex-col mt-5 items-end"
+					>
+						<button class="bg-green-200 rounded px-3 py-2">Save changes</button>
+					</div>
+				</Tabs.Content>
+			</Tabs.Root>
 			<CardTitle>
 				<span>Tabs</span><CardStatus status={2} />
 			</CardTitle>
