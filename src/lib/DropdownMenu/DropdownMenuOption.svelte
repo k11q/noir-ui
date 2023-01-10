@@ -120,4 +120,7 @@
 	div[data-noir-collection-item]:focus{
 		outline:none
 	}
+	div {
+		user-select: none;
+	}
 </style>

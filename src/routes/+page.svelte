@@ -58,8 +58,7 @@
 	}
 	function addNewWindow() {
 		alert('Added New Window!');
-	}
-</script>
+	}</script>
 
 <div class="w-full flex flex-col items-center gap-2 pb-16 pt-6 lg:px-12 px-5 text-[13px]">
 	<div class="w-full max-w-[1400px] flex flex-col items-start gap-2 mt-12 mb-6">
@@ -422,11 +421,11 @@
 							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 							>New Private Window</DropdownMenu.Option
 						>
-						<DropdownMenu.Option
-							value="More Tools"
+						<DropdownMenu.Sub>
+						<DropdownMenu.SubTrigger
 							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-							>More Tools</DropdownMenu.Option
-						>
+							>More Tools</DropdownMenu.SubTrigger
+						></DropdownMenu.Sub>
 					</DropdownMenu.Group>
 					<div class="h-[1px] mx-1 my-1 bg-neutral-200" />
 					<DropdownMenu.Group>
