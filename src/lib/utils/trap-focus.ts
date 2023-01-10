@@ -2,7 +2,6 @@
 
 export function trapFocus(element: HTMLElement) {
 	if(element){
-	event?.preventDefault()
 	const focusableEls = [
 		...element.querySelectorAll(
 		  'a[href], button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'

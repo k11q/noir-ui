@@ -24,7 +24,6 @@
 	//callback function to run when
 	$: if ($alertDialogElement) {
 		if ($open) {
-			trapFocus($alertDialogElement);
 
 			document.querySelector(
 				'body'
@@ -33,6 +32,8 @@
 				passive: false
 			});
 			window.addEventListener('keydown', lockKeydown);
+
+			trapFocus($alertDialogElement)
 		} else {
 			document.querySelector(
 				'body'

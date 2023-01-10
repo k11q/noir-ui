@@ -183,14 +183,13 @@
 			<div class="flex flex-col gap-3 text-neutral-600">
 				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<label
-					class="flex flex-row gap-3 items-center [&>label>input:focus+.checkbox]:outline [&>label>input:focus+.checkbox]:outline-2 [&>label>input:focus+.checkbox]:outline-[#00000066]"
+					class="flex flex-row gap-3 items-center [&>.checkbox]:hover:bg-neutral-100"
 				>
 					<Checkbox
-						class="bg-white shadow h-6 aspect-square rounded flex items-center justify-center"
+						class="bg-white shadow h-6 aspect-square rounded flex items-center justify-center  focus-within:outline focus-within:outline-2 focus-within:outline-[#00000066]"
 					>
 						<div
 							class="bg-black h-full w-full rounded flex items-center justify-center"
-							slot="indicator"
 						>
 							<Check
 								size={15}
@@ -203,14 +202,14 @@
 				</label>
 				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<label
-					class="flex flex-row gap-3 items-center [&>label>input:focus+.checkbox]:outline [&>label>input:focus+.checkbox]:outline-2 [&>label>input:focus+.checkbox]:outline-[#00000066]"
+					class="flex flex-row gap-3 items-center"
 				>
 					<Checkbox
-						class="bg-white shadow h-6 aspect-square rounded flex items-center justify-center"
+					disabled={true}
+						class="bg-neutral-200 shadow h-6 aspect-square rounded flex items-center justify-center  focus-within:outline focus-within:outline-2 focus-within:outline-[#00000066]"
 					>
 						<div
 							class="bg-black h-full w-full rounded flex items-center justify-center"
-							slot="indicator"
 						>
 							<Check
 								size={15}
@@ -219,18 +218,18 @@
 							/>
 						</div>
 					</Checkbox>
-					<span class="select-none">Checkbox 2</span>
+					<span class="select-none">Disabled Checkbox</span>
 				</label>
 				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<label
-					class="flex flex-row gap-3 items-center [&>label>input:focus+.checkbox]:outline [&>label>input:focus+.checkbox]:outline-2 [&>label>input:focus+.checkbox]:outline-[#00000066]"
+					class="flex flex-row gap-3 items-center [&>.checkbox]:hover:bg-neutral-100"
 				>
 					<Checkbox
-						class="bg-white shadow h-6 aspect-square rounded flex items-center justify-center"
+					required={true}
+						class="bg-white shadow h-6 aspect-square rounded flex items-center justify-center  focus-within:outline focus-within:outline-2 focus-within:outline-[#00000066]"
 					>
 						<div
 							class="bg-black h-full w-full rounded flex items-center justify-center"
-							slot="indicator"
 						>
 							<Check
 								size={15}
@@ -239,7 +238,7 @@
 							/>
 						</div>
 					</Checkbox>
-					<span class="select-none">Checkbox 2</span>
+					<span class="select-none">Required Checkbox</span>
 				</label>
 			</div>
 			<CardTitle>

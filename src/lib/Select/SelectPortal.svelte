@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { useClickOutside } from '$lib/utils/click-outside';
 	import { trapFocus } from '$lib/utils/trap-focus';
-	import { writable, type Writable } from 'svelte/store';
-	import { getContext, setContext } from 'svelte';
+	import type {Writable } from 'svelte/store';
+	import { getContext } from 'svelte';
 	import { portal } from '../Portal/Portal.svelte';
 
 	export let open: Writable<boolean> = getContext('open');
@@ -27,7 +27,7 @@
 
 	$: if (selectPortal) {
 		if ($open) {
-			const listBoxElRect = selectPortal.querySelector('[role="listbox"]').getBoundingClientRect()
+			const listBoxElRect = selectPortal.querySelector('[data-noir-collection-item]')!.getBoundingClientRect()
 			initialMenuHeight = listBoxElRect.height
 			menuLeft =
 				$triggerButton.getBoundingClientRect().left +
@@ -75,6 +75,7 @@
 			window.addEventListener('scroll', updatePortalPosition);
 
 			trapFocus(selectPortal);
+			window.addEventListener('keydown', handleKeydown);
 			document.querySelector('body')!.style.pointerEvents = 'none';
 
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);
@@ -82,6 +83,7 @@
 			document.querySelector('body').style.pointerEvents = '';
 			window.removeEventListener('mousedown', closeDialogWhenClickOutside);
 			window.removeEventListener('scroll', updatePortalPosition);
+			window.removeEventListener('keydown', handleKeydown)
 		}
 	}
 	function closeDialogWhenClickOutside(e: MouseEvent) {
@@ -131,7 +133,8 @@
 
 	function handleKeydown(e: KeyboardEvent) {
 		e.preventDefault();
-		const allOptions = [...selectPortal.querySelectorAll('[data-noir-collection-item]')];
+		if(selectPortal && $open){
+			const allOptions = [...selectPortal.querySelectorAll('[data-noir-collection-item]')];
 
 		if (e.key === 'ArrowDown') {
 			const firstElement = selectPortal.querySelector('[data-noir-collection-item]') as HTMLElement;
@@ -182,6 +185,8 @@
 		if (e.key === 'Escape') {
 			closeDialog();
 		}
+		}
+		
 	}
 </script>
 
@@ -191,7 +196,6 @@
 		use:portal={'body'}
 		role="dialog"
 		aria-modal="true"
-		on:keydown={handleKeydown}
 		style="position: fixed;display:flex; {menuHeight>0? `height: ${menuHeight}px;`: ''} top:0px flex-direction: column; flex: 1; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; pointer-events:auto"
 	>
 		<div class={className} role="listbox" aria-expanded={$open} style=" margin-top:auto">
