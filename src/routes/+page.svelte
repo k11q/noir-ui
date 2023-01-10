@@ -39,8 +39,6 @@
 	import { writable, type Writable } from 'svelte/store';
 	import CardStatus from '$lib/Card/CardStatus.svelte';
 
-	const storeTab: Writable<string> = writable('a');
-
 	const dialogOpen: Writable<boolean> = writable(false);
 	const accordionCurrentExpanded: Writable<string> = writable('item-1');
 	const collapsibleExpanded: Writable<boolean> = writable(false);
@@ -702,7 +700,7 @@
 		</Card>
 		<Card>
 			<Tabs.Root
-				selected={storeTab}
+				selected={writable('a')}
 				name="tabla"
 				class="flex flex-col rounded-lg bg-white shadow min-h-[140px] w-[300px]"
 			>

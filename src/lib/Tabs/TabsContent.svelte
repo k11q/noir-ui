@@ -9,7 +9,7 @@
 	export { className as class };
 </script>
 
-<div class={className} role="tabpanel" data-state={$selected === value ? 'active' : 'inactive'} hidden={$selected === value ? null : true}>
+<div class={className} role="tabpanel" data-state={$selected === value ? 'active' : 'inactive'} hidden={$selected === value ? null : true} tabindex=0>
 	{#if $selected === value}
 		<slot />
 	{/if}
