@@ -38,16 +38,12 @@
 
 	import { writable, type Writable } from 'svelte/store';
 	import CardStatus from '$lib/Card/CardStatus.svelte';
-		import AlertDialogOverlay from '$lib/AlertDialog/AlertDialogOverlay.svelte';
 
 	const dialogOpen: Writable<boolean> = writable(false);
-	const accordionCurrentExpanded: Writable<string | string[]> = writable(['item-1']);
 	const collapsibleExpanded: Writable<boolean> = writable(false);
 	const checkedDropdown = writable(true);
 	const checkedDropdown2 = writable(false);
 	const selectedMenu = writable('Khairul Haaziq');
-
-	$: $accordionCurrentExpanded ? console.log($accordionCurrentExpanded) : '';
 
 	function closeAlertDialog() {
 		dialogOpen.set(false);
@@ -79,8 +75,8 @@
 	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1400px] w-full gap-5">
 		<Card>
 			<Accordion.Root
-			type='multiple'
-				value={accordionCurrentExpanded}
+			type='single'
+				value={writable('item-1')}
 				class="bg-white rounded-md min-w-44 sm:w-[220px] flex flex-col shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*>*]:last:[&>*]:rounded-b-md"
 			>
 				<Accordion.Item
@@ -88,10 +84,9 @@
 					class="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
 				>
 					<Accordion.Header
-						class="flex p-3 text-left justify-between items-center"
+						class="flex p-3 text-left justify-between items-center [&>.AccordionChevron]:data-[state='open']:rotate-180 [&>.AccordionChevron]:duration-300 [&>.AccordionChevron]:ease-in [&>.AccordionChevron]:opacity-60"
 						><span> Is it accessible?</span><span
-							class:rotate-180={$accordionCurrentExpanded.indexOf('item-1') !== -1}
-							class="duration-300 ease-in opacity-60"
+							class="AccordionChevron"
 							><ChevronDown size={15} /></span
 						></Accordion.Header
 					>
@@ -110,10 +105,9 @@
 					class="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
 				>
 					<Accordion.Header
-						class="flex p-3 text-left justify-between items-center border-t"
+						class="flex p-3 text-left justify-between items-center border-t [&>.AccordionChevron]:data-[state='open']:rotate-180 [&>.AccordionChevron]:duration-300 [&>.AccordionChevron]:ease-in [&>.AccordionChevron]:opacity-60"
 						><span> Is it unstyled?</span><span
-							class:rotate-180={$accordionCurrentExpanded.indexOf('item-2') !== -1}
-							class="duration-300 ease-in opacity-60"
+							class="AccordionChevron"
 							><ChevronDown size={15} /></span
 						></Accordion.Header
 					>
@@ -131,10 +125,9 @@
 					class="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
 				>
 					<Accordion.Header
-						class="flex p-3 text-left justify-between items-center border-t"
+						class="flex p-3 text-left justify-between items-center border-t [&>.AccordionChevron]:data-[state='open']:rotate-180 [&>.AccordionChevron]:duration-300 [&>.AccordionChevron]:ease-in [&>.AccordionChevron]:opacity-60"
 						><span> Can it be animated?</span><span
-							class:rotate-180={$accordionCurrentExpanded.indexOf('item-3') !== -1}
-							class="duration-300 ease-in opacity-60"
+							class="AccordionChevron"
 							><ChevronDown size={15} /></span
 						></Accordion.Header
 					>

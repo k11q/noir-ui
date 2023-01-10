@@ -66,7 +66,7 @@
 	}
 </script>
 
-<button bind:this={currentButton} on:click={toggleExpanded} on:keydown={handleKeydown} class={className} data-state={$currentExpanded===value?'open':'closed'} aria-expanded={$currentExpanded===value?'true':'false'} data-noir-collection-item {style}>
+<button bind:this={currentButton} on:click={toggleExpanded} on:keydown={handleKeydown} class={className} data-state={(type === 'single' &&$currentExpanded===value) || (type === 'multiple' && $currentExpanded.indexOf(value)!==-1) ?'open':'closed'} aria-expanded={$currentExpanded===value?'true':'false'} data-noir-collection-item {style}>
 <slot />
 </button>
 
