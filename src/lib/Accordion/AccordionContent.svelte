@@ -2,8 +2,6 @@
 	import { getContext, setContext } from "svelte";
 	import type { Writable } from "svelte/store";
 
-	//PROPS: no props
-
 	const value:string = getContext('value')
 	const currentExpanded: Writable<string> = getContext('currentExpanded');
 </script>

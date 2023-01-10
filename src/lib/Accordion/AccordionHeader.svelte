@@ -2,13 +2,8 @@
 	import { getContext } from "svelte";
 	import type { Writable } from "svelte/store";
 
-	//PROPS: no props.
-
-	//exposing class
 	let className = ''
 	export {className as class}
-
-	//exposing style
 	export let style:string | undefined = undefined
 
 	const value:string = getContext('value')

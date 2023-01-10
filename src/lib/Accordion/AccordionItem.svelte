@@ -3,7 +3,7 @@
 	import type { Writable } from "svelte/store";
 
 	export let value = ''
-	export let style:string | undefined = undefined
+	export let disabled = false	
 
 	const currentExpanded: Writable<string> = getContext('currentExpanded');
 
@@ -11,7 +11,7 @@
 
 	let className = ''
 	export {className as class}
-
+	export let style:string | undefined = undefined
 </script>
 
 <div class={className} data-state={$currentExpanded===value?'open':'closed'} {style}>
