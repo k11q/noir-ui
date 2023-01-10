@@ -75,24 +75,34 @@
 			window.addEventListener('scroll', updatePortalPosition);
 
 			trapFocus(selectPortal);
-			window.addEventListener('keydown', handleKeydown);
+			if(!$selected){
+				if(!$highlighted){
+					window.addEventListener('keydown', handleKeydown);
+				}else {
+					window.removeEventListener('keydown', handleKeydown)
+				}
+			}
 			document.querySelector('body')!.style.pointerEvents = 'none';
-
 			window.addEventListener('mousedown', closeDialogWhenClickOutside);
 		} else {
 			document.querySelector('body').style.pointerEvents = '';
 			window.removeEventListener('mousedown', closeDialogWhenClickOutside);
 			window.removeEventListener('scroll', updatePortalPosition);
-			window.removeEventListener('keydown', handleKeydown)
+			
 		}
 	}
 	function closeDialogWhenClickOutside(e: MouseEvent) {
-			const clickOutside = useClickOutside(e, selectPortal);
-			e.preventDefault();
+		e.preventDefault();
 			e.stopPropagation();
+		if(selectPortal){
+			console.log(selectPortal)
+			const clickOutside = useClickOutside(e, selectPortal);
+			console.log(clickOutside)
+			
 			if (clickOutside) {
 				closeDialog();
 			}
+		}
 		}
 
 		function updatePortalPosition() {
@@ -194,6 +204,7 @@
 	<div
 		bind:this={selectPortal}
 		use:portal={'body'}
+		on:keydown={handleKeydown}
 		role="dialog"
 		aria-modal="true"
 		style="position: fixed;display:flex; {menuHeight>0? `height: ${menuHeight}px;`: ''} top:0px flex-direction: column; flex: 1; left: 0px; top: 0px; transform: translate3d({menuLeft}px, {menuTop}px, 0px); min-width: max-content; z-index: auto; pointer-events:auto"

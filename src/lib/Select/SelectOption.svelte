@@ -3,7 +3,6 @@
 	import type { Writable } from 'svelte/store';
 	import { Check } from 'lucide-svelte';
 	import { capitalise } from '$lib/utils/capitalise';
-	import { trapFocus } from '$lib/utils/trap-focus';
 
 	export let className = '';
 	export let selected: Writable<any> = getContext('selected');
@@ -15,7 +14,8 @@
 	let highlighted: Writable<any> = getContext('highlighted');
 	let optionElement: HTMLElement;
 
-	function changeSelected() {
+	function changeSelected(e: MouseEvent) {
+		e.preventDefault();
 		selected.set(value);
 		open.set(false);
 		$triggerButton.focus();
@@ -47,7 +47,7 @@
 	data-highlighted={$highlighted === value}
 	data-value={value}
 	tabindex={$highlighted === value ? 0 : -1}
-	on:click={changeSelected}
+	on:mousedown={changeSelected}
 	on:mouseenter={setHighlighted}
 	on:mouseleave={removeHighlighted}
 	on:keyup
@@ -67,5 +67,8 @@
 <style>
 	div:focus {
 		outline: none;
+	}
+	div {
+		user-select: none;
 	}
 </style>

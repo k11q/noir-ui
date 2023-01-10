@@ -1,7 +1,6 @@
 export { default as Option } from './SelectOption.svelte'
-export { default as Label } from './SelectGroupLabel.svelte'
 export { default as Root } from './SelectRoot.svelte'
 export { default as Portal } from './SelectPortal.svelte'
 export { default as Trigger } from './SelectTrigger.svelte'
 export { default as Value } from './SelectValue.svelte'
-export { default as Group } from './SelectGroup.svelte'
+export { default as OptGroup } from './SelectOptGroup.svelte'

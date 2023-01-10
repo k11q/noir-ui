@@ -608,7 +608,7 @@
 				<Select.Portal
 					className="border bg-white rounded-lg border-neutral-200 w-[135px] flex flex-col p-[6px] text-[13px] text-black shadow-lg"
 				>
-					<Select.Group
+					<Select.OptGroup
 						label="fruits"
 						labelClass="pl-[25px] pb-1 pt-0.5 text-neutral-400 text-xs"
 					>
@@ -632,9 +632,9 @@
 							value="pineapple"
 							className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
-					</Select.Group>
+					</Select.OptGroup>
 					<div class="h-[1px] mx-1 my-2 bg-neutral-200" />
-					<Select.Group
+					<Select.OptGroup
 						label="vegetables"
 						labelClass="pl-[25px] pb-1 pt-0.5 text-neutral-400 text-xs"
 					>
@@ -650,7 +650,7 @@
 							value="aubergine"
 							className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
 						/>
-					</Select.Group>
+					</Select.OptGroup>
 				</Select.Portal>
 			</Select.Root>
 			<CardTitle>
