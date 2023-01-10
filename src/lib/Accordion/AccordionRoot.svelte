@@ -2,17 +2,17 @@
 	import { writable, type Writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 
-	export let defaultExpanded: Writable<string> = writable('');
-    export let type: "single" | "multiple" = "single"
-    export let value: string | string[] | undefined = undefined;
+    export let type: "single" | "multiple" = "multiple"
+    export let value: Writable<string | string[] | undefined> = type === 'single' ?writable('') : writable([]);
     export let collapsible = false;
     export let disabled = false;
 
-    const currentExpanded: Writable<string> = defaultExpanded;
+    const currentExpanded: Writable<string | string[] | undefined> = value;
 	const rootAccordion: Writable<HTMLElement | null> = writable(null);
 
 	setContext('currentExpanded', currentExpanded);
 	setContext('rootAccordion', rootAccordion);
+    setContext('type', type);
 
     let className = '';
     export { className as class };

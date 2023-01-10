@@ -7,16 +7,32 @@
 	export let style:string | undefined = undefined
 
 	const value:string = getContext('value')
-	const currentExpanded: Writable<string> = getContext('currentExpanded');
+	const currentExpanded: Writable<string | string[]> = getContext('currentExpanded');
 	const rootAccordion: Writable<HTMLElement> = getContext('rootAccordion');
 	let currentButton: HTMLElement;
+	const type:"single" | "multiple" = getContext('type');
 
 	//toggle expanded
 	function toggleExpanded(){
-		if($currentExpanded===value){
-			currentExpanded.set('')
-		}else {
-			currentExpanded.set(value)
+		if(type === 'single'){
+			if($currentExpanded===value){
+				currentExpanded.set('')
+			}else{
+				currentExpanded.set(value)
+			}
+			
+		} else if(type === 'multiple'){
+			if($currentExpanded.indexOf(value) !== -1){
+				const array = $currentExpanded
+			const index = $currentExpanded.indexOf(value);
+			array.splice(index, 1);
+			$currentExpanded = [...array]
+			console.log(1)
+			}else {
+				$currentExpanded=[...$currentExpanded,(value)]
+				console.log(2)
+			}
+			
 		}
 	}
 

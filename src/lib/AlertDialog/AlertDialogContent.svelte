@@ -6,17 +6,10 @@
 	import { fade, scale } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 
-	//exposing class
 	let className = '';
 	export {className as class}
-
-	//exposing overlay class
-	export let overlayClass = '';
-
-	//exposing style
 	export let style:string | undefined = undefined
 
-	//utils
 	const open: Writable<boolean> = getContext('open');
 	const position: string = getContext('position');
 	const alertDialogElement: Writable<HTMLElement> = getContext('alertDialogElement');
@@ -80,35 +73,12 @@
 </script>
 
 {#if $open === true}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div
-		use:portal={'body'}
-		role="dialog"
-		aria-modal="true"
-		class={overlayClass}
-		transition:fade={{ duration: 200 }}
-		style="position: fixed; inset:0; left: {position ===
-			'bottom-left' || position === 'top-left'
-			? '20px'
-			: ''}; top: {position === 'top-right' ||
-		position === 'top-left'
-			? '20px'
-			: ''};right: {position === 'bottom-right' ||
-		position === 'top-right'
-			? '20px'
-			: ''}; bottom: {position === 'bottom-right' ||
-		position === 'bottom-left'
-			? '20px'
-			: ''}; {position === 'center'
-			? 'margin: auto;'
-			: ''} min-width: max-content; z-index: auto; transform-origin:118.5px -5px; pointer-events:auto"
-	/>
 	<div
 		in:scale={{ duration: 200, easing: quintOut }}
 		out:fade={{ duration: 100 }}
 		bind:this={$alertDialogElement}
 		class={className}
-		style={`pointer-events:auto ${style}`}
+		style={`pointer-events:auto; ${style}`}
 		aria-expanded={$open}
 		use:portal={'body'}
 		role="dialog"

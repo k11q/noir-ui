@@ -3,10 +3,17 @@
 	import type { Writable } from "svelte/store";
 
 	const value:string = getContext('value')
-	const currentExpanded: Writable<string> = getContext('currentExpanded');
+	const currentExpanded: Writable<string | string[]> = getContext('currentExpanded');
+	const type:"single" | "multiple" = getContext('type');
 </script>
 
-{#if $currentExpanded===value}
+{#if type === 'single' && $currentExpanded===value}
+<div data-state={$currentExpanded===value?'open':'closed'} role="region">
+<slot />
+</div>
+{/if}
+
+{#if type === 'multiple' && $currentExpanded.indexOf(value)!==-1}
 <div data-state={$currentExpanded===value?'open':'closed'} role="region">
 <slot />
 </div>

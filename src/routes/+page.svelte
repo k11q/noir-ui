@@ -38,9 +38,10 @@
 
 	import { writable, type Writable } from 'svelte/store';
 	import CardStatus from '$lib/Card/CardStatus.svelte';
+		import AlertDialogOverlay from '$lib/AlertDialog/AlertDialogOverlay.svelte';
 
 	const dialogOpen: Writable<boolean> = writable(false);
-	const accordionCurrentExpanded: Writable<string> = writable('item-1');
+	const accordionCurrentExpanded: Writable<string | string[]> = writable(['item-1']);
 	const collapsibleExpanded: Writable<boolean> = writable(false);
 	const checkedDropdown = writable(true);
 	const checkedDropdown2 = writable(false);
@@ -78,7 +79,8 @@
 	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1400px] w-full gap-5">
 		<Card>
 			<Accordion.Root
-				defaultExpanded={accordionCurrentExpanded}
+			type='multiple'
+				value={accordionCurrentExpanded}
 				class="bg-white rounded-md min-w-44 sm:w-[220px] flex flex-col shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*>*]:last:[&>*]:rounded-b-md"
 			>
 				<Accordion.Item
@@ -88,8 +90,7 @@
 					<Accordion.Header
 						class="flex p-3 text-left justify-between items-center"
 						><span> Is it accessible?</span><span
-							class:rotate-180={$accordionCurrentExpanded ===
-								'item-1'}
+							class:rotate-180={$accordionCurrentExpanded.indexOf('item-1') !== -1}
 							class="duration-300 ease-in opacity-60"
 							><ChevronDown size={15} /></span
 						></Accordion.Header
@@ -111,8 +112,7 @@
 					<Accordion.Header
 						class="flex p-3 text-left justify-between items-center border-t"
 						><span> Is it unstyled?</span><span
-							class:rotate-180={$accordionCurrentExpanded ===
-								'item-2'}
+							class:rotate-180={$accordionCurrentExpanded.indexOf('item-2') !== -1}
 							class="duration-300 ease-in opacity-60"
 							><ChevronDown size={15} /></span
 						></Accordion.Header
@@ -133,8 +133,7 @@
 					<Accordion.Header
 						class="flex p-3 text-left justify-between items-center border-t"
 						><span> Can it be animated?</span><span
-							class:rotate-180={$accordionCurrentExpanded ===
-								'item-3'}
+							class:rotate-180={$accordionCurrentExpanded.indexOf('item-3') !== -1}
 							class="duration-300 ease-in opacity-60"
 							><ChevronDown size={15} /></span
 						></Accordion.Header
@@ -156,12 +155,12 @@
 		<Card>
 			<AlertDialog.Root open={dialogOpen}>
 				<AlertDialog.Trigger
-					className="bg-white py-2 px-3 rounded shadow focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
+					class="bg-white py-2 px-3 rounded shadow focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
 				>
 					Delete Account
 				</AlertDialog.Trigger>
-				<AlertDialog.Portal
-					overlayClass="bg-neutral-400 opacity-50"
+				<AlertDialog.Overlay class="bg-neutral-400 opacity-50"/>
+				<AlertDialog.Content
 					class="flex flex-col items-between justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[500px] min-h-[150px] first-letter:border bg-white rounded-lg border-neutral-200 p-6 gap-3 shadow-lg text-[13px]"
 				>
 					<div class="text-base font-medium">
@@ -181,7 +180,7 @@
 							>Yes, delete my account</button
 						>
 					</div>
-				</AlertDialog.Portal>
+				</AlertDialog.Content>
 			</AlertDialog.Root>
 			<CardTitle>
 				<span>Alert Dialog</span><CardStatus status={4} />
