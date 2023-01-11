@@ -2,7 +2,7 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { Check } from 'lucide-svelte';
-	import { capitalise } from '$lib/utils/capitalise';
+	import { capitalise } from '../utils/capitalise';
 
 	export let className = '';
 	export let selected: Writable<any> = getContext('selected');

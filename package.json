@@ -1,6 +1,6 @@
 {
-	"name": "noir-ui",
-	"version": "0.0.1",
+	"name": "@noir-ui/svelte",
+	"version": "0.0.17",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "svelte-kit sync && svelte-package",
@@ -9,7 +9,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"test": "vitest"
+		"test": "vitest",
+    "package": "svelte-kit package"
 	},
 	"devDependencies": {
 		"@radix-ui/colors": "^0.1.8",
@@ -29,7 +30,6 @@
 		"prettier-plugin-svelte": "^2.8.1",
 		"svelte": "^3.54.0",
 		"svelte-check": "^2.9.2",
-		"svelte2tsx": "^0.6.0",
 		"tailwindcss": "^3.2.4",
 		"tslib": "^2.4.1",
 		"typescript": "^4.9.3",
@@ -41,5 +41,17 @@
 	"dependencies": {
 		"install": "^0.13.0",
 		"lucide-svelte": "^0.104.0"
-	}
+	},
+  "description": "Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).",
+  "main": "svelte.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khairulhaaziq/noir-ui.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/khairulhaaziq/noir-ui/issues"
+  },
+  "homepage": "https://github.com/khairulhaaziq/noir-ui#readme"
 }

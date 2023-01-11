@@ -17,8 +17,7 @@
 	import Card from '$lib/Card/Card.svelte';
 	import CardTitle from '$lib/Card/CardTitle.svelte';
 
-	import Toggle from '$lib/Toggle';
-	import * as Accordion from '$lib/Accordion';
+	import {Toggle, Accordion} from '@noir-ui/svelte'
 	import Checkbox from '$lib/Checkbox';
 	import * as Tabs from '$lib/Tabs';
 	import Radio from '$lib/Radio';

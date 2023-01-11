@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
-	import { useCheckPositionInside } from '$lib/utils/check-position-inside';
+	import { useCheckPositionInside } from '../utils/check-position-inside';
 
 	const triggerButton: Writable<HTMLElement> = getContext('triggerButton');
 	const hoverCardPortal: Writable<HTMLElement> = getContext('hoverCardPortal');

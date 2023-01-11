@@ -2,8 +2,8 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { Check } from 'lucide-svelte';
-	import { capitalise } from '$lib/utils/capitalise';
-	import { trapFocus } from '$lib/utils/trap-focus';
+	import { capitalise } from '../utils/capitalise';
+	import { trapFocus } from '../utils/trap-focus';
 
 	let className = '';
 	export {className as class}

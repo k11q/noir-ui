@@ -2,7 +2,7 @@
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
 	import { portal } from '../Portal/Portal.svelte';
-	import { trapFocus } from '$lib/utils/trap-focus';
+	import { trapFocus } from '../utils/trap-focus';
 	import { fade, fly } from 'svelte/transition';
 
 	let className = '';

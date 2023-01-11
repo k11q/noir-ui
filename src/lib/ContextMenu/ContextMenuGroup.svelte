@@ -1,6 +1,6 @@
 <script>
 	import { setContext } from "svelte";
-    import { capitalise } from '$lib/utils/capitalise';
+    import { capitalise } from '../utils/capitalise';
 
     export let className = ''
     export let label = ''

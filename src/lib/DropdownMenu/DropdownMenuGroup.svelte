@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { setContext } from "svelte";
-    import { capitalise } from '$lib/utils/capitalise';
+    import { capitalise } from '../utils/capitalise';
 	import { writable, type Writable } from "svelte/store";
 
     export let className = ''

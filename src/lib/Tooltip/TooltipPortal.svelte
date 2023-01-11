@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { useClickOutside } from '$lib/utils/click-outside';
-	import { trapFocus } from '$lib/utils/trap-focus';
+	import { useClickOutside } from '../utils/click-outside';
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
 	import { portal } from '../Portal/Portal.svelte';
