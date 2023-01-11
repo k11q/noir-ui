@@ -3,11 +3,11 @@
 	import { setContext } from 'svelte';
 
     export let type: "single" | "multiple" = "multiple"
-    export let value: Writable<string | string[] | undefined> = type === 'single' ?writable('') : writable([]);
+    export let value: string | string[] | undefined= type === 'single' ? '' : [];
     export let collapsible = false;
     export let disabled = false;
 
-    const currentExpanded: Writable<string | string[] | undefined> = value;
+    const currentExpanded: Writable<string | string[] | undefined> = writable(value);
 	const rootAccordion: Writable<HTMLElement | null> = writable(null);
 
 	setContext('currentExpanded', currentExpanded);

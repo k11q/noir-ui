@@ -11,7 +11,6 @@
 
 	let triggerButton: Writable<HTMLElement> = getContext('triggerButton');
 	let highlighted: Writable<any> = getContext('highlighted');
-	let highlightedElement: Writable<HTMLElement> = getContext('highlightedElement');
 	let selectPortal: HTMLElement;
 	let menuLeft = 0;
 	let menuTop = 0;

@@ -11,9 +11,7 @@
 <div data-state={$currentExpanded===value?'open':'closed'} role="region">
 <slot />
 </div>
-{/if}
-
-{#if type === 'multiple' && $currentExpanded.indexOf(value)!==-1}
+{:else if type === 'multiple' && $currentExpanded.indexOf(value)!==-1}
 <div data-state={$currentExpanded.indexOf(value)!==-1?'open':'closed'} role="region">
 <slot />
 </div>

@@ -75,7 +75,7 @@
 		<Card>
 			<Accordion.Root
 			type='single'
-				value={writable('item-1')}
+				value={'item-1'}
 				class="bg-white rounded-md min-w-44 sm:w-[220px] flex flex-col shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*>*]:last:[&>*]:rounded-b-md"
 			>
 				<Accordion.Item
