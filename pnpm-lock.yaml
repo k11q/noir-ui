@@ -20,6 +20,7 @@ specifiers:
   prettier-plugin-svelte: ^2.8.1
   svelte: ^3.54.0
   svelte-check: ^2.9.2
+  svelte2tsx: ^0.6.0
   tailwindcss: ^3.2.4
   tslib: ^2.4.1
   typescript: ^4.9.3
@@ -49,6 +50,7 @@ devDependencies:
   prettier-plugin-svelte: 2.9.0_ajxj753sv7dbwexjherrch25ta
   svelte: 3.55.0
   svelte-check: 2.10.3_qs7rgzvahok4cbkjoy5bgypde4
+  svelte2tsx: 0.6.0_niwyv7xychq2ag6arq5eqxbomm
   tailwindcss: 3.2.4_postcss@8.4.20
   tslib: 2.4.1
   typescript: 4.9.4
@@ -2659,6 +2661,18 @@ packages:
     peerDependencies:
       svelte: ^3.24
       typescript: ^4.1.2
+    dependencies:
+      dedent-js: 1.0.1
+      pascal-case: 3.1.2
+      svelte: 3.55.0
+      typescript: 4.9.4
+    dev: true
+
+  /svelte2tsx/0.6.0_niwyv7xychq2ag6arq5eqxbomm:
+    resolution: {integrity: sha512-TrxfQkO7CKi8Pu2eC/FyteDCdk3OOeQV5u6z7OjYAsOhsd0ClzAKqxJdvp6xxNQLrbFzf/XvCi9Fy8MQ1MleFA==}
+    peerDependencies:
+      svelte: ^3.55
+      typescript: ^4.9.4
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
