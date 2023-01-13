@@ -1,6 +1,6 @@
 {
-	"name": "@noir-ui/svelte",
-	"version": "0.0.17",
+	"name": "souvre-ui",
+	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "svelte-kit sync && svelte-package",
@@ -9,8 +9,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"test": "vitest",
-    "package": "svelte-kit package"
+		"test": "vitest"
 	},
 	"devDependencies": {
 		"@radix-ui/colors": "^0.1.8",
@@ -41,17 +40,5 @@
 	"dependencies": {
 		"install": "^0.13.0",
 		"lucide-svelte": "^0.104.0"
-	},
-  "description": "Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).",
-  "main": "svelte.config.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/khairulhaaziq/noir-ui.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/khairulhaaziq/noir-ui/issues"
-  },
-  "homepage": "https://github.com/khairulhaaziq/noir-ui#readme"
+	}
 }

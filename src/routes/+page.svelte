@@ -59,8 +59,8 @@
 		alert('Added New Window!');
 	}</script>
 
-<div class="w-full flex flex-col items-center gap-2 pb-16 pt-6 lg:px-12 px-5 text-[13px]">
-	<div class="w-full max-w-[1400px] flex flex-col items-start gap-2 mt-12 mb-6">
+<div class="w-full flex flex-col items-center gap-2 pb-16 pt-6 lg:px-12 px-5 text-[13px] bg-[#111111] text-white">
+	<div class="w-full max-w-[1020px] flex flex-col items-start gap-2 mt-12 mb-6">
 		<div class="flex flex-row items-end">
 			<img
 				src="logo.svg"
@@ -70,778 +70,248 @@
 			<h3 class="text-base leading-[1rem]">Components made easy</h3>
 		</div>
 	</div>
-	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1400px] w-full gap-5">
-		<Card>
-			<Accordion.Root
-			type='single'
-				value={'item-1'}
-				class="bg-white rounded-md min-w-44 sm:w-[220px] flex flex-col shadow first:[&>*]:rounded-t-md last:[&>*]:rounded-b-md [&>*>*]:last:[&>*]:rounded-b-md"
-			>
-				<Accordion.Item
-					value="item-1"
-					class="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
-				>
-					<Accordion.Header
-						class="flex p-3 text-left justify-between items-center [&>.AccordionChevron]:data-[state='open']:rotate-180 [&>.AccordionChevron]:duration-300 [&>.AccordionChevron]:ease-in [&>.AccordionChevron]:opacity-60"
-						><span> Is it accessible?</span><span
-							class="AccordionChevron"
-							><ChevronDown size={15} /></span
-						></Accordion.Header
-					>
-					<Accordion.Content
-						><div
-							class="p-3 border-t bg-neutral-100 opacity-60"
-							transition:slide
-						>
-							Yes. It adheres to the WAI-ARIA design
-							pattern.
-						</div></Accordion.Content
-					>
-				</Accordion.Item>
-				<Accordion.Item
-					value="item-2"
-					class="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
-				>
-					<Accordion.Header
-						class="flex p-3 text-left justify-between items-center border-t [&>.AccordionChevron]:data-[state='open']:rotate-180 [&>.AccordionChevron]:duration-300 [&>.AccordionChevron]:ease-in [&>.AccordionChevron]:opacity-60"
-						><span> Is it unstyled?</span><span
-							class="AccordionChevron"
-							><ChevronDown size={15} /></span
-						></Accordion.Header
-					>
-					<Accordion.Content
-						><div
-							class="p-3 border-t bg-neutral-100 opacity-60"
-							transition:slide
-						>
-							Content sini
-						</div></Accordion.Content
-					>
-				</Accordion.Item>
-				<Accordion.Item
-					value="item-3"
-					class="flex flex-col focus-within:outline focus-within:outline-2 focus-within:outline-black focus-within:relative"
-				>
-					<Accordion.Header
-						class="flex p-3 text-left justify-between items-center border-t [&>.AccordionChevron]:data-[state='open']:rotate-180 [&>.AccordionChevron]:duration-300 [&>.AccordionChevron]:ease-in [&>.AccordionChevron]:opacity-60"
-						><span> Can it be animated?</span><span
-							class="AccordionChevron"
-							><ChevronDown size={15} /></span
-						></Accordion.Header
-					>
-					<Accordion.Content
-						><div
-							class="p-3 border-t bg-neutral-100 opacity-60"
-							transition:slide
-						>
-							Content sini
-						</div></Accordion.Content
-					>
-				</Accordion.Item>
-			</Accordion.Root>
-			<CardTitle>
-				<span>Accordion</span><CardStatus status={4} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<AlertDialog.Root open={dialogOpen}>
-				<AlertDialog.Trigger
-					class="bg-white py-2 px-3 rounded shadow focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
-				>
-					Delete Account
-				</AlertDialog.Trigger>
-				<AlertDialog.Overlay class="bg-neutral-400 opacity-50"/>
-				<AlertDialog.Content
-					class="flex flex-col items-between justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[500px] min-h-[150px] first-letter:border bg-white rounded-lg border-neutral-200 p-6 gap-3 shadow-lg text-[13px]"
-				>
-					<div class="text-base font-medium">
-						Are you absolutely sure?
-					</div>
-					<p class="opacity-60">
-						This action cannot be undone. This will permanently
-						delete your account and remove your data from our
-						servers.
-					</p>
-					<div class="pt-2 flex flex-row gap-3 justify-end">
-						<button
-							class="bg-neutral-100 rounded px-4 py-2 text-neutral-700"
-							on:click={closeAlertDialog}>Cancel</button
-						><button
-							class="bg-red-100 rounded px-4 py-2 text-red-900"
-							>Yes, delete my account</button
-						>
-					</div>
-				</AlertDialog.Content>
-			</AlertDialog.Root>
-			<CardTitle>
-				<span>Alert Dialog</span><CardStatus status={4} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<div class="flex flex-col gap-3 text-neutral-600">
-				<!-- svelte-ignore a11y-label-has-associated-control -->
-				<label
-					class="flex flex-row gap-3 items-center [&>.checkbox]:hover:bg-neutral-100"
-				>
-					<Checkbox
-						class="bg-white shadow h-6 aspect-square rounded flex items-center justify-center  focus-within:outline focus-within:outline-2 focus-within:outline-[#00000066]"
-					>
-						<div
-							class="bg-black h-full w-full rounded flex items-center justify-center"
-						>
-							<Check
-								size={15}
-								color="white"
-								strokeWidth={3}
-							/>
-						</div>
-					</Checkbox>
-					<span class="select-none">Checkbox 1</span>
-				</label>
-				<!-- svelte-ignore a11y-label-has-associated-control -->
-				<label
-					class="flex flex-row gap-3 items-center"
-				>
-					<Checkbox
-					disabled={true}
-						class="bg-neutral-200 shadow h-6 aspect-square rounded flex items-center justify-center  focus-within:outline focus-within:outline-2 focus-within:outline-[#00000066]"
-					>
-						<div
-							class="bg-black h-full w-full rounded flex items-center justify-center"
-						>
-							<Check
-								size={15}
-								color="white"
-								strokeWidth={3}
-							/>
-						</div>
-					</Checkbox>
-					<span class="select-none">Disabled Checkbox</span>
-				</label>
-				<!-- svelte-ignore a11y-label-has-associated-control -->
-				<label
-					class="flex flex-row gap-3 items-center [&>.checkbox]:hover:bg-neutral-100"
-				>
-					<Checkbox
-					required={true}
-						class="bg-white shadow h-6 aspect-square rounded flex items-center justify-center  focus-within:outline focus-within:outline-2 focus-within:outline-[#00000066]"
-					>
-						<div
-							class="bg-black h-full w-full rounded flex items-center justify-center"
-						>
-							<Check
-								size={15}
-								color="white"
-								strokeWidth={3}
-							/>
-						</div>
-					</Checkbox>
-					<span class="select-none">Required Checkbox</span>
-				</label>
+	<div class="grid md:grid-cols-12 grid-cols-8 max-w-[1020px] w-full gap-5">
+	<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+		<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+			<h3>Accordion</h3>
+			<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+				<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+				<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+				<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+				<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+				<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+				</svg>			
 			</div>
-			<CardTitle>
-				<span>Checkbox</span><CardStatus status={4} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<Collapsible.Root
-				defaultOpen={true}
-				class=" rounded-md min-w-44 sm:min-w-[220px] flex flex-col gap-[6px] shadow-sm"
-			>
-				<div class="flex items-center">
-					<span class="flex-grow text-xs"
-						>Khairul Haaziq follows you</span
-					>
-					<Collapsible.Trigger
-						class="flex text-left shadow justify-center items-center h-6 aspect-square bg-white rounded-full focus:outline focus:outline-black focus:outline-2"
-					>
-						<span class="opacity-60" transition:slide>
-							{#if $collapsibleExpanded}
-								<X size={14} />
-							{:else}
-								<ChevronsUpDown size={14} />
-							{/if}
-						</span></Collapsible.Trigger
-					>
+		</div>
+		<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+			<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+				<h3>Alert Dialog</h3>
+					<svg class="absolute right-0 bottom-0 h-3/4 aspect-auto" viewBox="0 0 252 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect x="123.649" y="121.57" width="71" height="29" transform="rotate(-15 123.649 121.57)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+						<rect x="200.736" y="100.865" width="70" height="29" transform="rotate(-15 200.736 100.865)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+						<rect x="1" y="69.0694" width="263" height="125" transform="rotate(-15 1 69.0694)" stroke="white"/>
+						<rect x="1" y="69.0694" width="263" height="70" transform="rotate(-15 1 69.0694)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+						<path d="M32.109 87.5462C32.109 85.264 30.9613 74.5511 33.3444 74.7173C39.8231 75.1693 45.4004 79.4097 50.3545 83.1749C52.4459 84.7643 55.5052 87.7248 55.8661 83.555C56.0428 81.5127 54.797 67.0245 57.9567 68.0654C64.2375 70.1343 67.9475 77.4272 68.885 67.1151C69.6288 58.9324 76.0528 61.5484 81.5237 64.6444C83.8213 65.9445 85.9032 67.6165 88.2232 68.8731C89.8029 69.7288 89.342 67.9517 90.2663 67.0676C96.9157 60.7073 110.982 71.3707 116.494 65.3571C119.026 62.5955 123.256 63.9964 125.949 60.0355C127.5 57.7551 127.973 52.9405 131.271 52.5283C135.786 51.9639 140.341 51.6255 144.908 51.6255C150.219 51.6255 156.22 48.8589 161.252 47.3492" stroke="white" stroke-width="3" stroke-linecap="round"/>
+						<path d="M140.155 136.723C140.338 132.347 140.744 126.844 143.101 123.039C147.467 115.993 151.005 130.236 155.835 126.84C159.76 124.081 161.671 121.748 166.811 124.227C169.242 125.399 172.12 129.833 174.936 130.166C177.571 130.478 180.223 126.39 181.54 124.892C182.311 124.016 183 123.058 183.868 122.279C192.336 114.677 180.775 125.279 187.194 121.328" stroke="white" stroke-width="3" stroke-linecap="round"/>
+						<path d="M220.549 117.907C223.203 115.784 223.663 114.975 226.916 114.011C227.881 113.725 231.463 113.555 232.523 112.871C234.171 111.807 234.127 104.504 235.136 104.746C239.245 105.732 241.536 108.567 246.207 108.167C250.558 107.794 254.62 106.789 259.036 106.789" stroke="white" stroke-width="3" stroke-linecap="round"/>
+						<path d="M244.315 15.9407C244.315 25.9692 237.065 33.4166 234.052 42.4536" stroke="white" stroke-width="3" stroke-linecap="round"/>
+						<path d="M230.631 19.3617C237.553 20.8999 247.228 24.8399 252.013 29.6248" stroke="white" stroke-width="3" stroke-linecap="round"/>
+						<path d="M42.1297 114.741C40.9756 110.199 39.4696 102.716 40.8308 98.0358C42.4863 92.3442 47.205 96.1034 50.7986 98.5745C53.2018 100.227 54.6895 101.064 55.9356 97.7817C56.3326 96.7359 56.3719 93.1493 57.4887 92.5673C61.4206 90.5179 66.0475 104.192 68.4295 100.367C69.2571 99.0378 69.7207 96.3743 71.6156 96.0442C75.0737 95.4417 79.0461 99.1289 81.6389 100.783C85.2632 103.095 88.235 103.303 87.7318 98.1128C87.4908 95.6269 86.8634 94.8617 89.85 94.8867C92.8199 94.9115 95.7379 95.2924 98.6884 95.566C101.613 95.8372 101.672 95.2079 100.978 92.6181C99.1764 85.8925 108.865 93.4839 112.144 93.0303C116.209 92.4682 120.338 90.8379 124.299 89.8709C130.743 88.2976 140.039 84.9083 146.417 87.9644" stroke="white" stroke-width="3" stroke-linecap="round"/>
+						</svg>
+								
 				</div>
-				<div class="p-2 bg-white rounded">Content sini</div>
-				<Collapsible.Content
-					><div class="p-2 bg-white rounded shadow">Content sini</div>
-					<div class="p-2 bg-white rounded shadow">
-						Content sini
-					</div></Collapsible.Content
-				>
-			</Collapsible.Root>
-			<CardTitle>
-				<span>Collapsible</span><CardStatus status={4} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<ContextMenu.Root>
-				<ContextMenu.Trigger
-					class="flex items-center justify-center bg-neutral-300 border-neutral-400 opacity-50 border-dashed border h-32 w-44 sm:w-52 rounded-md text-neutral-600"
-				>
-					<p>Right click here</p>
-				</ContextMenu.Trigger>
-				<ContextMenu.Portal
-					class="border bg-white rounded-lg border-neutral-200 w-60 flex flex-col p-[6px] text-[13px] text-black shadow-lg"
-				>
-					<ContextMenu.Group>
-						<ContextMenu.Option
-							value="New Tab"
-							class="px-2 py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white [&>*]:data-[highlighted='true']:text-white rounded"
-							><span
-								class="flex flex-grow items-center text-neutral-500 justify-end tracking-wide"
-								>⌘+T</span
-							></ContextMenu.Option
-						>
-						<ContextMenu.Option
-							value="New Window"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-						<ContextMenu.Option
-							value="New Private Window"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-						<ContextMenu.Option
-							value="More Tools"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-					</ContextMenu.Group>
-					<div class="h-[1px] mx-1 my-1 bg-neutral-200" />
-					<ContextMenu.Group>
-						<ContextMenu.Option
-							value="Show Bookmarks"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-						<ContextMenu.Option
-							value="Show Full URLs"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-					</ContextMenu.Group>
-					<div class="h-[1px] mx-1 my-1 bg-neutral-200" />
-					<ContextMenu.Group
-						label="People"
-						labelClass="pl-[25px] pb-1 pt-0.5 text-neutral-400 text-xs"
-					>
-						<ContextMenu.Option
-							value="Khairul Haaziq"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-						<ContextMenu.Option
-							value="spinach"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-						<ContextMenu.Option
-							value="aubergine"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-					</ContextMenu.Group>
-				</ContextMenu.Portal>
-			</ContextMenu.Root>
-			<CardTitle>
-				<span>Context Menu</span><CardStatus status={1} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<Dialog.Root>
-				<Dialog.Trigger
-					class="bg-white py-2 px-3 rounded shadow focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
-				>
-					Edit Profile
-				</Dialog.Trigger>
-				<Dialog.Portal
-					overlayClass="bg-neutral-400 opacity-50"
-					class="flex flex-col items-between justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[450px] min-h-[150px] first-letter:border bg-white rounded-lg border-neutral-200 p-6 gap-3 shadow-lg text-[13px]"
-				>
-					<div class="text-base font-medium">Edit profile</div>
-					<p class="opacity-60">
-						Make changes to your profile here. Click save when
-						you're done.
-					</p>
-					<fieldset
-						class="flex flex-row items-center justify-end gap-3 text-sm mt-3"
-					>
-						<label for="name">Name</label><input
-							type="text"
-							id="name"
-							class="w-[290px] pl-3 py-2 outline outline-1 outline-neutral-400 rounded focus:outline-[3px] focus:outline-black"
-						/>
-					</fieldset>
-					<fieldset
-						class="flex flex-row items-center justify-end gap-3 text-sm mt-1"
-					>
-						<label for="name">Age</label><input
-							type="text"
-							id="name"
-							class="w-[290px] pl-3 py-2 outline outline-1 outline-neutral-400 rounded focus:outline-[3px] focus:outline-black"
-						/>
-					</fieldset>
-					<div class="pt-2 flex flex-row gap-3 justify-end">
-						<button
-							class="bg-green-100 rounded px-4 py-2 text-green-900"
-							>Save changes</button
-						>
-					</div>
-				</Dialog.Portal>
-			</Dialog.Root>
-			<CardTitle>
-				<span>Dialog</span><CardStatus status={4} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<DropdownMenu.Root>
-				<DropdownMenu.Trigger
-					className="flex items-center justify-center bg-white h-10 rounded-full shadow aspect-square focus:outline focus:outline-2 focus:outline-black text-neutral-600"
-				>
-					<AlignJustify size={15} />
-				</DropdownMenu.Trigger>
-				<DropdownMenu.Portal
-					class="border bg-white rounded-lg border-neutral-200 w-60 flex flex-col p-[6px] text-[13px] text-black shadow-lg"
-				>
-					<DropdownMenu.Group>
-						<DropdownMenu.Option
-							on:change={addNewTab}
-							value="New Tab"
-							class="flex pl-[25px] pr-2 items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white [&>*]:data-[highlighted='true']:text-white rounded"
-							>New Tab<span
-								class="flex flex-grow items-center text-neutral-500 justify-end tracking-wide"
-								>⌘+T</span
-							></DropdownMenu.Option
-						>
-						<DropdownMenu.Option
-							on:change={addNewWindow}
-							value="New Window"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-							>New Window</DropdownMenu.Option
-						>
-						<DropdownMenu.Option
-							value="New Private Window"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-							>New Private Window</DropdownMenu.Option
-						>
-						<DropdownMenu.Sub>
-						<DropdownMenu.SubTrigger
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-							>More Tools</DropdownMenu.SubTrigger
-						></DropdownMenu.Sub>
-					</DropdownMenu.Group>
-					<div class="h-[1px] mx-1 my-1 bg-neutral-200" />
-					<DropdownMenu.Group>
-						<DropdownMenu.Option
-							on:change={handleChange}
-							checked={checkedDropdown}
-							type="checkbox"
-							value="Show Bookmarks"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-							>Show Bookmarks</DropdownMenu.Option
-						>
-						<DropdownMenu.Option
-							on:change={handleChange}
-							checked={checkedDropdown2}
-							type="checkbox"
-							value="Show full URLs"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-							>Show Full URLs</DropdownMenu.Option
-						>
-					</DropdownMenu.Group>
-					<div class="h-[1px] mx-1 my-1 bg-neutral-200" />
-					<DropdownMenu.Group
-						label="People"
-						labelClass="pl-[25px] pb-1 pt-0.5 text-neutral-400 text-xs"
-					>
-						<DropdownMenu.Option
-							selected={selectedMenu}
-							on:change={handleChange}
-							name="DM Group 1"
-							type="radio"
-							value="Khairul Haaziq"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-							>Khairul Haaziq</DropdownMenu.Option
-						>
-						<DropdownMenu.Option
-							selected={selectedMenu}
-							on:change={handleChange}
-							name="DM Group 1"
-							type="radio"
-							value="Luqman Hakim"
-							class="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-							>Luqman Hakim</DropdownMenu.Option
-						>
-					</DropdownMenu.Group>
-				</DropdownMenu.Portal>
-			</DropdownMenu.Root>
-			<CardTitle>
-				<span>Dropdown Menu</span><CardStatus status={2} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<HoverCard.Root>
-				<HoverCard.Trigger
-					class="flex items-center justify-center shadow bg-white h-10 rounded-full aspect-square text-neutral-600"
-				>
-					<Github size={15} />
-				</HoverCard.Trigger>
-				<HoverCard.Portal
-					className="border bg-white rounded-lg border-neutral-200 w-64 flex flex-col gap-3 p-5 text-[13px] text-black shadow-lg"
-				>
-					<div class="text-base font-medium">HoverCard</div>
-					<p class="opacity-50">
-						All you need to know about HoverCard
-					</p>
-					<p class="opacity-40 text-[11px] mt-4">
-						Copyright hovercard
-					</p>
-				</HoverCard.Portal>
-			</HoverCard.Root>
-			<CardTitle>
-				<span>Hover Card</span><CardStatus status={4} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<Popover.Root>
-				<Popover.Trigger
-					class="flex items-center justify-center shadow bg-white h-10 rounded-full aspect-square focus:outline focus:outline-2 focus:outline-black text-neutral-600"
-				>
-					<Settings2 size={15} />
-				</Popover.Trigger>
-				<Popover.Portal
-					class="border bg-white rounded-lg border-neutral-200 w-64 flex flex-col gap-3 p-5 text-[13px] text-black shadow-lg"
-				>
-					<div>Dimensions</div>
-					<fieldset
-						class="flex flex-row items-center justify-between gap-3"
-					>
-						<label for="name">Width</label><input
-							type="text"
-							id="name"
-							class="w-3/5 pl-2 py-1 outline outline-1 outline-neutral-300 rounded focus:outline-2 focus:outline-black"
-						/>
-					</fieldset>
-					<fieldset
-						class="flex flex-row items-center justify-between gap-3"
-					>
-						<label for="name">Max Width</label><input
-							type="text"
-							id="name"
-							class="w-3/5 pl-2 py-1 outline outline-1 outline-neutral-300 rounded focus:outline-2 focus:outline-black"
-						/>
-					</fieldset>
-					<fieldset
-						class="flex flex-row items-center justify-between gap-3"
-					>
-						<label for="name">Height</label><input
-							type="text"
-							id="name"
-							class="w-3/5 pl-2 py-1 outline outline-1 outline-neutral-300 rounded focus:outline-2 focus:outline-black"
-						/>
-					</fieldset>
-					<fieldset
-						class="flex flex-row items-center justify-between gap-3"
-					>
-						<label for="name">Height</label><input
-							type="text"
-							id="name"
-							class="w-3/5 pl-2 py-1 outline outline-1 outline-neutral-300 rounded focus:outline-2 focus:outline-black"
-						/>
-					</fieldset>
-				</Popover.Portal>
-			</Popover.Root>
-			<CardTitle>
-				<span>Popover</span><CardStatus status={3} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<div class="flex flex-col gap-3 text-neutral-600">
-				<Radio
-					name="radiogroup1"
-					value="default"
-					labelClass=" flex flex-row gap-3 items-center [&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black"
-					class="bg-white shadow h-6 aspect-square rounded-full flex items-center justify-center"
-				>
-					<span
-						class="block bg-black rounded-full h-[10px] aspect-square"
-						slot="indicator"
-					/>
-					<span class="select-none">Default</span>
-				</Radio>
-				<Radio
-					name="radiogroup1"
-					value="comfortable"
-					labelClass=" flex flex-row gap-3 items-center [&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black"
-					class="bg-white shadow h-6 aspect-square rounded-full flex items-center justify-center"
-				>
-					<span
-						class="block bg-black rounded-full h-[10px] aspect-square"
-						slot="indicator"
-					/>
-					<span class="select-none">Comfortable</span>
-				</Radio>
-				<Radio
-					name="radiogroup1"
-					value="compact"
-					labelClass=" flex flex-row gap-3 items-center [&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black"
-					class="bg-white shadow h-6 aspect-square rounded-full flex items-center justify-center"
-				>
-					<span
-						class="block bg-black rounded-full h-[10px] aspect-square"
-						slot="indicator"
-					/>
-					<span class="select-none">Compact</span>
-				</Radio>
 			</div>
-			<CardTitle>
-				<span>Radio Group</span><CardStatus status={4} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<Select.Root>
-				<Select.Trigger
-					className="bg-white py-2 px-3 rounded shadow focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center text-black"
-				>
-					<Select.Value placeholder="Select a value..." />
-					<span class="opacity-70 -mb-0.5">
-						<ChevronDown size={15} />
-					</span>
-				</Select.Trigger>
-				<Select.Portal
-					className="border bg-white rounded-lg border-neutral-200 w-[135px] flex flex-col p-[6px] text-[13px] text-black shadow-lg"
-				>
-					<Select.OptGroup
-						label="fruits"
-						labelClass="pl-[25px] pb-1 pt-0.5 text-neutral-400 text-xs"
-					>
-						<Select.Option
-							value="apple"
-							className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-						<Select.Option
-							value="banana"
-							className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-						<Select.Option
-							value="blueberry"
-							className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-						<Select.Option
-							value="grapes"
-							className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-						<Select.Option
-							value="pineapple"
-							className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-					</Select.OptGroup>
-					<div class="h-[1px] mx-1 my-2 bg-neutral-200" />
-					<Select.OptGroup
-						label="vegetables"
-						labelClass="pl-[25px] pb-1 pt-0.5 text-neutral-400 text-xs"
-					>
-						<Select.Option
-							value="broccoli"
-							className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-						<Select.Option
-							value="spinach"
-							className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-						<Select.Option
-							value="aubergine"
-							className="flex relative pl-[25px] items-center default py-1 data-[highlighted='true']:bg-black data-[highlighted='true']:text-white rounded"
-						/>
-					</Select.OptGroup>
-				</Select.Portal>
-			</Select.Root>
-			<CardTitle>
-				<span>Select</span><CardStatus status={1} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<Slider.Root
-				className="relative flex items-center w-[200px] touch-none select-none h-5"
-			>
-				<Slider.Range
-					rangeClass="rounded-full h-[3px] flex-grow bg-gray-400 relative"
-					trackerClass="rounded-full absolute bg-black h-full left-0"
-				/>
-				<Slider.Thumb
-					className="block h-5 w-5 rounded-full shadow-sm bg-white focus:outline focus:outline-4 outline-[#0000006a]"
-				/>
-			</Slider.Root>
-			<CardTitle>
-				<span>Slider</span><CardStatus status={3} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<!-- svelte-ignore a11y-label-has-associated-control -->
-			<label
-				class="flex gap-3 items-start max-w-[200px] [&>label>input:focus+span>span]:outline [&>label>input:focus+span>span]:outline-2 [&>label>input:focus+span>span]:outline-black"
-			>
-				<Switch />
-				<span class="select-none text-neutral-500"
-					>A switch is essentially a checkbox, it works without
-					javascript!</span
-				>
-			</label>
-			<CardTitle>
-				<span>Switch</span><CardStatus status={4} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<Tabs.Root
-				selected={writable('a')}
-				name="tabla"
-				class="flex flex-col rounded-lg bg-white shadow min-h-[140px] w-[300px]"
-			>
-				<Tabs.List
-					class="flex flex-row shadow-[0_-1px_0px_0px_inset] shadow-neutral-200 [&>*]:py-3 [&>*]:px-5 [&>*]:text-neutral-400 first:[&>*]:rounded-tl-lg data-[state='active']:[&>*]:shadow-[0_-2px_0px_0px_inset] data-[state='active']:[&>*]:shadow-black data-[state='active']:[&>*]:text-black focus-within:[&>*]:outline focus-within:[&>*]:outline-2 focus-within:[&>*]:outline-black focus-within:[&>*]:relative"
-				>
-					<Tabs.Item value="a">Account</Tabs.Item>
-					<Tabs.Item value="b">Password</Tabs.Item>
-				</Tabs.List>
-				<Tabs.Content class="p-5 flex flex-col gap-3" value="a">
-					<p class="text-neutral-400">
-						Make changes to your account here. Click save when
-						you're done.
-					</p>
-					<fieldset class="flex flex-col gap-1">
-						<label class="Label" for="name"> Name </label>
-						<input
-							class="rounded border border-neutral-200 px-3 py-2"
-							id="name"
-							value="Pedro Duarte"
-						/>
-					</fieldset>
-					<fieldset class="flex flex-col gap-1">
-						<label class="Label" for="username">
-							Username
-						</label>
-						<input
-							class="rounded border border-neutral-200 px-3 py-2"
-							id="username"
-							value="@peduarte"
-						/>
-					</fieldset>
-					<div class="flex flex-col mt-5 items-end"
-					>
-						<button class="bg-green-200 rounded px-3 py-2">Save changes</button>
+			<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+				<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+					<h3>Checkbox</h3>
+					<svg class="absolute right-0 bottom-0 w-3/4 aspect-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect x="1" y="56.7223" width="53.3931" height="53.3931" transform="rotate(-15 1 56.7223)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+						<rect x="79.1924" y="35.7707" width="53.3931" height="53.3931" transform="rotate(-15 79.1924 35.7707)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+						<rect x="157.385" y="14.8192" width="53.3931" height="53.3931" transform="rotate(-15 157.385 14.8192)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+						<path d="M20.2924 83.5942C23.7473 83.5942 33.2446 91.2414 34.6417 85.7799C36.7913 77.3767 40.8185 51.8286 40.8185 60.5024" stroke="white" stroke-width="3" stroke-linecap="round"/>
+						<path d="M102.397 55.3709C107.515 51.8524 114.14 52.065 119.502 49.3841" stroke="white" stroke-width="3" stroke-linecap="round"/>
+						</svg>		
 					</div>
-				</Tabs.Content>
-				<Tabs.Content class="p-5 flex flex-col gap-3" value="b">
-					<p class="text-neutral-400">
-						Make changes to your account here. Click save when
-						you're done.
-					</p>
-					<fieldset class="flex flex-col gap-1">
-						<label class="Label" for="currentPassword">
-							Current password
-						</label>
-						<input
-							class="rounded border border-neutral-200 px-3 py-2"
-							id="currentPassword"
-							type="password"
-						/>
-					</fieldset>
-					<fieldset class="flex flex-col gap-1">
-						<label class="Label" for="newPassword">
-							New password
-						</label>
-						<input
-							class="rounded border border-neutral-200 px-3 py-2"
-							id="newPassword"
-							type="password"
-						/>
-					</fieldset>
-					<fieldset class="flex flex-col gap-1">
-						<label class="Label" for="confirmPassword">
-							Confirm password
-						</label>
-						<input
-							class="rounded border border-neutral-200 px-3 py-2"
-							id="confirmPassword"
-							type="password"
-						/>
-					</fieldset>
-					<div class="flex flex-col mt-5 items-end"
-					>
-						<button class="bg-green-200 rounded px-3 py-2">Save changes</button>
+				</div>
+				<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+					<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+						<h3>Collapsible</h3>
+						<svg class="absolute right-0 bottom-0 w-3/4 aspect-auto overflow-hidden" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<rect x="1" y="24.8701" width="92.2272" height="34.8664" transform="rotate(-15 1 24.8701)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+							<rect x="13.5173" y="71.5852" width="248.563" height="110.329" transform="rotate(-15 13.5173 71.5852)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+							<path d="M14.592 33.6689C16.128 33.7969 24.7213 36.2598 24.9089 37.9485C25.1118 39.7738 19.929 45.4441 18.7188 46.0492" stroke="white" stroke-width="3" stroke-linecap="round"/>
+							<path d="M36.6015 43.298C36.6015 41.3166 36.404 29.7702 39.2762 29.8478C41.8588 29.9176 44.2176 32.9863 46.6127 34.0128C51.674 36.1819 47.4114 25.295 48.9818 25.0333C50.4592 24.787 53.8392 34.1402 54.4841 28.0137C55.2408 20.8251 57.7269 25.6721 62.0499 28.0137C62.5482 28.2836 62.6886 27.8713 62.7377 27.4788C62.9258 25.9739 67.8829 27.787 68.3547 27.8991C73.18 29.0451 75.8058 30.899 75.8058 25.4154" stroke="white" stroke-width="3" stroke-linecap="round"/>
+							<path d="M39.3526 88.6925C41.9851 90.974 45.3061 94.1812 48.4468 95.6469C49.5894 96.1801 48.96 93.1629 48.9818 91.9022C49.0574 87.5148 48.6166 82.2664 50.2045 78.0699C51.4256 74.8428 61.9237 78.1169 64.5336 77.7642C67.4079 77.3758 63.1905 61.4283 68.1636 69.1286C69.0732 70.537 78.8862 87.1118 79.5504 85.0243C80.814 81.053 79.0302 78.2358 84.5178 78.5284C87.7692 78.7018 91.0586 79.1244 94.1852 80.0569C97.1357 80.9368 96.9904 80.3629 97.0892 77.1528C97.2369 72.3535 95.5828 67.7926 100.414 72.8732C101.298 73.8033 105.875 80.1225 107.674 79.178C112.363 76.7163 106.266 63.785 115.965 65.8806C125.48 67.9364 133.646 76.4488 142.14 80.8211C149.884 84.808 146.69 79.3976 144.509 75.8537C144.505 75.8474 142.312 73.2771 143.324 72.9879C146.173 72.1739 149.857 72.9779 152.801 72.7968C157.061 72.5346 155.802 68.0807 160.175 69.6635C161.291 70.0673 164.561 72.4254 165.066 69.8546C165.817 66.0304 162.102 58.5484 167.703 56.9011C173.288 55.2584 179.682 59.2235 185.471 59.1173C190.574 59.0237 192.996 57.7617 197.278 55.6784C205.82 51.5226 214.909 48.3112 223.682 44.6736" stroke="white" stroke-width="3" stroke-linecap="round"/>
+							<path d="M77.8691 117.58C77.8691 115.091 80.1875 95.8131 84.7471 99.6972C88.6399 103.013 92.6673 106.886 97.8916 107.836C101.679 108.525 100.451 101.493 102.935 100.003C105.241 98.6198 109.643 102.272 111.495 103.213C114.417 104.698 111.322 97.7164 115.66 99.1623C119.355 100.394 123.036 106.155 123.302 99.7737C123.588 92.9016 134.261 97.8924 137.937 99.3915C142.234 101.144 140.554 100.246 144.28 99.8501C146.818 99.5801 154.675 101.251 155.819 98.1306C157.895 92.4696 156.93 90.6748 163.461 89.9153C169.964 89.1592 174.813 85.875 180.389 82.808C184.553 80.5175 189.332 81.5151 193.419 79.0634" stroke="white" stroke-width="3" stroke-linecap="round"/>
+							<path d="M177.599 114.829C183.551 113.341 189.321 109.467 194.947 107.072C199.01 105.342 202.276 104.592 206.64 104.474C209.454 104.398 213.703 104.723 216.154 102.983C217.879 101.76 217.091 99.6692 217.186 97.9395C217.52 91.8245 223.494 94.6832 227.121 96.2583C231.529 98.1726 231.742 98.597 235.374 95.5705" stroke="white" stroke-width="3" stroke-linecap="round"/>
+							</svg>		
+						</div>
 					</div>
-				</Tabs.Content>
-			</Tabs.Root>
-			<CardTitle>
-				<span>Tabs</span><CardStatus status={2} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<Toast.Root duration={3000}>
-				<Toast.Trigger
-					className="bg-white py-2 px-3 rounded shadow focus:outline focus:outline-2 focus:outline-black flex flex-row gap-1 items-center font-medium text-black"
-				>
-					Add to calendar
-				</Toast.Trigger>
-				<Toast.Portal
-					className="flex flex-row justify-between items-center min-w-[300px] border bg-white rounded-lg border-neutral-200 px-6 py-4 gap-2 shadow-lg text-[13px]"
-				>
-					<div class="hover:bg-neutral-200">
-						<div class="text-sm font-medium">Scheduled</div>
-						<p>Catch up tomorrow</p>
-					</div>
-					<button class="bg-neutral-200 rounded px-2 py-1"
-						>Undo</button
-					>
-				</Toast.Portal>
-			</Toast.Root>
-			<CardTitle>
-				<span>Toast</span><CardStatus status={2} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<Toggle
-				labelClass="[&>input:checked+span]:bg-[#00000010] [&>input:focus+span]:outline [&>input:focus+span]:outline-2 [&>input:focus+span]:outline-black"
-				class="flex items-center justify-center focus:outline bg-white hover:bg-neutral-100 shadow h-10 aspect-square rounded text-neutral-600"
-			>
-				<Italic size={14} />
-			</Toggle>
-			<CardTitle>
-				<span>Toggle</span><CardStatus status={3} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<ToggleGroup.Root
-				class="text-neutral-600 flex [&>*>span]:flex [&>*>span]:items-center [&>*>span]:justify-center rounded bg-white shadow [&>span]:first:[&>*]:rounded-l [&>span]:last:[&>*]:rounded-r [&>span]:last:[&>*]:border-r-0 [&>*>span]:border-r [&>*>span]:border-neutral-200 [&>*>span]:h-10 [&>*>span]:aspect-square focus:[&>*>span]:relative
-				[&>*>input:checked+span]:bg-[#00000010] [&>*>input:focus+span]:outline [&>*>input:focus+span]:outline-2 [&>*>input:focus+span]:outline-black [&>*>input:focus+span]:relative"
-			>
-				<ToggleGroup.Item value="item1" class="hover:bg-neutral-100"
-					><AlignLeft size={15} /></ToggleGroup.Item
-				>
-				<ToggleGroup.Item value="item2" class="hover:bg-neutral-100"
-					><AlignCenter size={15} /></ToggleGroup.Item
-				>
-				<ToggleGroup.Item value="item3" class="hover:bg-neutral-100"
-					><AlignRight size={15} /></ToggleGroup.Item
-				>
-			</ToggleGroup.Root>
-			<CardTitle>
-				<span>Toggle Group</span><CardStatus status={3} />
-			</CardTitle>
-		</Card>
-		<Card>
-			<Tooltip.Root>
-				<p>
-					Example of inline
-					<Tooltip.Trigger className="font-semibold"
-						>Tooltip!</Tooltip.Trigger
-					>
-				</p>
-				<Tooltip.Portal
-					className="bg-black rounded flex flex-col text-[13px] text-white px-2 py-1"
-				>
-					This is a tooltip example
-				</Tooltip.Portal>
-			</Tooltip.Root>
-			<CardTitle>
-				<span>Tooltip</span><CardStatus status={3} />
-			</CardTitle>
-		</Card>
-	</div>
+					<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+						<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+							<h3>Context Menu</h3>
+							<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+								<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+								<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+								<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+								<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+								<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+								</svg>			
+							</div>
+						</div>
+						<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+							<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+								<h3>Dialog</h3>
+								<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+									<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+									<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+									<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+									<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+									<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+									</svg>			
+								</div>
+							</div>
+							<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+								<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+									<h3>Dropdown Menu</h3>
+									<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+										<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+										<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+										<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+										<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+										<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+										</svg>			
+									</div>
+								</div>
+								<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+									<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+										<h3>Hover Card</h3>
+										<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+											<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+											<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+											<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+											<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+											<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+											</svg>			
+										</div>
+									</div>
+									<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+										<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+											<h3>Popover</h3>
+											<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+												<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+												<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+												<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+												<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+												<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+												</svg>			
+											</div>
+										</div>
+										<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+											<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+												<h3>Radio</h3>
+												<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+													<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+													<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+													<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+													<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+													<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+													</svg>			
+												</div>
+											</div>
+											<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+												<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+													<h3>Select</h3>
+													<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+														<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+														<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+														<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+														<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+														<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+														</svg>			
+													</div>
+												</div>
+												<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+													<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+														<h3>Slider</h3>
+														<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+															<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+															<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+															<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+															<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+															<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+															</svg>			
+														</div>
+													</div>
+													<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+														<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+															<h3>Switch</h3>
+															<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+																<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+																<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+																<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+																<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+																<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+																</svg>			
+															</div>
+														</div>
+														<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+															<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+																<h3>Tabs</h3>
+																<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+																	<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+																	<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+																	<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+																	<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+																	<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+																	<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+																	</svg>			
+																</div>
+															</div>
+															<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+																<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+																	<h3>Toast</h3>
+																	<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+																		<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+																		<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+																		<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+																		<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+																		<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+																		</svg>			
+																	</div>
+																</div>
+																<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+													<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+														<h3>Toggle</h3>
+														<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+															<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+															<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+															<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+															<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+															<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+															</svg>			
+														</div>
+													</div>
+													<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+													<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+														<h3>Toggle Group</h3>
+														<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+															<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+															<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+															<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+															<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+															<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+															</svg>			
+														</div>
+													</div>
+													<div class="p-[1px] relative aspect-[7/4] col-span-4 bg-gradient-to-br from-white to-[rgba(17, 17, 17, 0.16)] rounded">
+														<div class="bg-[#111111] px-6 py-3 text-2xl rounded h-full w-full overflow-clip">
+															<h3>Tooltip</h3>
+															<svg class="absolute right-0 bottom-0 w-2/3 aspect-auto" viewBox="0 0 206 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<rect x="1" y="57.8396" width="219.611" height="40.4547" transform="rotate(-15 1 57.8396)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+																<path d="M187.013 34.0798C187.013 28.294 186.577 25.7852 190.814 22.1537C195.462 18.1695 202.39 25.5103 205.828 28.9482" stroke="white" stroke-width="3" stroke-linecap="round"/>
+																<rect x="28.806" y="161.613" width="219.611" height="40.4547" transform="rotate(-15 28.806 161.613)" fill="#B3B3B3" fill-opacity="0.16" stroke="white"/>
+																<rect x="11.3863" y="96.602" width="220.074" height="67.3041" transform="rotate(-15 11.3863 96.602)" stroke="white"/>
+																<path d="M31.8393 70.3708C31.8393 63.3171 33.2173 56.4422 35.7355 49.8448C35.7465 49.8158 37.7861 44.2679 38.6813 44.6182C41.8807 45.8701 44.6541 58.4362 45.7609 61.2481C50.8252 74.1142 49.421 55.0446 53.6483 51.7928C57.188 49.07 63.3081 62.6267 66.5246 61.2481C66.9101 61.0829 67.0642 59.587 67.0948 59.5376C68.3631 57.4943 70.1999 56.9714 72.5114 56.2116C76.974 54.7448 87.4404 54.578 89.9966 49.7497C91.9061 46.1428 95.933 49.6547 99.6419 49.6547C100.775 49.6547 102.118 46.9634 102.92 46.3762C106.763 43.5647 111.885 42.7169 116.509 42.29C119.428 42.0206 124.125 41.1692 125.917 43.858" stroke="white" stroke-width="3" stroke-linecap="round"/>
+																<path d="M47.2339 119.12C47.2339 115.003 46.1972 109.579 47.2339 105.626C48.4229 101.093 61.659 109.441 63.7688 110.663C66.5746 112.287 65.9072 99.0149 66.4296 97.5489C67.6594 94.0973 71.8486 102.568 73.9368 105.579C74.7032 106.684 83.098 121.403 85.0076 113.989C85.3827 112.532 85.5775 97.8688 86.3855 97.9766C91.4009 98.6453 95.2991 105.469 100.355 105.721C102.222 105.815 100.267 95.9799 101.495 94.6981C103.369 92.7426 110.827 98.8358 112.946 99.2594C115.466 99.7634 114.686 94.2589 115.369 92.8926C116.809 90.0133 124.86 93.5693 126.868 94.223C130.331 95.3507 128.673 94.4657 130.716 93.5578C132.676 92.6868 135.358 94.7277 137.321 94.7931C143.204 94.9892 147.155 93.5797 151.242 89.9467C156.568 85.2131 162.201 84.422 169.535 83.1997" stroke="white" stroke-width="3" stroke-linecap="round"/>
+																</svg>			
+															</div>
+														</div>
+</div>
+
+
+	
 </div>

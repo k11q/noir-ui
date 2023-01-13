@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'Clash-Display';
+    font-style: medium;
+    font-weight: 500;
+    src: local(''), url('../static/fonts/ClashDisplay-Medium.woff') format('woff')
+}
