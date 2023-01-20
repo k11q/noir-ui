@@ -1,10 +1,10 @@
 # Noir-UI
 
-Noir-UI is a low-level component library with built in accessibility, built for building high quality design systems.
+Noir-UI is a low-level component library with built in accessibility, for building high quality design systems.
 
 ## Installation
 
-Noir-UI is currently in version 0.0.1 and not suitable for production. However to try it, run:
+Noir-UI is currently in version 0.0.1 and not suitable for production. However you can try it, run:
 
 ```bash
 npm install @noir-ui/svelte
