@@ -14,7 +14,7 @@ npm install @noir-ui/svelte
 
 ## Documentation
 
-Visit the official [site](https://noir-ui-com.vercel.app).
+Visit the official [site](https://noir-ui-www.vercel.app).
 
 ## Author
 
