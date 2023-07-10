@@ -1,3 +1,7 @@
+> **Warning**
+> 
+> Deprecated: Please visit radix-svelte for the alternative
+
 # Noir-UI
 
 Noir-UI is a low-level component library with built in accessibility, for building high quality design systems.
